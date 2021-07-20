@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SpringBoot 踩坑记 之 集成webSocket （一） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言   springboot 集成webSocket是很方便简单的，当然对于博主这种小萌新还是需要多努力的，经过不断的度娘终于完成了可用的demo，虽然都是搬的，但是还是要做做笔记。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot 踩坑记 之 集成webSocket （一）">
+<meta property="og:url" content="http://example.com/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言   springboot 集成webSocket是很方便简单的，当然对于博主这种小萌新还是需要多努力的，经过不断的度娘终于完成了可用的demo，虽然都是搬的，但是还是要做做笔记。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-20T13:21:58.467Z">
+<meta property="article:modified_time" content="2021-07-20T13:21:58.468Z">
+<meta property="article:author" content="exceedY">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SpringBoot 踩坑记 之  集成webSocket（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
+  <time datetime="2021-07-20T13:21:58.467Z" itemprop="datePublished">2021-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>►<a class="article-category-link" href="/categories/SpringBoot/webSocket/">webSocket</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SpringBoot 踩坑记 之 集成webSocket （一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>   springboot 集成webSocket是很方便简单的，当然对于博主这种小萌新还是需要多努力的，经过不断的度娘终于完成了可用的demo，虽然都是搬的，但是还是要做做笔记。<br>    <span id="more"></span><br>   好的，为了能加深印象，简单说一下webSocket的用处，webSocket是单个TCP链接提供全双工（双向通信）通信的计算机通信协议。webSocket允许服务端主动向客户端推送数据，在浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的链接，并进行双向数据传输。</p>
+<h4 id="接下来就是代码时刻："><a href="#接下来就是代码时刻：" class="headerlink" title="接下来就是代码时刻："></a>接下来就是代码时刻：</h4><p>  首先springboot集成websocket在pom文件内直接加入以下代码<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<h5 id="1-先从配置开始"><a href="#1-先从配置开始" class="headerlink" title="1. 先从配置开始"></a>1. 先从配置开始</h5><p>主要配置文件，配置了链接webSocket的访问路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cn.tdchain.cloud.interceptor.SocketInterceptor;</span><br><span class="line"><span class="keyword">import</span> cn.tdchain.cloud.service.websocket.MyWebSocketHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.config.annotation.EnableWebSocket;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.config.annotation.WebSocketConfigurer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> Mr.Y</span></span><br><span class="line"><span class="comment">* <span class="doctag">@time</span> 2019/3/12/11:33</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSocket</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSocketConfig</span> <span class="keyword">implements</span> <span class="title">WebSocketConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SocketInterceptor handshake; </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MyWebSocketHandler handler; </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 实现 WebSocketConfigurer 接口，重写 registerWebSocketHandlers 方法，这是一个核心实现方法，配置 websocket 入口，允许访问的域、注册 Handler、SockJs 支持和拦截器。</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;</span></span><br><span class="line"><span class="comment">    * registry.addHandler()注册和路由的功能，当客户端发起 websocket 连接，把 /path 交给对应的 handler 处理，而不实现具体的业务逻辑，可以理解为收集和任务分发中心。</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;</span></span><br><span class="line"><span class="comment">    * addInterceptors，顾名思义就是为 handler 添加拦截器，可以在调用 handler 前后加入我们自己的逻辑代码。</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;</span></span><br><span class="line"><span class="comment">    * setAllowedOrigins(String[] domains),允许指定的域名或 IP (含端口号)建立长连接，如果只允许自家域名访问，这里轻松设置。如果不限时使用”*”号，如果指定了域名，则必须要以 http 或 https 开头。</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerWebSocketHandlers</span><span class="params">(WebSocketHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//部分 支持websocket 的访问链接,允许跨域</span></span><br><span class="line">        registry.addHandler(handler, <span class="string">&quot;/echo&quot;</span>).addInterceptors(handshake).setAllowedOrigins(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">//部分 不支持websocket的访问链接,允许跨域</span></span><br><span class="line">        registry.addHandler(handler, <span class="string">&quot;/sockjs/echo&quot;</span>).addInterceptors(handshake).setAllowedOrigins(<span class="string">&quot;*&quot;</span>).withSockJS();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-实现HandshakeInterceptor"><a href="#2-实现HandshakeInterceptor" class="headerlink" title="2. 实现HandshakeInterceptor"></a>2. 实现HandshakeInterceptor</h5><p>拦截器，在客户端与服务端握手前后进行操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cn.tdchain.cloud.constant.WebSocketUrlType;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.server.ServerHttpRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.server.ServerHttpResponse;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.server.ServletServerHttpRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.WebSocketHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.server.HandshakeInterceptor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Mr.Y</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2019/3/12/10:03</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocketInterceptor</span> <span class="keyword">implements</span> <span class="title">HandshakeInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">beforeHandshake</span><span class="params">(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map&lt;String, Object&gt; map)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (serverHttpRequest <span class="keyword">instanceof</span> ServletServerHttpRequest) &#123;</span><br><span class="line">            HttpServletRequest request = ((ServletServerHttpRequest)serverHttpRequest).getServletRequest();</span><br><span class="line">            String user = (String) request.getAttribute(WebSocketUrlType.WEBSOCKET_USERNAME);</span><br><span class="line">            <span class="keyword">if</span> (user == <span class="keyword">null</span>) &#123;</span><br><span class="line">                user = (String) request.getSession().getAttribute(WebSocketUrlType.WEBSOCKET_USERNAME);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">&quot;-------socket&quot;</span> +user);</span><br><span class="line">            map.put(WebSocketUrlType.WEBSOCKET_USERNAME,user);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterHandshake</span><span class="params">(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Exception e)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h5 id="3、实现WebSocketHandler-该功能主要用于消息分发"><a href="#3、实现WebSocketHandler-该功能主要用于消息分发" class="headerlink" title="3、实现WebSocketHandler,该功能主要用于消息分发"></a>3、实现WebSocketHandler,该功能主要用于消息分发</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">import cn.tdchain.cloud.constant.WebSocketUrlType;</span><br><span class="line">import com.alibaba.fastjson.JSON;</span><br><span class="line">import com.alibaba.fastjson.JSONObject;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import org.springframework.web.socket.*;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.concurrent.Executors;</span><br><span class="line">import java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author Mr.Y</span><br><span class="line"> * @time 2019/3/12/9:51</span><br><span class="line"> */</span><br><span class="line">@Service</span><br><span class="line">public class MyWebSocketHandler implements WebSocketHandler &#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(MyWebSocketHandler.class);</span><br><span class="line">    private final static List&lt;WebSocketSession&gt; webSocketSessions = Collections.synchronizedList(new ArrayList&lt;WebSocketSession&gt;());</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception &#123;</span><br><span class="line">        logger.info(&quot;webSocket 链接成功&quot;);</span><br><span class="line">        webSocketSessions.add(webSocketSession);</span><br><span class="line"></span><br><span class="line">        String userName = (String) webSocketSession.getAttributes().get(WebSocketUrlType.WEBSOCKET_USERNAME);</span><br><span class="line">        System.out.println(&quot;--------user:&quot; + userName);</span><br><span class="line">        if (userName != null) &#123;</span><br><span class="line">            JSONObject obj = new JSONObject();</span><br><span class="line">            // 统计当前链接人数</span><br><span class="line">            obj.put(&quot;count&quot;, webSocketSessions.size());</span><br><span class="line">            users(obj);</span><br><span class="line">            webSocketSession.sendMessage(new TextMessage(obj.toJSONString()));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage&lt;?&gt; webSocketMessage) throws Exception &#123;</span><br><span class="line">        logger.info(&quot;处理消息发送&quot;);</span><br><span class="line">        JSONObject msg = JSON.parseObject(webSocketMessage.getPayload().toString());</span><br><span class="line">        JSONObject obj = new JSONObject();</span><br><span class="line">        if (msg.getInteger(&quot;type&quot;) == 1) &#123;</span><br><span class="line">            // 发送给所有人</span><br><span class="line">            obj.put(&quot;msg&quot;, msg.getString(&quot;msg&quot;));</span><br><span class="line">            sendMessageToUser(new TextMessage(obj.toJSONString()));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            String to = msg.getString(&quot;to&quot;);</span><br><span class="line">            obj.put(&quot;msg&quot;, msg.getString(&quot;msg&quot;));</span><br><span class="line">            sendMessageToUser(to, new TextMessage(obj.toJSONString()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handleTransportError(WebSocketSession webSocketSession, Throwable throwable) throws Exception &#123;</span><br><span class="line">        if (webSocketSession.isOpen()) &#123;</span><br><span class="line">            webSocketSession.close();</span><br><span class="line">        &#125;</span><br><span class="line">        logger.info(&quot;链接出错，断开链接。。。&quot;);</span><br><span class="line">        webSocketSessions.remove(webSocketSession);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception &#123;</span><br><span class="line">        logger.info(&quot;链接断开&quot;);</span><br><span class="line">        webSocketSessions.remove(webSocketSession);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean supportsPartialMessages() &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 给所有用户发消息</span><br><span class="line">     *</span><br><span class="line">     * @param message</span><br><span class="line">     */</span><br><span class="line">    public static void sendMessageToUser(TextMessage message) &#123;</span><br><span class="line">        webSocketSessions.forEach(v -&gt; &#123;</span><br><span class="line">            if (v.isOpen()) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    v.sendMessage(message);</span><br><span class="line">                &#125; catch (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 发送给指定用户</span><br><span class="line">     *</span><br><span class="line">     * @param to</span><br><span class="line">     * @param message</span><br><span class="line">     */</span><br><span class="line">    public static void sendMessageToUser(String to, TextMessage message) &#123;</span><br><span class="line">        webSocketSessions.forEach(v -&gt; &#123;</span><br><span class="line">            if (v.getAttributes().get(WebSocketUrlType.WEBSOCKET_USERNAME).equals(to)) &#123;</span><br><span class="line">                if (v.isOpen()) &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        v.sendMessage(message);</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 将所有用户发送到前端</span><br><span class="line">     *</span><br><span class="line">     * @param obj</span><br><span class="line">     */</span><br><span class="line">    private void users(JSONObject obj) &#123;</span><br><span class="line">        List&lt;String&gt; userNames = new ArrayList&lt;&gt;();</span><br><span class="line">        webSocketSessions.forEach(v -&gt; &#123;</span><br><span class="line">            userNames.add((String) v.getAttributes().get(WebSocketUrlType.WEBSOCKET_USERNAME));</span><br><span class="line">        &#125;);</span><br><span class="line">        obj.put(&quot;users&quot;, userNames);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static List&lt;WebSocketSession&gt; getWebSocketSessions() &#123;</span><br><span class="line">        return webSocketSessions;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h5><p>前端js代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> websocket;</span><br><span class="line">      <span class="keyword">if</span> (<span class="string">&#x27;WebSocket&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&quot;WebSocket&quot;</span>);</span><br><span class="line">          websocket = <span class="keyword">new</span> WebSocket(<span class="string">&quot;ws://localhost:8080/cloud/echo&quot;</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&#x27;MozWebSocket&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&quot;MozWebSocket&quot;</span>);</span><br><span class="line">          websocket = <span class="keyword">new</span> MozWebSocket(<span class="string">&quot;ws://cloud/echo&quot;</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&quot;SockJS&quot;</span>);</span><br><span class="line">          websocket = <span class="keyword">new</span> SockJS(<span class="string">&quot;http://127.0.0.1:8080/cloud/sockjs/echo&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      websocket.onopen = <span class="function"><span class="keyword">function</span> (<span class="params">evnt</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&quot;链接服务器成功!&quot;</span>, evnt.data);</span><br><span class="line">      &#125;;</span><br><span class="line">      websocket.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">evnt</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;收到消息:&#x27;</span>, evnt.data);</span><br><span class="line">          <span class="keyword">var</span> json = <span class="built_in">JSON</span>.parse(evnt.data);</span><br><span class="line">          <span class="keyword">if</span> (json.hasOwnProperty(<span class="string">&#x27;users&#x27;</span>)) &#123;</span><br><span class="line">              <span class="keyword">var</span> users = json.users;</span><br><span class="line">              <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; users.length; i++) &#123;</span><br><span class="line">                  $(<span class="string">&quot;#inputGroupSelect01&quot;</span>).append(<span class="string">&#x27;&lt;option value=&quot;&#x27;</span> + users[i] + <span class="string">&#x27;&quot;&gt;&#x27;</span> + users[i] + <span class="string">&#x27;&lt;/option&gt;&#x27;</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="comment">//打印消息</span></span><br><span class="line">              toast(json, <span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      websocket.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">evnt</span>) </span>&#123;</span><br><span class="line">      &#125;;</span><br><span class="line">      websocket.onclose = <span class="function"><span class="keyword">function</span> (<span class="params">evnt</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&quot;与服务器断开了链接!&quot;</span>)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">toast</span>(<span class="params">text, icon</span>) </span>&#123;</span><br><span class="line">      $.toast(&#123;</span><br><span class="line">          <span class="attr">text</span>: text,</span><br><span class="line">          <span class="attr">heading</span>: <span class="string">&#x27;新消息&#x27;</span>,</span><br><span class="line">          <span class="attr">icon</span>: icon,</span><br><span class="line">          <span class="attr">showHideTransition</span>: <span class="string">&#x27;slide&#x27;</span>,</span><br><span class="line">          <span class="attr">allowToastClose</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="attr">hideAfter</span>: <span class="number">3000</span>,</span><br><span class="line">          <span class="attr">stack</span>: <span class="number">5</span>,</span><br><span class="line">          <span class="attr">position</span>: <span class="string">&#x27;top-right&#x27;</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">bgColor</span>: <span class="string">&#x27;#444444&#x27;</span>,</span><br><span class="line">          <span class="attr">textColor</span>: <span class="string">&#x27;#eeeeee&#x27;</span>,</span><br><span class="line">          <span class="attr">textAlign</span>: <span class="string">&#x27;left&#x27;</span>,</span><br><span class="line">          <span class="attr">loader</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="attr">loaderBg</span>: <span class="string">&#x27;#006eff&#x27;</span></span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ckrc373le00039cz51jpz3dgw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/20/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8Fstudy%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          设计模式study（一）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%E6%97%A5%E6%9C%9F%E8%BD%AC%E5%8C%96%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringBoot 踩坑记 之 日期转化器 （一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/DateConverter/">DateConverter</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/webSocket/">webSocket</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/head-first/">head first</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/util/">util</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/%E7%AC%AC%E4%B8%89%E6%96%B9/">第三方</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/sendEmail/">sendEmail</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/shell/">shell</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sql/">sql</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msyql/" rel="tag">msyql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SpringBoot/" style="font-size: 20px;">SpringBoot</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/msyql/" style="font-size: 13.33px;">msyql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/20/ImageIo/">docker 踩坑记 （一）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/">SpringBoot 踩坑记 之 集成webSocket （二）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/dubbo-md/">dubbo 学习日记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/">mysql读写分离 （一）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/docker%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">docker 踩坑记 （一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 exceedY<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

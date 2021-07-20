@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SpringBoot 踩坑记 之 集成webSocket （二） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基于stomp版的，啊，有个demo，但是还没实际用过，不想写怎么办，在线等，一点也不急那种。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot 踩坑记 之 集成webSocket （二）">
+<meta property="og:url" content="http://example.com/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基于stomp版的，啊，有个demo，但是还没实际用过，不想写怎么办，在线等，一点也不急那种。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-20T13:21:58.473Z">
+<meta property="article:modified_time" content="2021-07-20T13:21:58.473Z">
+<meta property="article:author" content="exceedY">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SpringBoot 踩坑记 之  集成webSocket（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-date">
+  <time datetime="2021-07-20T13:21:58.473Z" itemprop="datePublished">2021-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>►<a class="article-category-link" href="/categories/SpringBoot/webSocket/">webSocket</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SpringBoot 踩坑记 之 集成webSocket （二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>基于stomp版的，啊，有个demo，但是还没实际用过，不想写怎么办，在线等，一点也不急那种。</p>
+<span id="more"></span>
+<p>啊，时隔n久，终于用到这个demo了，现在来补一下，啦啦啦。<br>此次使用的主要是后台推送功能，这样实现起来就比较简单了，前端订阅后，就不需要再次操作。<br>和上一篇有很多相似之处，主要的还是前后端连接，首先上配置类也是最主要的类代码。 </p>
+<h5 id="1-WebStompConfig"><a href="#1-WebStompConfig" class="headerlink" title="1.  WebStompConfig"></a>1.  WebStompConfig</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.messaging.simp.config.MessageBrokerRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.config.annotation.StompEndpointRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Mr.Y</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2019/7/10/15:17</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSocketMessageBroker</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebStompConfig</span> <span class="keyword">implements</span> <span class="title">WebSocketMessageBrokerConfigurer</span> </span>&#123;</span><br><span class="line"><span class="comment">//    @Autowired</span></span><br><span class="line"><span class="comment">//    private WebSocketHandleInterceptor interceptor;</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerStompEndpoints</span><span class="params">(StompEndpointRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//添加一个/chat端点，客户端就可以通过这个端点来进行连接；withSockJS作用是添加SockJS支持</span></span><br><span class="line">        registry.addEndpoint(<span class="string">&quot;/chat&quot;</span>).setAllowedOrigins(<span class="string">&quot;*&quot;</span>).withSockJS();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageBroker</span><span class="params">(MessageBrokerRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义了两个客户端订阅地址的前缀信息，也就是客户端接收服务端发送消息的前缀信息</span></span><br><span class="line">        registry.enableSimpleBroker(<span class="string">&quot;/test&quot;</span>, <span class="string">&quot;/api&quot;</span>);</span><br><span class="line">        <span class="comment">//定义了服务端接收地址的前缀，也即客户端给服务端发消息的地址前缀</span></span><br><span class="line">        <span class="comment">// 因不需要前端发送信息，所以不提供接收地址</span></span><br><span class="line"><span class="comment">//        registry.setApplicationDestinationPrefixes(&quot;/ws/jbcc&quot;);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端其实这样就算是结束了，是不是很简单。那么接下来，其实还有一点，没错，这里只是配置了链接，没有推送，我们的目的是推送呀推送。<br>好的，那么来推送代码，推送简直简单的可怕。</p>
+<h5 id="2-推送代码"><a href="#2-推送代码" class="headerlink" title="2.推送代码"></a>2.推送代码</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private SimpMessagingTemplate simpMessagingTemplate; //引入消息发送类</span><br><span class="line"> simpMessagingTemplate.convertAndSend(&quot;/chain/info&quot;,&quot;test&quot;); // 发送消息到订阅该链接的客户端</span><br></pre></td></tr></table></figure>
+<p>简单吧，没错，因为博主只用了推送功能，所以，就是这么简单。其实，就算使用客户端发送消息功能，后端其实也是这样写。</p>
+<h4 id="前端交互"><a href="#前端交互" class="headerlink" title="前端交互"></a>前端交互</h4><h5 id="js-代码"><a href="#js-代码" class="headerlink" title="js 代码"></a>js 代码</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://d1fxtkz8shb9d2.cloudfront.net/sockjs-0.3.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.bootcss.com/stomp.js/2.3.3/stomp.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(function()  &#123;</span><br><span class="line">		var socket;</span><br><span class="line">      </span><br><span class="line">            console.log(&quot;SockJS&quot;);</span><br><span class="line">            //socket = new SockJS(&quot;http://192.168.200.31:80/cloud/ws/jbcc&quot;);</span><br><span class="line">		socket = new SockJS(&quot;http://127.0.0.1:8080/cloud/ws/jbcc&quot;);</span><br><span class="line">        var client = Stomp.over(socket);</span><br><span class="line">        client.connect(&#123;&#125;,function (succ) &#123;</span><br><span class="line">            console.log(&#x27;client connect success:&#x27;, succ);</span><br><span class="line"></span><br><span class="line">            client.subscribe(&quot;/blocks/info&quot;, function (res) &#123;</span><br><span class="line">                console.log(&#x27;收到消息---/blocks/info：&#x27;,res);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, function (error) &#123;</span><br><span class="line">            console.log(&#x27;client connect error:&#x27;, error);</span><br><span class="line">        &#125;);</span><br><span class="line">        sendMessage = function (destination, headers, body) &#123;</span><br><span class="line">            client.send(destination, headers, body)</span><br><span class="line">        &#125;;</span><br><span class="line">        disConnect = function () &#123;</span><br><span class="line">            client.disconnect();</span><br><span class="line">            console.log(&#x27;client connect break&#x27;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckrc373li00069cz5d79ofdub" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/20/ImageIo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          docker 踩坑记 （一）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/20/dubbo-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">dubbo 学习日记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/DateConverter/">DateConverter</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/webSocket/">webSocket</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/head-first/">head first</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/util/">util</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/%E7%AC%AC%E4%B8%89%E6%96%B9/">第三方</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/sendEmail/">sendEmail</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/shell/">shell</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sql/">sql</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msyql/" rel="tag">msyql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SpringBoot/" style="font-size: 20px;">SpringBoot</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/msyql/" style="font-size: 13.33px;">msyql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/20/ImageIo/">docker 踩坑记 （一）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/">SpringBoot 踩坑记 之 集成webSocket （二）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/dubbo-md/">dubbo 学习日记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/">mysql读写分离 （一）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/docker%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">docker 踩坑记 （一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 exceedY<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

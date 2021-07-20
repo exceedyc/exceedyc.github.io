@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>linux sendEmail 踩坑记 （一） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="linux 可以直接发送email，需要借助sendEmail工具，废话少说直接上代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux sendEmail 踩坑记 （一）">
+<meta property="og:url" content="http://example.com/2021/07/20/linux%20sendEmail%20%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="linux 可以直接发送email，需要借助sendEmail工具，废话少说直接上代码">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-20T13:21:58.465Z">
+<meta property="article:modified_time" content="2021-07-20T13:21:58.465Z">
+<meta property="article:author" content="exceedY">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux sendEmail 踩坑记（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/20/linux%20sendEmail%20%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
+  <time datetime="2021-07-20T13:21:58.465Z" itemprop="datePublished">2021-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>►<a class="article-category-link" href="/categories/linux/sendEmail/">sendEmail</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux sendEmail 踩坑记 （一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>linux 可以直接发送email，需要借助sendEmail工具，废话少说直接上代码</p>
+<span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 下载安装包</span><br><span class="line">wget http://caspian.dotconf.net/menu/Software/SendEmail/sendEmail-v1.56.tar.gz</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">tar zxf sendEmail-v1.56.tar.gz</span><br><span class="line"></span><br><span class="line"># 进入解压目录</span><br><span class="line">cd /usr/src/sendEmail-v1.56/</span><br><span class="line"></span><br><span class="line">#复制程序到指定目录</span><br><span class="line">cp -a sendEmail /usr/local/bin/</span><br><span class="line"></span><br><span class="line">#给执行权限</span><br><span class="line">chmod +x /usr/local/bin/sendEmail</span><br><span class="line"></span><br><span class="line">#安装组件</span><br><span class="line">yum install perl-Net-SSLeay perl-IO-Socket-SSL -y</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="sendEmail-参数"><a href="#sendEmail-参数" class="headerlink" title="sendEmail 参数"></a>sendEmail 参数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sendEmail -h</span><br><span class="line"></span><br><span class="line">-f 表示发送者的邮箱</span><br><span class="line">-t 表示接收者的邮箱</span><br><span class="line">-s 表示SMTP服务器的域名或者ip</span><br><span class="line">-u 表示邮件的主题</span><br><span class="line">-xu 表示SMTP验证的用户名</span><br><span class="line">-xp 表示SMTP验证的密码(注意,这个密码貌似有限制,例如我用d!5neyland就不能被正确识别)</span><br><span class="line">-m 表示邮件的内容</span><br><span class="line">-cc 表示抄送</span><br><span class="line">-bcc 表示暗抄送</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="发送邮件测试"><a href="#发送邮件测试" class="headerlink" title="发送邮件测试"></a>发送邮件测试</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#发送邮件</span><br><span class="line">/usr/local/bin/sendEmail -f hhh@163.com -t 123456789@qq.com -s smtp.163.com -u &quot;测试&quot;-xu hhh@163.com -xp @453163.com -m &quot;test-1234567890&quot;</span><br></pre></td></tr></table></figure>
+<p> 发送邮箱测试时会报如下错误，原因是perl版本不兼容</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    *******************************************************************</span><br><span class="line"> Using the default of SSL_verify_mode of SSL_VERIFY_NONE for client</span><br><span class="line"> is deprecated! Please set SSL_verify_mode to SSL_VERIFY_PEER</span><br><span class="line"> possibly with SSL_ca_file|SSL_ca_path for verification.</span><br><span class="line"> If you really don&#x27;t want to verify the certificate and keep the</span><br><span class="line"> connection open to Man-In-The-Middle attacks please set</span><br><span class="line"> SSL_verify_mode explicitly to SSL_VERIFY_NONE in your application.</span><br><span class="line">*******************************************************************</span><br><span class="line">  at /usr/local/bin/sendEmail line 1906.</span><br><span class="line">invalid SSL_version specified at /usr/share/perl5/vendor_perl/IO/Socket/SSL.pm line 444.</span><br></pre></td></tr></table></figure>
+<p> 解决方案，sendEmail 增加两个参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-o tls=no    // sendEmail -h 查看帮助，解释是 -o tls=&lt;auto|yes|no&gt;         -o fqdn=FQDN  即不验证 ssl</span><br></pre></td></tr></table></figure>
+<p>完整的正确命令是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/sendEmail -f hhh@163.com -t 123456789@qq.com -s smtp.163.com -u &quot;测试&quot;-xu hhh@163.com -xp @453163.com -m &quot;正文&quot; -o tls = no</span><br></pre></td></tr></table></figure>
+<p>上述问题还有解决perl版本冲突的方案，博主还没测试，等测试可用后再进行更新。<br>执行发送命令时需要注意 -xp 的密码并不是发送邮箱的本身密码，以163邮箱为例，需要开启smtp等权限，然后生成授权码，该密码为生成的授权码。设置授权码详情整理后更新</p>
+<hr>
+<p>参考网址：<a target="_blank" rel="noopener" href="http://www.mamicode.com/info-detail-2404622.html">http://www.mamicode.com/info-detail-2404622.html</a><br>参考网址：<a target="_blank" rel="noopener" href="https://blog.csdn.net/ithomer/article/details/83514232">https://blog.csdn.net/ithomer/article/details/83514232</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/20/linux%20sendEmail%20%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ckrc373lt000o9cz558u913hx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/20/java-%E8%BF%9B%E9%98%B6-jvm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java 进阶 -jvm
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/20/shell%20%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">shell脚本学习笔记 （一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/DateConverter/">DateConverter</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/webSocket/">webSocket</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/head-first/">head first</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/util/">util</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/%E7%AC%AC%E4%B8%89%E6%96%B9/">第三方</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/sendEmail/">sendEmail</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/shell/">shell</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/nginx/">nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sql/">sql</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msyql/" rel="tag">msyql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SpringBoot/" style="font-size: 20px;">SpringBoot</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/msyql/" style="font-size: 13.33px;">msyql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/20/ImageIo/">docker 踩坑记 （一）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/">SpringBoot 踩坑记 之 集成webSocket （二）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/dubbo-md/">dubbo 学习日记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/">mysql读写分离 （一）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/20/docker%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">docker 踩坑记 （一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 exceedY<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
