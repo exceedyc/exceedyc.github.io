@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mysql 踩坑记 （一） | exceedy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天某贱贱的同事，给我出了个题,关于sql查询的题，那么直接开始吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql 踩坑记 （一）">
+<meta property="og:url" content="http://example.com/;categories/mysql%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="exceedy">
+<meta property="og:description" content="今天某贱贱的同事，给我出了个题,关于sql查询的题，那么直接开始吧。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-20T13:21:58.461Z">
+<meta property="article:modified_time" content="2021-07-20T13:21:58.461Z">
+<meta property="article:author" content="exceedY">
+<meta property="article:tag" content="msyql">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="exceedy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate"></a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/SpringBoot/" style="font-size: 20px;">SpringBoot</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/msyql/" style="font-size: 13.33px;">msyql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-mysql踩坑记（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/;categories/mysql%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
+      <time datetime="2021-07-20T13:21:58.461Z" itemprop="datePublished">2021-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql 踩坑记 （一）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/sql/">sql</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/msyql/" rel="tag">msyql</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>今天某贱贱的同事，给我出了个题,关于sql查询的题，那么直接开始吧。</p>
+<span id="more"></span>
+<ul>
+<li>题目：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>userid</th>
+<th>start</th>
+<th>end</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2</td>
+<td>18</td>
+<td>28</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>34</td>
+<td>44</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>24</td>
+<td>44</td>
+</tr>
+<tr>
+<td>获得从开始时间(start)到结束时间(end)的总时长,重复时间按一个时间算。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>代码解答:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">delimiter //</span><br><span class="line">CREATE PROCEDURE test() BEGIN</span><br><span class="line">DECLARE</span><br><span class="line">	oneStart INT;</span><br><span class="line">DECLARE</span><br><span class="line">	oneEnd INT;</span><br><span class="line">DECLARE</span><br><span class="line">	twoStart INT;</span><br><span class="line">DECLARE</span><br><span class="line">	twoEnd INT;</span><br><span class="line">DECLARE</span><br><span class="line">	count INT default 0;</span><br><span class="line">-- DECLARE</span><br><span class="line">-- 	start_ INT;</span><br><span class="line">-- DECLARE</span><br><span class="line">-- 	end_ INT;</span><br><span class="line">declare done int default false;</span><br><span class="line">DECLARE</span><br><span class="line">	my_test CURSOR FOR ( SELECT START, END FROM ruizhi WHERE userid = 2 ORDER BY START ASC );</span><br><span class="line">declare continue HANDLER for not found set done = true;	</span><br><span class="line">OPEN my_test;</span><br><span class="line">FETCH  my_test INTO oneStart,oneEnd;</span><br><span class="line">read_loop:loop</span><br><span class="line">	FETCH  my_test INTO twoStart,twoEnd;</span><br><span class="line">	if done then</span><br><span class="line">			leave read_loop;    # 跳出游标循环</span><br><span class="line">	 end if;</span><br><span class="line">	SELECT twoStart,twoEnd;</span><br><span class="line">	IF</span><br><span class="line">		twoStart &lt; oneStart THEN</span><br><span class="line">		</span><br><span class="line">		SET oneStart = twoStart; </span><br><span class="line">		END IF; -- 如果第一行的结束小于第二行的开始就记录第一行的结果。并更新start为第二行。</span><br><span class="line">	IF</span><br><span class="line">		oneEnd &lt; twoStart THEN </span><br><span class="line">			SET count = count + ( oneEnd - oneStart ); </span><br><span class="line">			SET oneStart = twoStart; </span><br><span class="line">			SET oneEnd = twoEnd;</span><br><span class="line">	ELSEIF twoEnd &gt; oneEnd THEN-- 第二行开始时间包含在第一行，那么对比结束时间</span><br><span class="line">			SET oneEnd = twoEnd; </span><br><span class="line">	END IF ;</span><br><span class="line">-- 	SELECT start_,end_,count;</span><br><span class="line"></span><br><span class="line">end loop;</span><br><span class="line">SET count = count + ( oneEnd - oneStart ); </span><br><span class="line">CLOSE my_test ;</span><br><span class="line">SELECT count;</span><br><span class="line">END // </span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line">call test();</span><br><span class="line">oEnd &gt; oneEnd THEN-- 第二行开始时间包含在第一行，那么对比结束时间</span><br><span class="line">			SET oneEnd = twoEnd; </span><br><span class="line">	END IF ;</span><br><span class="line">-- 	SELECT start_,end_,count;</span><br><span class="line"></span><br><span class="line">end loop;</span><br><span class="line">SET count = count + ( oneEnd - oneStart ); </span><br><span class="line">CLOSE my_test ;</span><br><span class="line">SELECT count;</span><br><span class="line">END // </span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line">call test();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<ul>
+<li>代码解析<ul>
+<li>声明：declare<ul>
+<li>declare data data_type。声明变量，declare使用时需要注意放在BEGIN …END 之间，并且是所有其他语句之前。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>浮标：cursor<ul>
+<li>创建浮标：<ul>
+<li>declare cur cursor for select * from test;</li>
+</ul>
+</li>
+<li>打开浮标<ul>
+<li>open cur；</li>
+</ul>
+</li>
+<li>获取浮标当前位置的值并赋值给变量，浮标位置前进一位<ul>
+<li>fetch cur into data；</li>
+</ul>
+</li>
+<li>开启浮标循环<ul>
+<li>read_loop:loop;</li>
+</ul>
+</li>
+<li>退出浮标循环<ul>
+<li>leave read_loop;</li>
+</ul>
+</li>
+<li>浮标循环实例  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> declare done int default false; --设置浮标控制变量</span><br><span class="line"> DECLARE</span><br><span class="line">     my_test CURSOR FOR ( SELECT START, END FROM ruizhi WHERE userid = 2 ORDER BY START ASC );--创建浮标</span><br><span class="line"> declare continue HANDLER for not found set done = true;	--浮标查询结束后返回。</span><br><span class="line"> open my_test; --打开浮标</span><br><span class="line"> read_loop:loop;--开启浮标循环</span><br><span class="line">     fetch my_test into data;--获取浮标当前位置内容并前进一。</span><br><span class="line">     if done then</span><br><span class="line">         leave read_loop;--退出loop循环</span><br><span class="line">    end if；</span><br><span class="line">end loop；--使用loop，必须要关闭。</span><br><span class="line">close my_test;--关闭浮标</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>while 循环  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while boolean do</span><br><span class="line">    业务</span><br><span class="line">end while;</span><br></pre></td></tr></table></figure></li>
+<li>if 语句  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if <span class="type">boolean</span> <span class="keyword">then</span> </span><br><span class="line">业务，这里要注意写法和java相同，每行都要以&quot;;&quot;结尾</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">业务 同上</span><br><span class="line"><span class="keyword">end</span> if；</span><br></pre></td></tr></table></figure></li>
+<li>存储过程<ul>
+<li>CREATE PROCEDURE test()  begin end;</li>
+<li>开始要进行结束符转化 delimiter //  – 设置结尾符为”//“</li>
+</ul>
+</li>
+</ul>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/;categories/mysql%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">mysql 踩坑记 （一）</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问  的个人博客"></a></p>
+        <p><span>发布时间:</span>2021年07月20日 - 21时21分</p>
+        <p><span>最后更新:</span>2021年07月20日 - 21时21分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/;categories/mysql%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" title="mysql 踩坑记 （一）">http://example.com/;categories/mysql%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://example.com/;categories/mysql%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/;categories/shell%20%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          shell脚本学习笔记 （一）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/;categories/nginx/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nginx 从0学起 （一）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/;categories/shell%20%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" title="上一篇: shell脚本学习笔记 （一）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/;categories/nginx/" title="下一篇: nginx 从0学起 （一）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/;categories/ImageIo/">docker 踩坑记 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/">SpringBoot 踩坑记 之 集成webSocket （二）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/dubbo-md/">dubbo 学习日记</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/">mysql读写分离 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/docker%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">docker 踩坑记 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/Swagger/">docker 踩坑记 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8Fstudy%EF%BC%88%E4%B8%80%EF%BC%89/">设计模式study（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%B8%80%EF%BC%89/">SpringBoot 踩坑记 之 集成webSocket （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%E6%97%A5%E6%9C%9F%E8%BD%AC%E5%8C%96%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/">SpringBoot 踩坑记 之 日期转化器 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/poi/">poi</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/java-%E8%BF%9B%E9%98%B6-jvm/">java 进阶 -jvm</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/linux%20sendEmail%20%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">linux sendEmail 踩坑记 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/shell%20%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">shell脚本学习笔记 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/mysql%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">mysql 踩坑记 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/nginx/">nginx 从0学起 （一）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%E6%97%A5%E6%9C%9F%E8%BD%AC%E5%8C%96%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">SpringBoot 踩坑记 之 日期转化器 （二）</a></li><li class="post-list-item"><a class="post-list-link" href="/;categories/hello-world/">Hello World</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 exceedY
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
