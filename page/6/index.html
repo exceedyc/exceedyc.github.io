@@ -181,174 +181,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Git%E7%B3%BB%E5%88%97]%20git%20%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/%5BGit%E7%B3%BB%E5%88%97%5D%20git%20%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">git命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 16:38:06" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="合并其他分支指定提交到本分支"><a href="#合并其他分支指定提交到本分支" class="headerlink" title="合并其他分支指定提交到本分支"></a>合并其他分支指定提交到本分支</h2><p>当1.1分支的某个提交 需要提前放到1.0分支时，那么可以单独将该提交放到1.0分支。</p>
-<p>首先切换到1.1分支，使用<code>git log </code> 查看commitId。 然后切换回1.0分支，执行下列命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick commitId</span><br></pre></td></tr></table></figure>
-
-<p>此时提交是提交在了本地，因此需要 <code>git push</code> 才能上传到 远程。</p>
-<p>ps: 目标提交必须在本地!</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Git]%20github%E8%AF%B7%E6%B1%82%E6%85%A2%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/%5BGit%5D%20github%E8%AF%B7%E6%B1%82%E6%85%A2%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">GitHub 请求慢问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:10:00" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/bug/" itemprop="url" rel="index"><span itemprop="name">bug</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最简单的办法，做映射</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/;categories/%5BGit%5D%20github%E8%AF%B7%E6%B1%82%E6%85%A2%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Docker]%20docker%20%E5%AE%B9%E5%99%A8%E9%87%8D%E5%90%AF%E6%97%B6%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%A4%B1%E6%95%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -603,6 +435,181 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/;categories/%5BDJL%5D%20DJL%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/ImageIo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/ImageIo/" class="post-title-link" itemprop="url">java操作图片-ImageIo</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-21 17:55:28" itemprop="dateModified" datetime="2021-07-21T17:55:28+08:00">2021-07-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="java操作图片"><a href="#java操作图片" class="headerlink" title="java操作图片"></a>java操作图片</h2><p>​    本文章主要说明java 进行图片合并、添加文字两个功能，其他功能大同小异，但是因为博主没用过，所以不做过多赘述。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/ImageIo/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">SpringBoot 踩坑记 之 集成webSocket （二）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/webSocket/" itemprop="url" rel="index"><span itemprop="name">webSocket</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>基于stomp版的，啊，有个demo，但是还没实际用过，不想写怎么办，在线等，一点也不急那种。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
