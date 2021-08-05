@@ -4,6 +4,102 @@
   
     
     <entry>
+      <title></title>
+      <link href="/;categories/linux%20%E4%B8%AD%E5%8D%88%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/"/>
+      <url>/;categories/linux%20%E4%B8%AD%E5%8D%88%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="linux下安装宋体"><a href="#linux下安装宋体" class="headerlink" title="linux下安装宋体"></a><a href="https://www.cnblogs.com/yangjianbo/articles/10825178.html">linux下安装宋体</a></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.到windows环境下将所需字体拷贝到linux下。(simsun.ttc(宋体),msyf.ttf（微软雅黑）)</span><br><span class="line">2.到linux环境下创建目录</span><br><span class="line">mkdir -pv /usr/share/fonts/chinese/TrueType</span><br><span class="line">将字体放入目录下</span><br><span class="line">cd /usr/share/fonts/chinese/TrueType</span><br><span class="line">chmod 755 * 为字体赋予可执行权限</span><br><span class="line">3.建立字体缓存</span><br><span class="line"># mkfontscale （如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ）</span><br><span class="line"># mkfontdir</span><br><span class="line"># fc-cache -fv （如果提示 fc-cache: command not found，则需要安装# yum install fontconfig</span><br></pre></td></tr></table></figure><p><a href="https://blog.csdn.net/Box_clf/article/details/85224413">https://blog.csdn.net/Box_clf/article/details/85224413</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SpringBoot 返回LocalDateTime转为String</title>
+      <link href="/;categories/%5BSpringBoot%5D%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/"/>
+      <url>/;categories/%5BSpringBoot%5D%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/</url>
+      
+        <content type="html"><![CDATA[<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>老规矩，直接解决方法</p><span id="more"></span><p>在需要的参数上加下列注解</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> SpringBoot </category>
+          
+          <category> result </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SpringBoot </tag>
+            
+            <tag> bug </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据库查询时，得到的时间不对问题</title>
+      <link href="/;categories/%5BMybatis%5D%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%97%B6%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8D%E5%AF%B9%E9%97%AE%E9%A2%98/"/>
+      <url>/;categories/%5BMybatis%5D%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%97%B6%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8D%E5%AF%B9%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>数据库时间与实际时间不符问题</p><span id="more"></span><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>逐步解决：</p><ol><li>首先查看数据库时区</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &quot;%time_zone%&quot;; </span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210805111806.png" alt="image-20210805111806768"></p><p>时区明显不对，居然是CST时区，如果得到的时区不对，那么大概率就是这个造成的，所以修改。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set global time_zone=&quot;+8:00&quot;;</span><br><span class="line"># 刷新权限</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure><p>等一会，再次查询，如下图所示即为修改成功</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210805111528.png" alt="image-20210805111528788"></p><ol start="2"><li>一般情况下修改数据库就会成功，（ps: 可能不会立即生效，可以先重启项目试试）如果一直不成功，那么排查服务器时区是否正确。</li></ol><ol start="3"><li>服务器时区正确，还不行，那么就在项目的配置文件的链接数据库的url中增加时区</li></ol><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">jdbc:mysql://47.97.154.202:3306/glosselephant?useUnicode=true&amp;useSSL=false&amp;characterEncoding=utf-8&amp;serverTimeZone=GMT+8</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> mybatis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mybatis </tag>
+            
+            <tag> type </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>[object Object]</title>
+      <link href="/;categories/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/"/>
+      <url>/;categories/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://theme-next.js.org/docs/tag-plugins/tabs.html">next 主题文档</a> </p><div class="tabs" id="unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#unique-name-1">1</a></li><li class="tab"><a href="#unique-name-2">2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="unique-name-1"><p>Any content (support inline tags too).</p></div><div class="tab-pane" id="unique-name-2"><p>哈哈哈</p></div></div></div><p>{[(<em>words</em>)]}</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> next </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> next </tag>
+            
+            <tag> test </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Mysql创建用户并授权</title>
       <link href="/;categories/%5BMysql%5DMysql%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83/"/>
       <url>/;categories/%5BMysql%5DMysql%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83/</url>
@@ -554,7 +650,7 @@
       <link href="/;categories/Github%20%E5%9B%BE%E5%BA%8A%20+%20Typora%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0/"/>
       <url>/;categories/Github%20%E5%9B%BE%E5%BA%8A%20+%20Typora%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><span id="more"></span><h2 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h2><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210722102530549.png"></p><p>新建仓库<name> ，然后就不用管了。</p><h1 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h1><p><a href="https://github.com/Molunerfinn/PicGo/releases/">下载PicGo</a> 可以在该地址选择心仪的版本，然后安装。</p><p>ps: PicGO的指南地址：<a href="https://picgo.github.io/PicGo-Doc/zh/guide/">https://picgo.github.io/PicGo-Doc/zh/guide/</a></p><p>因为笔者电脑限制，所以这里只说mac版，其实是一样的，但是为了严谨。</p><p>下载 <a href="https://github.com/Molunerfinn/PicGo/releases/download/v2.3.0-beta.6/PicGo-2.3.0-beta.6.dmg">PicGo-2.3.0-beta.6.dmg</a> 然后点击安装，之后打开，打开后不会出来界面，需要手动点出。 </p><p>在状态栏找到</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210722104355.png"></p><p>右键点击，选择 打开详细窗口</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210722104523.png"></p><h2 id="回到github，生成token"><a href="#回到github，生成token" class="headerlink" title="回到github，生成token"></a>回到github，生成token</h2><p>点击头像，选择setting，然后选择Developer settings -&gt; Personal access tokens -&gt; Generate new token.</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210722105001811.png"></p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210722105219756.png"></p><p>​    给予repo权限，表示对仓库有操作权限。</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210722105318749.png"></p><p>然后copy token，记得保存，不然只能重新生成了</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210722105441447.png"></p><h2 id="配置github信息到PicGo"><a href="#配置github信息到PicGo" class="headerlink" title="配置github信息到PicGo"></a>配置github信息到PicGo</h2><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210722112843.png"></p><p>token为上述生成的token，仓库名为新建的仓库。</p><p>自定义域名：</p><p>github 默认：<a href="https://github.com/exceedyc/images">https://github.com/exceedyc/images</a> </p><p>cdn加速：<a href="https://cdn.jsdelivr.net/gh/exceedyc/images">https://cdn.jsdelivr.net/gh/exceedyc/images</a></p><p>同时点击PicGo设置，将 时间戳重命名 及 上传后复制 打开</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210722114732.png"></p><p>此处两个配置的作用是： 避免同名造成上传失败，以及上传成功后 自动复制链接到编译器。</p><p>至此上传及图床配置完成，接下来就是编辑器的配置了</p><h1 id="配置Typora"><a href="#配置Typora" class="headerlink" title="配置Typora"></a>配置Typora</h1><p>下载安装Typora 不再赘述。打开Typora -&gt; 设置 -&gt; 图片</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210722114237.png"></p><p>将插入图片时配置为上传图片。将上传服务选定为PicGo.app。</p><p>点击验证图片上传选项，得到以下提示即为成功。</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210722114512.png"></p><p>这样在插入图片后会自动上传并自动修改路径。</p><p>至此结束。</p>]]></content>
       
       
       <categories>
@@ -662,31 +758,6 @@
     
     
     <entry>
-      <title>dubbo 学习日记</title>
-      <link href="/;categories/dubbo-md/"/>
-      <url>/;categories/dubbo-md/</url>
-      
-        <content type="html"><![CDATA[<p>dubbo 直接使用scoket通信，传输效率高，并可以统计系统之间的调用干洗、调用次数。缺点是无法跨语音，只能是java。<br>  <span id="more"></span><br>  dubbo 是阿里巴巴开源的分布式框架。<br>  <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsdubbo-relation.jpg" alt="依赖关系"></p><pre><code>简单来说，我们的服务端启动后，第一步去注册中心进行注册，第二部客户端去注册中心查找，第三步注册中心返回符合要求的地址，第四步客户端进行调用就进行请求调用。</code></pre><p>  注册中心：官方推荐使用zookeeper。:</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> java </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> dubbo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>mysql读写分离 （一）</title>
       <link href="/;categories/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/"/>
       <url>/;categories/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/</url>
@@ -706,6 +777,31 @@
             <tag> msyql </tag>
             
             <tag> springboot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>dubbo 学习日记</title>
+      <link href="/;categories/dubbo-md/"/>
+      <url>/;categories/dubbo-md/</url>
+      
+        <content type="html"><![CDATA[<p>dubbo 直接使用scoket通信，传输效率高，并可以统计系统之间的调用干洗、调用次数。缺点是无法跨语音，只能是java。<br>  <span id="more"></span><br>  dubbo 是阿里巴巴开源的分布式框架。<br>  <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsdubbo-relation.jpg" alt="依赖关系"></p><pre><code>简单来说，我们的服务端启动后，第一步去注册中心进行注册，第二部客户端去注册中心查找，第三步注册中心返回符合要求的地址，第四步客户端进行调用就进行请求调用。</code></pre><p>  注册中心：官方推荐使用zookeeper。:</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> dubbo </tag>
             
         </tags>
       
