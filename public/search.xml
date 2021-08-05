@@ -4,13 +4,27 @@
   
     
     <entry>
-      <title></title>
+      <title>linux下安装宋体</title>
       <link href="/;categories/linux%20%E4%B8%AD%E5%8D%88%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/"/>
       <url>/;categories/linux%20%E4%B8%AD%E5%8D%88%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
       
         <content type="html"><![CDATA[<h1 id="linux下安装宋体"><a href="#linux下安装宋体" class="headerlink" title="linux下安装宋体"></a><a href="https://www.cnblogs.com/yangjianbo/articles/10825178.html">linux下安装宋体</a></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.到windows环境下将所需字体拷贝到linux下。(simsun.ttc(宋体),msyf.ttf（微软雅黑）)</span><br><span class="line">2.到linux环境下创建目录</span><br><span class="line">mkdir -pv /usr/share/fonts/chinese/TrueType</span><br><span class="line">将字体放入目录下</span><br><span class="line">cd /usr/share/fonts/chinese/TrueType</span><br><span class="line">chmod 755 * 为字体赋予可执行权限</span><br><span class="line">3.建立字体缓存</span><br><span class="line"># mkfontscale （如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ）</span><br><span class="line"># mkfontdir</span><br><span class="line"># fc-cache -fv （如果提示 fc-cache: command not found，则需要安装# yum install fontconfig</span><br></pre></td></tr></table></figure><p><a href="https://blog.csdn.net/Box_clf/article/details/85224413">https://blog.csdn.net/Box_clf/article/details/85224413</a></p>]]></content>
       
       
+      <categories>
+          
+          <category> linux </category>
+          
+          <category> sendEmail </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
       
     </entry>
     
@@ -73,11 +87,11 @@
     
     
     <entry>
-      <title>[object Object]</title>
+      <title>next 主题 功能测试</title>
       <link href="/;categories/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/"/>
       <url>/;categories/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/</url>
       
-        <content type="html"><![CDATA[<p><a href="https://theme-next.js.org/docs/tag-plugins/tabs.html">next 主题文档</a> </p><div class="tabs" id="unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#unique-name-1">1</a></li><li class="tab"><a href="#unique-name-2">2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="unique-name-1"><p>Any content (support inline tags too).</p></div><div class="tab-pane" id="unique-name-2"><p>哈哈哈</p></div></div></div><p>{[(<em>words</em>)]}</p>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://theme-next.js.org/docs/tag-plugins/tabs.html">next 主题文档</a> </p><div class="tabs" id="unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#unique-name-1">1</a></li><li class="tab"><a href="#unique-name-2">2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="unique-name-1"><p>Any content (support inline tags too).</p></div><div class="tab-pane" id="unique-name-2"><p>哈哈哈</p></div></div></div>]]></content>
       
       
       <categories>
