@@ -998,19 +998,6 @@
     
     
     <entry>
-      <title>java 进阶 -jvm</title>
-      <link href="/;categories/java-%E8%BF%9B%E9%98%B6-jvm/"/>
-      <url>/;categories/java-%E8%BF%9B%E9%98%B6-jvm/</url>
-      
-        <content type="html"><![CDATA[<p>生成内存溢出快照：在runConfigurations中的VM arguments添加：<code>-XX:+HeapDumpOnOutOfMemoryError </code>。 </p><p>-Xss规定了每个线程堆栈的大小。一般情况下256K是足够了。影响了此进程中并发线程数大小。</p><p>-Xms初始的Heap的大小。</p><p>-Xmx最大Heap的大小。</p><p>在很多情况下，-Xms和-Xmx设置成一样的。这么设置，是因为当Heap不够用时，会发生内存抖动，影响程序运行稳定性。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>linux sendEmail 踩坑记 （一）</title>
       <link href="/;categories/linux%20sendEmail%20%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
       <url>/;categories/linux%20sendEmail%20%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
@@ -1032,6 +1019,19 @@
             <tag> linux </tag>
             
         </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java 进阶 -jvm</title>
+      <link href="/;categories/java-%E8%BF%9B%E9%98%B6-jvm/"/>
+      <url>/;categories/java-%E8%BF%9B%E9%98%B6-jvm/</url>
+      
+        <content type="html"><![CDATA[<p>生成内存溢出快照：在runConfigurations中的VM arguments添加：<code>-XX:+HeapDumpOnOutOfMemoryError </code>。 </p><p>-Xss规定了每个线程堆栈的大小。一般情况下256K是足够了。影响了此进程中并发线程数大小。</p><p>-Xms初始的Heap的大小。</p><p>-Xmx最大Heap的大小。</p><p>在很多情况下，-Xms和-Xmx设置成一样的。这么设置，是因为当Heap不够用时，会发生内存抖动，影响程序运行稳定性。</p>]]></content>
+      
+      
       
     </entry>
     
