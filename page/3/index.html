@@ -215,7 +215,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-18 17:01:46" itemprop="dateModified" datetime="2021-10-18T17:01:46+08:00">2021-10-18</time>
+                <time title="Modified: 2021-11-11 12:06:43" itemprop="dateModified" datetime="2021-11-11T12:06:43+08:00">2021-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,19 +239,14 @@
 
       
           <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class path resource [dataSource/dataSource.txt] cannot be resolved to absolute file path because it does not reside in the file system: </span><br><span class="line">jar:file:/app/web/ydb-drug-server/ydb-drug-0.0.1-SNAPSHOT.jar!/BOOT</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClassPathResource resource = <span class="keyword">new</span> ClassPathResource(<span class="string">&quot;dataSource/dataSource.txt&quot;</span>);</span><br><span class="line">InputStream inputStream = resource.getInputStream();</span><br></pre></td></tr></table></figure>
-
-
-
-<p>todo</p>
-<p>  两个bug</p>
-<p>一个 调url传文件的bug</p>
-<p>一个localDateTime的bug</p>
-<p>url传base64时 + 会被转为 空格，因此需要转回去</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/bug/%5BSpringBoot%5DSpringboot%20%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96jar%20%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

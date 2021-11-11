@@ -209,7 +209,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-11-11 11:49:18 / Modified: 11:56:08" itemprop="dateCreated datePublished" datetime="2021-11-11T11:49:18+08:00">2021-11-11</time>
+              <time title="Created: 2021-11-11 11:49:18 / Modified: 12:06:51" itemprop="dateCreated datePublished" datetime="2021-11-11T11:49:18+08:00">2021-11-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,18 +233,16 @@
 
       
           <h2 id="git管理方式"><a href="#git管理方式" class="headerlink" title="git管理方式:"></a>git管理方式:</h2><ol>
-<li><p>每次开发新功能拉取新的分支,分支命名方式如下:<br><code>feature-姓名全拼-分支说明-日期 / feature-分支说明-日期</code></p>
-</li>
-<li><p>新功能开发完成后先单元测试,不着急合并,确认可以进入联调后,将功能合并到dev-2.0.0分支,进行联调测试,联调测试期间出现的bug,从dev分支派生出新的分支进行bug修复,命名规则如下:<br><code>release-版本号</code></p>
-</li>
-<li><p>测试无误后,将release-* 分支合并到dev分支, 确认正式上线时,将dev分支合并到master分支,切换至master分支打包部署.</p>
-</li>
-<li><p>如果master出现bug, 从master分支派生出hotfixes分支,命名规则如下:<br><code>hotfixes-姓名全拼-分支说明-日期</code><br>测试完成后合并至dev及master,重复3中的打包部署操作</p>
-</li>
-<li><p>以上分支除master分支及dev分支外的其他分支,合并结束后即可删除</p>
-</li>
+<li>每次开发新功能拉取新的分支,分支命名方式如下:<br><code>feature-姓名全拼-分支说明-日期 / feature-分支说明-日期</code></li>
 </ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/study/g%20i%20t/%5BGIT%5D%20git%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -302,7 +300,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-11 11:59:21" itemprop="dateModified" datetime="2021-11-11T11:59:21+08:00">2021-11-11</time>
+                <time title="Modified: 2021-11-11 12:06:26" itemprop="dateModified" datetime="2021-11-11T12:06:26+08:00">2021-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -327,33 +325,14 @@
       
           <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><strong>重点哦，所以放前面</strong>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this is incompatible with sql_mode=only_full_group_by</span><br></pre></td></tr></table></figure>
-
-<p>musql8.0 版本，使用group by 查询所有行数据时会报错，报错信息如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1055 - Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &#x27;transfer.transfer_histroy.id&#x27; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by, Time: 0.028000s</span><br></pre></td></tr></table></figure>
-
-<h2 id="bug复现"><a href="#bug复现" class="headerlink" title="bug复现"></a>bug复现</h2><p>sql 语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,`to` from transfer_histroy GROUP BY `to`;</span><br></pre></td></tr></table></figure>
-
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>正确的使用方式是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select `to` from transfer_history GROUP BY `to`;</span><br></pre></td></tr></table></figure>
-
-<p>正如报错信息所说 GROUP BY 后跟的行要和 查询的行一致，不能多也不能少。不然就会报错。</p>
-<p>虽然这样可以解决sql报错，但明显不是我们想要的,我们需要的是所有行数据，那么怎么解决呢？</p>
-<p>找到罪魁祸首，没错就是<code>sql_mode=only_full_group_by</code> 因为<code>sql_mode</code> 里面有 <code>only_full_group_by</code> 所以会报错，那么去掉它试试。</p>
-<p>首先查看<code>sql_mode</code> 都有什么，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select @@global.sql_mode;</span><br><span class="line">结果：</span><br><span class="line">ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
-
-<p>果不其然，有ONLY_FULL_GROUP_BY，抓到狗了，那么干掉它，copy除<code>NOLY_FULL_GROUP_BY</code>以为的参数，修改<code>sql_mode</code>.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set sql_mode = &quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&quot;</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是：可能不是马上生效的，所以要等一会，并且呢，如果是项目使用的需要重启，不然项目还是会报错……</p>
-<p>再次查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,`from` from transfer_record GROUP BY `to`;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211105155059.png" alt="image-20211105155059797"></p>
-<p>拿到结果，问题解决。</p>
-<p>ps: 这种办法不用永久性的，mysql重启就需要重新配置的</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/bug/%5BMysql%5D%20Mysql5.7%E4%B9%8B%E5%90%8E%20group%20by%20%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -403,10 +382,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-11-03 11:22:49 / Modified: 15:37:29" itemprop="dateCreated datePublished" datetime="2021-11-03T11:22:49+08:00">2021-11-03</time>
+              <time title="Created: 2021-11-03 11:22:49" itemprop="dateCreated datePublished" datetime="2021-11-03T11:22:49+08:00">2021-11-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-11 12:06:33" itemprop="dateModified" datetime="2021-11-11T12:06:33+08:00">2021-11-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -429,16 +414,14 @@
 
       
           <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>​            使用shrio没有在接口上配置权限，所以该接口需要匿名访问，但是配置拦截时配置了该接口路径，就有可能造成302请求。</p>
-<ul>
-<li><p>配置了验证：        <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211103112619.png" alt="image-20211103112619362"></p>
-</li>
-<li><p>接口没配置权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211103112729.png" alt="image-20211103112729219"></p>
-</li>
-</ul>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>将上述红框的配置注释是最有效的方法，但也要说下为什么：</p>
-<p>​     <code>authc</code> 是开启验证，所以注释掉，或该成<code>anon</code> 都可以，同时要注意不要有<code>filterChainDefinitionMap.put(&quot;**&quot;,authc)</code>因为这样代表所有接口都需要验证。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/bug/%5BShrio%5D%20Shrio%E9%80%A0%E6%88%90302%E9%97%AE%E9%A2%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -538,7 +521,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/bug/[Mysql]%20%E8%A1%A8%E6%83%85%E6%97%A0%E6%B3%95%E5%85%A5%E5%BA%93%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/bug/[BUG]%20url%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -555,7 +538,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/bug/%5BMysql%5D%20%E8%A1%A8%E6%83%85%E6%97%A0%E6%B3%95%E5%85%A5%E5%BA%93%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/;categories/bug/%5BBUG%5D%20url%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -564,10 +547,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-10-25 18:29:52 / Modified: 18:30:10" itemprop="dateCreated datePublished" datetime="2021-10-25T18:29:52+08:00">2021-10-25</time>
+              <time title="Created: 2021-10-25 18:29:52" itemprop="dateCreated datePublished" datetime="2021-10-25T18:29:52+08:00">2021-10-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-11 12:06:00" itemprop="dateModified" datetime="2021-11-11T12:06:00+08:00">2021-11-11</time>
+              </span>
 
           
 
