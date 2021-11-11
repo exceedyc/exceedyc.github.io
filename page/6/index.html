@@ -116,17 +116,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">34</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">44</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">42</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">49</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">69</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -181,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Docker]%20docker%20%E5%AE%B9%E5%99%A8%E9%87%8D%E5%90%AF%E6%97%B6%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%A4%B1%E6%95%88/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[SpringBoot]%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -198,100 +198,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/%5BDocker%5D%20docker%20%E5%AE%B9%E5%99%A8%E9%87%8D%E5%90%AF%E6%97%B6%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%A4%B1%E6%95%88/" class="post-title-link" itemprop="url">Docker 容器配置环境变量重启时失效</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 16:37:02" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/bug/" itemprop="url" rel="index"><span itemprop="name">bug</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Docker-容器配置的环境变量重启时失效问题解决"><a href="#Docker-容器配置的环境变量重启时失效问题解决" class="headerlink" title="Docker 容器配置的环境变量重启时失效问题解决"></a>Docker 容器配置的环境变量重启时失效问题解决</h1><h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>在/etc/profile 配置环境变量</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/opt/java/jdk-15.0.2</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
-
-<p>然后在/etc/bashrc 中增加环境刷新命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<p>可以保证重启时环境变量依旧有效</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/;categories/%5BDocker%5D%20docker%20%E5%AE%B9%E5%99%A8%E9%87%8D%E5%90%AF%E6%97%B6%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%A4%B1%E6%95%88/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/Github%20%E5%9B%BE%E5%BA%8A%20+%20Typora%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/Github%20%E5%9B%BE%E5%BA%8A%20+%20Typora%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0/" class="post-title-link" itemprop="url">GitHub + PicGo + Typora 自动上传图片</a>
+            <a href="/;categories/%5BSpringBoot%5D%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/" class="post-title-link" itemprop="url">SpringBoot 返回LocalDateTime转为String</a>
         </h2>
 
         <div class="post-meta">
@@ -301,286 +208,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-27 17:14:42" itemprop="dateCreated datePublished" datetime="2021-07-27T17:14:42+08:00">2021-07-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-22 11:55:04" itemprop="dateModified" datetime="2021-07-22T11:55:04+08:00">2021-07-22</time>
+                <time title="Modified: 2021-10-19 18:27:51" itemprop="dateModified" datetime="2021-10-19T18:27:51+08:00">2021-10-19</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Typora/" itemprop="url" rel="index"><span itemprop="name">Typora</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/;categories/Github%20%E5%9B%BE%E5%BA%8A%20+%20Typora%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[DJL]%20DJL%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/%5BDJL%5D%20DJL%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">DJL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:09:40" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/DJL/" itemprop="url" rel="index"><span itemprop="name">DJL</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>@<a href="DJL">DJL</a></p>
-<p>学习DJL之前先了解一下什么是深度学习</p>
-<hr>
-<h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><h2 id="什么是深度学习"><a href="#什么是深度学习" class="headerlink" title="什么是深度学习"></a>什么是深度学习</h2><p>深度学习是机器学习中监督学习的分支，是根据神经网络对模型进行训练的任务过程。</p>
-<p>机器学习包含：</p>
-<ul>
-<li>监督学习</li>
-<li>非监督学习</li>
-</ul>
-<p> 在上层是 人工智能。</p>
-<ul>
-<li>一开始是传统专家系统，根据判断（数据、规则）得出答案。</li>
-<li>进一步发展：数据+答案通过机器学习训练模型得到规则</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/;categories/%5BDJL%5D%20DJL%E5%AD%A6%E4%B9%A0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/ImageIo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/ImageIo/" class="post-title-link" itemprop="url">java操作图片-ImageIo</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-21 17:55:28" itemprop="dateModified" datetime="2021-07-21T17:55:28+08:00">2021-07-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="java操作图片"><a href="#java操作图片" class="headerlink" title="java操作图片"></a>java操作图片</h2><p>​    本文章主要说明java 进行图片合并、添加文字两个功能，其他功能大同小异，但是因为博主没用过，所以不做过多赘述。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/;categories/ImageIo/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">SpringBoot 踩坑记 之 集成webSocket （二）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
-            </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -591,7 +227,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/webSocket/" itemprop="url" rel="index"><span itemprop="name">webSocket</span></a>
+                  <a href="/categories/SpringBoot/result/" itemprop="url" rel="index"><span itemprop="name">result</span></a>
                 </span>
             </span>
 
@@ -606,10 +242,349 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>基于stomp版的，啊，有个demo，但是还没实际用过，不想写怎么办，在线等，一点也不急那种。</p>
+          <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>老规矩，直接解决方法</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/;categories/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
+              <a class="btn" href="/;categories/%5BSpringBoot%5D%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Mybatis]%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%97%B6%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8D%E5%AF%B9%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/%5BMybatis%5D%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%97%B6%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8D%E5%AF%B9%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">数据库查询时，得到的时间不对问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-27 14:59:02" itemprop="dateCreated datePublished" datetime="2021-07-27T14:59:02+08:00">2021-07-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-05 11:24:48" itemprop="dateModified" datetime="2021-08-05T11:24:48+08:00">2021-08-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>数据库时间与实际时间不符问题</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/%5BMybatis%5D%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%97%B6%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8D%E5%AF%B9%E9%97%AE%E9%A2%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/" class="post-title-link" itemprop="url">next 主题 功能测试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-22 11:55:06" itemprop="dateCreated datePublished" datetime="2021-07-22T11:55:06+08:00">2021-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-05 14:29:06" itemprop="dateModified" datetime="2021-08-05T14:29:06+08:00">2021-08-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/next/" itemprop="url" rel="index"><span itemprop="name">next</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/tag-plugins/tabs.html">next 主题文档</a> </p>
+<div class="tabs" id="unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#unique-name-1">1</a></li><li class="tab"><a href="#unique-name-2">2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="unique-name-1"><p>Any content (support inline tags too).</p></div><div class="tab-pane" id="unique-name-2"><p>哈哈哈</p></div></div></div>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Mysql]Mysql%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/%5BMysql%5DMysql%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83/" class="post-title-link" itemprop="url">Mysql创建用户并授权</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-21 17:16:55 / Modified: 17:17:39" itemprop="dateCreated datePublished" datetime="2021-07-21T17:16:55+08:00">2021-07-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Mysql创建用户并授权"><a href="#Mysql创建用户并授权" class="headerlink" title="Mysql创建用户并授权"></a>Mysql创建用户并授权</h1><h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line"># % 所有地址都可用</span><br><span class="line">create user &#x27;userName&#x27;@&#x27;%&#x27; identified by ‘password&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># all : 所有权限  # test.* 所有表</span><br><span class="line">grant all on database.table to &#x27;username&#x27; identified by &#x27;password&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/" class="post-title-link" itemprop="url">免费ssl证书</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:53:23" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ssl/" itemprop="url" rel="index"><span itemprop="name">ssl</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://www.laozuo.org/tag/lets-encrypt">Let’s Encrypt</a>作为一个公共且免费SSL的项目逐渐被广大用户传播和使用，是由Mozilla、Cisco、Akamai、IdenTrust、EFF等组织人员发起，主要的目的也是为了推进网站从HTTP向HTTPS过度的进程，目前已经有越来越多的商家加入和赞助支持。</p>
+<p><a target="_blank" rel="noopener" href="http://www.laozuo.org/tag/lets-encrypt%E5%85%8D%E8%B4%B9ssl">Let’s Encrypt免费SSL</a>证书的出现，也会对传统提供付费SSL证书服务的商家有不小的打击。到目前为止，<a target="_blank" rel="noopener" href="http://www.laozuo.org/tag/lets-encrypt">Let’s Encrypt</a>获得IdenTrust交叉签名，这就是说可以应用且支持包括FireFox、Chrome在内的主流浏览器的兼容和支持，虽然目前是公测阶段，但是也有不少的用户在自有网站项目中正式使用起来。</p>
+<p>虽然目前Let’s Encrypt免费SSL证书默认是90天有效期，但是我们也可以到期自动续约，不影响我们的尝试和使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -637,7 +612,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -705,20 +680,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">49</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -4,6 +4,490 @@
   
     
     <entry>
+      <title>合理利用Git进行项目管理</title>
+      <link href="/;categories/study/g%20i%20t/%5BGIT%5D%20git%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F/"/>
+      <url>/;categories/study/g%20i%20t/%5BGIT%5D%20git%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="git管理方式"><a href="#git管理方式" class="headerlink" title="git管理方式:"></a>git管理方式:</h2><ol><li><p>每次开发新功能拉取新的分支,分支命名方式如下:<br><code>feature-姓名全拼-分支说明-日期 / feature-分支说明-日期</code></p></li><li><p>新功能开发完成后先单元测试,不着急合并,确认可以进入联调后,将功能合并到dev-2.0.0分支,进行联调测试,联调测试期间出现的bug,从dev分支派生出新的分支进行bug修复,命名规则如下:<br><code>release-版本号</code></p></li><li><p>测试无误后,将release-* 分支合并到dev分支, 确认正式上线时,将dev分支合并到master分支,切换至master分支打包部署.</p></li><li><p>如果master出现bug, 从master分支派生出hotfixes分支,命名规则如下:<br><code>hotfixes-姓名全拼-分支说明-日期</code><br>测试完成后合并至dev及master,重复3中的打包部署操作</p></li><li><p>以上分支除master分支及dev分支外的其他分支,合并结束后即可删除</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> GitHub </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GitHub </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql5.7之后 group by 报错问题</title>
+      <link href="/;categories/bug/%5BMysql%5D%20Mysql5.7%E4%B9%8B%E5%90%8E%20group%20by%20%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/"/>
+      <url>/;categories/bug/%5BMysql%5D%20Mysql5.7%E4%B9%8B%E5%90%8E%20group%20by%20%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><strong>重点哦，所以放前面</strong>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this is incompatible with sql_mode=only_full_group_by</span><br></pre></td></tr></table></figure><p>musql8.0 版本，使用group by 查询所有行数据时会报错，报错信息如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1055 - Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column &#x27;transfer.transfer_histroy.id&#x27; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by, Time: 0.028000s</span><br></pre></td></tr></table></figure><h2 id="bug复现"><a href="#bug复现" class="headerlink" title="bug复现"></a>bug复现</h2><p>sql 语句：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,`to` from transfer_histroy GROUP BY `to`;</span><br></pre></td></tr></table></figure><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>正确的使用方式是：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select `to` from transfer_history GROUP BY `to`;</span><br></pre></td></tr></table></figure><p>正如报错信息所说 GROUP BY 后跟的行要和 查询的行一致，不能多也不能少。不然就会报错。</p><p>虽然这样可以解决sql报错，但明显不是我们想要的,我们需要的是所有行数据，那么怎么解决呢？</p><p>找到罪魁祸首，没错就是<code>sql_mode=only_full_group_by</code> 因为<code>sql_mode</code> 里面有 <code>only_full_group_by</code> 所以会报错，那么去掉它试试。</p><p>首先查看<code>sql_mode</code> 都有什么，</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select @@global.sql_mode;</span><br><span class="line">结果：</span><br><span class="line">ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure><p>果不其然，有ONLY_FULL_GROUP_BY，抓到狗了，那么干掉它，copy除<code>NOLY_FULL_GROUP_BY</code>以为的参数，修改<code>sql_mode</code>.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set sql_mode = &quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&quot;</span><br></pre></td></tr></table></figure><p>需要注意的是：可能不是马上生效的，所以要等一会，并且呢，如果是项目使用的需要重启，不然项目还是会报错……</p><p>再次查询</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,`from` from transfer_record GROUP BY `to`;</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211105155059.png" alt="image-20211105155059797"></p><p>拿到结果，问题解决。</p><p>ps: 这种办法不用永久性的，mysql重启就需要重新配置的</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> bugs </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql8 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Shrio 302问题</title>
+      <link href="/;categories/bug/%5BShrio%5D%20Shrio%E9%80%A0%E6%88%90302%E9%97%AE%E9%A2%98/"/>
+      <url>/;categories/bug/%5BShrio%5D%20Shrio%E9%80%A0%E6%88%90302%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>​            使用shrio没有在接口上配置权限，所以该接口需要匿名访问，但是配置拦截时配置了该接口路径，就有可能造成302请求。</p><ul><li><p>配置了验证：        <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211103112619.png" alt="image-20211103112619362"></p></li><li><p>接口没配置权限</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211103112729.png" alt="image-20211103112729219"></p></li></ul><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>将上述红框的配置注释是最有效的方法，但也要说下为什么：</p><p>​     <code>authc</code> 是开启验证，所以注释掉，或该成<code>anon</code> 都可以，同时要注意不要有<code>filterChainDefinitionMap.put(&quot;**&quot;,authc)</code>因为这样代表所有接口都需要验证。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> bugs </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Shrio </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>IText7 入门</title>
+      <link href="/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/itext/%5BIText%5D%20IText7%20%E5%AD%A6%E4%B9%A0/"/>
+      <url>/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/itext/%5BIText%5D%20IText7%20%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://kb.itextpdf.com/home/it7kb/examples/encrypting-decrypting-pdfs#Encrypting/DecryptingPDFs-encryptpdf">官方教程</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> IText </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> PDF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/bug/%5BMysql%5D%20%E8%A1%A8%E6%83%85%E6%97%A0%E6%B3%95%E5%85%A5%E5%BA%93%E9%97%AE%E9%A2%98/"/>
+      <url>/;categories/bug/%5BMysql%5D%20%E8%A1%A8%E6%83%85%E6%97%A0%E6%B3%95%E5%85%A5%E5%BA%93%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E5%AD%A6%E7%9A%84%E6%96%B0%E4%B8%9C%E8%A5%BF/"/>
+      <url>/;categories/study/%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E5%AD%A6%E7%9A%84%E6%96%B0%E4%B8%9C%E8%A5%BF/</url>
+      
+        <content type="html"><![CDATA[<ul><li>Light Security</li><li>Dozer</li><li>设计模式真的很重要！</li><li>vue</li><li>uniapp</li><li>Quartz</li><li>消息队列</li><li>redis</li><li>Elasticsearch 搜索引擎</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/mysql/%5Bmysql%E8%B8%A9%E5%9D%91%E8%AE%B0%5D%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/"/>
+      <url>/;categories/study/mysql/%5Bmysql%E8%B8%A9%E5%9D%91%E8%AE%B0%5D%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>url传Base64解码失败问题</title>
+      <link href="/;categories/bug/%5BBUG%5D%20url%E4%BC%A0Base64%E8%A7%A3%E7%A0%81%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/"/>
+      <url>/;categories/bug/%5BBUG%5D%20url%E4%BC%A0Base64%E8%A7%A3%E7%A0%81%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>​    java 使用Http请求接口时，传如了Base64编码的参数，但是解码时失败。</p><p>​    造成解码失败的原因是因为 “+” 被http 解析为了空格，因此需要将空格转回“+”</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String param = param.replace(<span class="string">&quot; &quot;</span>, <span class="string">&quot;+&quot;</span>);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> bugs </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> url </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/bug/%5BSpringBoot%5DLocalDateTime%E8%BD%AC%E4%B9%89%E9%97%AE%E9%A2%98/"/>
+      <url>/;categories/bug/%5BSpringBoot%5DLocalDateTime%E8%BD%AC%E4%B9%89%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<hr><hr>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>表情无法入库</title>
+      <link href="/;categories/bug/%5BBUG%5D%20url%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/"/>
+      <url>/;categories/bug/%5BBUG%5D%20url%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<h2 id="对接微信将微信表情入库时报错字符串超长"><a href="#对接微信将微信表情入库时报错字符串超长" class="headerlink" title="对接微信将微信表情入库时报错字符串超长"></a>对接微信将微信表情入库时报错字符串超长</h2><p>解决： 将对应cloumn的字符格式修改为 utf8mb4</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211025183224.png" alt="image-20211025183224325"></p><ul><li><p>Character Set 改为utf8mb4</p></li><li><p>Collation改为utf8mb4_bin</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> bugs </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Springboot 无法读取jar 中的文件</title>
+      <link href="/;categories/bug/%5BSpringBoot%5DSpringboot%20%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96jar%20%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6/"/>
+      <url>/;categories/bug/%5BSpringBoot%5DSpringboot%20%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96jar%20%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class path resource [dataSource/dataSource.txt] cannot be resolved to absolute file path because it does not reside in the file system: </span><br><span class="line">jar:file:/app/web/ydb-drug-server/ydb-drug-0.0.1-SNAPSHOT.jar!/BOOT</span><br></pre></td></tr></table></figure><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClassPathResource resource = <span class="keyword">new</span> ClassPathResource(<span class="string">&quot;dataSource/dataSource.txt&quot;</span>);</span><br><span class="line">InputStream inputStream = resource.getInputStream();</span><br></pre></td></tr></table></figure><p>todo</p><p>  两个bug</p><p>一个 调url传文件的bug</p><p>一个localDateTime的bug</p><p>url传base64时 + 会被转为 空格，因此需要转回去</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> bugs </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SpringBoot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/java/java%20%E5%9F%BA%E7%A1%80/%E9%9D%A2%E8%AF%95%E9%A2%98/%5B%E9%9D%A2%E8%AF%95%5D%20Offer%E6%9D%A5%E4%BA%86%20%E5%8E%9F%E7%90%86%E7%AF%87/"/>
+      <url>/;categories/study/java/java%20%E5%9F%BA%E7%A1%80/%E9%9D%A2%E8%AF%95%E9%A2%98/%5B%E9%9D%A2%E8%AF%95%5D%20Offer%E6%9D%A5%E4%BA%86%20%E5%8E%9F%E7%90%86%E7%AF%87/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>shell 语言</title>
+      <link href="/;categories/study/shell/shell%E8%AF%AD%E8%A8%80/"/>
+      <url>/;categories/study/shell/shell%E8%AF%AD%E8%A8%80/</url>
+      
+        <content type="html"><![CDATA[<h2 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo &quot;hello world&quot;</span><br></pre></td></tr></table></figure><p><code>#!</code> 是一个约定标记，它告诉系统这个脚本用什么解释器来执行。</p><p><code>echo</code> 命令用于向窗口输出文本</p><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>可以直接命名不需要$符合，但是赋值时不能有空格，同时变量不能有空格，不能有除_以外的特殊符号。如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">your_name=&quot;小明&quot;</span><br><span class="line">test=&quot;hello&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用</span></span><br><span class="line">echo $your_name</span><br><span class="line">echo &quot;&#123;&#125;可有可无，用来做边界使用，如：$&#123;test&#125;s 和 $tests 是不一样的哦&quot;</span><br></pre></td></tr></table></figure><hr><p>输出</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">小明</span><br><span class="line">&#123;&#125;可有可无，用来做边界使用，如：hellos和  是不一样的哦</span><br></pre></td></tr></table></figure><hr><p>如果不使用{}作为边界，那么系统会将 $tests当成一个变量，其值为空。所以就出现了上述的空现象</p><h3 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">test=&quot;1&quot;</span><br><span class="line">readonly test</span><br><span class="line">test=&quot;2&quot;</span><br></pre></td></tr></table></figure><p>运行会提示</p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210923150235.png" alt="image-20210923150235809"></p><h3 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">test=&quot;1&quot;</span><br><span class="line">unset test</span><br><span class="line">echo $test</span><br></pre></td></tr></table></figure><p>没有任何输出</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 解释型语言 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/%E5%8A%A0%E5%AF%86/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86-RSA/"/>
+      <url>/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/%E5%8A%A0%E5%AF%86/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86-RSA/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/java/%E8%AE%A1%E5%88%92%E8%B7%AF%E7%BA%BF/"/>
+      <url>/;categories/study/java/%E8%AE%A1%E5%88%92%E8%B7%AF%E7%BA%BF/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Reactor%E6%A8%A1%E5%BC%8F/"/>
+      <url>/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Reactor%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/%E6%90%9E%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B2%A1%E5%AD%A6%E8%BF%87%E7%9A%84%E4%B8%9C%E8%A5%BF/"/>
+      <url>/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/%E6%90%9E%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B2%A1%E5%AD%A6%E8%BF%87%E7%9A%84%E4%B8%9C%E8%A5%BF/</url>
+      
+        <content type="html"><![CDATA[<p>SpringCloudGateway  </p><p>Netty</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/study/java/%E7%BA%B2%E9%A2%86%E6%8F%90%E8%A6%81/"/>
+      <url>/;categories/study/java/%E7%BA%B2%E9%A2%86%E6%8F%90%E8%A6%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第一部分-扎实的Java基础-（Java基础-容器-并发-JVM）"><a href="#第一部分-扎实的Java基础-（Java基础-容器-并发-JVM）" class="headerlink" title="第一部分 扎实的Java基础 （Java基础+容器+并发+JVM）"></a>第一部分 扎实的Java基础 （Java基础+容器+并发+JVM）</h1><h1 id="第二部分-网络知识（计算机网络技术-HTTPS中的TLS）"><a href="#第二部分-网络知识（计算机网络技术-HTTPS中的TLS）" class="headerlink" title="第二部分 网络知识（计算机网络技术+HTTPS中的TLS）"></a>第二部分 网络知识（计算机网络技术+HTTPS中的TLS）</h1><h1 id="第三部分-Linux"><a href="#第三部分-Linux" class="headerlink" title="第三部分 Linux"></a>第三部分 Linux</h1><h1 id="第四部分-数据结构与算法"><a href="#第四部分-数据结构与算法" class="headerlink" title="第四部分 数据结构与算法"></a>第四部分 数据结构与算法</h1><h1 id="第五部分-数据库（MySQL-Redis）"><a href="#第五部分-数据库（MySQL-Redis）" class="headerlink" title="第五部分 数据库（MySQL+Redis）"></a>第五部分 数据库（MySQL+Redis）</h1><h1 id="第六部分-系统设计（RestFul-API-常用框架-认证授权-分布式-大型网站架构-微服务）"><a href="#第六部分-系统设计（RestFul-API-常用框架-认证授权-分布式-大型网站架构-微服务）" class="headerlink" title="第六部分 系统设计（RestFul API+常用框架+认证授权+分布式+大型网站架构+微服务）"></a>第六部分 系统设计（RestFul API+常用框架+认证授权+分布式+大型网站架构+微服务）</h1><h1 id="第七部分-必会工具（Git-Docker）"><a href="#第七部分-必会工具（Git-Docker）" class="headerlink" title="第七部分 必会工具（Git+Docker）"></a>第七部分 必会工具（Git+Docker）</h1><h1 id="第八部分-面试指南（简历应该如何写-如何准备面试-我的学习方法）"><a href="#第八部分-面试指南（简历应该如何写-如何准备面试-我的学习方法）" class="headerlink" title="第八部分 面试指南（简历应该如何写+如何准备面试+我的学习方法）"></a>第八部分 面试指南（简历应该如何写+如何准备面试+我的学习方法）</h1>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NIO 学习--</title>
+      <link href="/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/io/NIO%E5%AD%A6%E4%B9%A0/"/>
+      <url>/;categories/study/java/java%20%E8%BF%9B%E9%98%B6/io/NIO%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="什么是IO"><a href="#什么是IO" class="headerlink" title="什么是IO"></a><strong>什么是IO</strong></h1><p>​        IO流用来处理设备之间的数据传输的，在Java中，对于数据的输入与传输都是以“流”的方式进行的，java.io 包下提供了各种“流‘类的接口，用以获取不同的种类的数据，并通过标准的方法输入或输出数据。</p><p>​        java把这些不同来源和目标的数据的统一抽象为数据流。</p><p>​        流根据不同的流向分为 </p><p>​                输入流： 程序读取的</p><p>​                输出流： 程序写入的</p><p>​        同时根据不同的类型分为：</p><p>​                字节流：以 字节为单位，</p><p>​                        对应的读\写方法为：InputStream\ OutputStream.</p><p>​                字符流：以字符为单位，</p><p>​                        对应的读\写方法为：Reader \ Writer</p><p>​        java.io 里面的类都分别继承了上述抽象类。</p><h1 id="什么是NIO"><a href="#什么是NIO" class="headerlink" title="什么是NIO"></a><strong>什么是NIO</strong></h1><p>​    上述提到的IO表述了 IO流是什么，而IO流在进行读写时是阻塞的，也就是，来一条处理一条，而后来的只能等先来的处理完，就像是去某行窗口办业务一样，后来的要排队等着，这就是传统的阻塞IO。</p><p>​    而为了提高效率，那么就引入了线程池，而线程池的好处就是避免重复打开关闭，做到线程的复用。但是常驻线程和最大线程数以及阻塞 线程数 也达到了最大数，那么此时在 进入时就会被拒绝。</p><p>​        线程池就像是新增窗口，窗口不会被反复打开关闭，但是新增的窗口是有 上限的，当窗口被占满就需要排队，进入阻塞 队列，而到整个大厅都满了以后，就只能 禁止进入，也就是拒绝。</p><p>​    那么NIO是什么呢？ 我也不知道，咳咳，开个玩笑，快去学。</p><blockquote><p>NIO中非阻塞IO采用了基于reactor模式的工作方式，I/O调用不会被阻塞，相反是注册感兴趣的特定I/O事件，如：可读数据到达，新的套接字链接等等，在发生特定事件时，系统再通知我们。NIO中实现非阻塞I/O的核心对象就是Selector；</p></blockquote><p>​    那么Selector是什么呢？</p><p>​    在提Selector之前，就需要介绍下NIO的组成部分了。NIO分为三个部分组成：</p><ul><li>Selector</li><li>Reactor</li></ul><p>​    </p><blockquote><p>Selector就是注册各种I/O事件的地方，当我们感兴趣的事件发生时，它就会告诉我们所发生的事件。</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210915112813.png"></p><blockquote><p>当有读或血等任何注册的事件发生时，可以从Selector中获得相应的SelectionKey，同时从SelectionKey中可以找到发生事件及该事件所发生（或者绑定更好？）的SelectableChannel，</p></blockquote><p>​    NIO的本质是<strong>延迟IO操作到真正发生IO的时候</strong> ，而不是以前的只要IO流打开了就一直等待IO操作。</p><h1 id="区别是什么？"><a href="#区别是什么？" class="headerlink" title="区别是什么？"></a><b>区别是什么？</b></h1><h1 id="优缺点？"><a href="#优缺点？" class="headerlink" title="优缺点？"></a><strong>优缺点？</strong></h1><h1 id="NIO应用场景"><a href="#NIO应用场景" class="headerlink" title="NIO应用场景"></a><strong>NIO应用场景</strong></h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> io </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>markdown 语法</title>
+      <link href="/;categories/markdown%20%E8%AF%AD%E6%B3%95/"/>
+      <url>/;categories/markdown%20%E8%AF%AD%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>​        笔者用的是typora进行 编辑的，typora和csdn都内嵌了html，所以，写文章就像写html一样就好了，而且还是可以实时反馈的。</p><p>​        那么接下来先介绍：</p><h3 id="字体修改"><a href="#字体修改" class="headerlink" title="字体修改"></a>字体修改</h3><ul><li><p>color 颜色</p></li><li><p>size 字体大小</p></li></ul><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">red</span>&gt;</span>2<span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">font</span> <span class="attr">size</span>=<span class="string">1</span>&gt;</span><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br></pre></td></tr></table></figure><h1 id="一样大哦"><a href="#一样大哦" class="headerlink" title="一样大哦"></a>一样大哦</h1><h1>真的嘛?</h1><h3 id="业内跳转"><a href="#业内跳转" class="headerlink" title="业内跳转"></a>业内跳转</h3><ol><li><p>去1<a href="#test1"><sup>1</sup></a>号位置</p></li><li><p>去字体修改<a href="#%E5%AD%97%E4%BD%93%E4%BF%AE%E6%94%B9"><sup>1</sup></a>号位置</p></li><li><p><a href="#test1">超链接版再去1号</a></p></li><li><p><a href="#sss">去标题</a></p></li></ol><h1 name="sss">标题在这</h1><div name="test1">1号在这里</div><p>三个版本的页内但是很神奇的只有一个可以通用，其他两个只能在typora编辑器里使用</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. 3. 编辑器好用</span><br><span class="line">2. 通用，但是不实用</span><br><span class="line"></span><br><span class="line">1. 使用 跳转标签name的方式</span><br><span class="line">[1](#name)</span><br><span class="line">&lt;div name=&quot;name&quot;&gt;1&lt;/div&gt;</span><br><span class="line">当使用这种方式时，就可以做到点1 跳转到div 1 的位置</span><br><span class="line">3. 使用的方式大同小异，区别在于3使用的是纯h5，也就是超链接</span><br><span class="line">&lt;a href=&quot;#test1&quot;&gt;超链接版再去1号&lt;/a&gt;</span><br><span class="line">这样也可以完成跳转。但遗憾的事，这两种办法只能在cdsn或编译器用。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> markdown </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/;categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%20%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93%EF%BC%9A%E9%80%9A%E5%90%91%E5%8A%A1%E5%AE%9E%E7%9A%84%E6%9C%80%E9%AB%98%E5%A2%83%E7%95%8C%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+      <url>/;categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%20%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93%EF%BC%9A%E9%80%9A%E5%90%91%E5%8A%A1%E5%AE%9E%E7%9A%84%E6%9C%80%E9%AB%98%E5%A2%83%E7%95%8C%E3%80%8B%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p>《程序员修炼之道：通向务实的最高境界》笔记</p><ol><li><p>关注自己的技艺</p></li><li><p>思考！</p></li><li><p>有权选择.安排自己的时间学习一些有趣的新东西,这是对自己的投资,只有为此而进行的加班才是有意义的</p></li><li><p>提供选择,别找借口. 先把谈话在心里过一遍.</p></li><li><p>不要放任破窗</p><ol><li> 不要搁置”破窗”(糟糕的设计、错误的决定、低劣的代码)不去修理.每发现一个就赶紧修复,没时间就先钉起来. 切记不要打破窗户!</li></ol></li><li><p>做推动变革的催化剂</p></li><li><p>牢记全景</p></li><li><p>将质量要求视为需求问题</p></li><li><p>对知识组合做定期投资。： 每年学习一门新语言。 每月读一本技术书。偶尔读非技术书。上课。 加入本地的用户组和交流群。尝试不同的环境。与时俱进。</p></li><li><p>批判性地分析你读到和听到的东西。但是这很难，要有坚实的基础有分辨能力，以及批判能力。 ： 问“五个为什么”。 1. 谁从中受益呢？ 2. 有什么背景？3.什么时间？发生了什么，会有什么结果。4.为什么这是个问题。</p></li><li><p>英语（母语）就是另一门编程语言。 将输出文章当做编程来做。</p></li><li><p>说什么和怎么说同样重要。：除非与世隔，否则必须学会交流。越有效 的交流，影响力越大。</p></li><li><p>把文档嵌进去，而不要拴在表面。</p><p>​    · 明白自己想说什么。</p><p>​    · 了解听众。</p><p>​    · 选择时机。</p><p>​    · 挑选风格。</p><p>​    · 让它看起来不错。</p><p>​    · 让听众参与。</p><p>​    · 做倾听者。</p><p>​    · 回应别人。</p><p>​    · 把代码和文档绑在一起”</p></li><li><p>优秀的设计比糟糕的设计更容易变更。</p></li><li><ol><li><ol><li><p> DRY原则，邪恶的重复性与正交性。</p></li><li><ol><li>邪恶的重复性：不要在系统中复制知识</li><li>不要把同一块知识分到多个系统组件中</li></ol></li><li><p>ETC原则： 更容易变更。</p></li></ol></li></ol></li><li><p>DRY—不要重复自己</p></li><li><ol><li>在一个系统中，每一处知识都必须单一、明确、权威地表达</li></ol></li><li><p>让复用变得更容易</p></li><li><p>消除不相关事物之间的影响</p></li><li><ol><li><p>编码</p></li><li><ol><li>保持代码解藕</li><li>避免全局数据</li><li>避免相似的函数 《设计模式》中的策略模式 不断质疑代码，有机会就重构</li></ol></li><li><p>测试</p></li><li><ol><li>基于正交性设计和实现的系统更容易测试</li><li>编写单元测试半身就是一个有趣的正交性测试。</li><li>修bug也是评估整个系统正交性的好时机。</li></ol></li><li><p>文档</p></li><li><p>与正交共处</p></li></ol></li><li><p>可逆性</p><ol><li>不设最终决定</li><li>放弃追逐时尚</li></ol></li></ol><p>技巧适用</p><p><font size=2 color=blue> 22 </font></p><p><a href="%E9%83%A8%E5%88%86%E5%90%8D%E8%A8%80">1</a></p><p>部分名言 <a href="%E9%83%A8%E5%88%86%E5%90%8D%E8%A8%80">1</a>：</p><p>​    我不需要变成你期望的模样,正如你不是为了我的期望而活—-李小龙</p><p>​    在所有的弱点中,最大的弱点就是害怕出现弱点  —-J.B.Bossuet，Politics from Holy Writ，1709</p><p>​    我认为被人从头打量到脚总比被人视而不见要好 ——— “梅·韦斯特 电影：《九十岁的美女》，1934”</p><p>​    如果某个想法是你唯一的想法，那就没有比它更危险的东西了。</p><p>​                                    ——埃米尔-奥古斯特·沙尔捷（阿兰）Propos sur la religion，1938”</p><p>思考及经验</p><p> 经验:  </p><p>​    + 当意识到自己在说不知道时,要接着说 但是我会搞清楚. 这样就可以像专家一样承担起责任</p><p>​    + 相互沟通这件事我占了其中 一半。如果有人想让用 一段话谈谈某 件事，，而这不是三两句 话就讲得清楚的，那么如实告之。 对话要先听别人说、及时回复很重要，哪怕时间不足，也要回一句“稍后 回复”</p><p>思考:  </p><p>​    怎么辨别推动的变革是好还是坏?</p><p>   那么何不问问自己,问问其他人呢.掌控全局的同时,不要忘记吸取建议也是修改方法的最好办法.</p><p>挑战： </p><p>本周就开始学一门新语言：</p><p>Clojure、Elixir、Elm、F#、Go、Haskell、Python、R、ReasonML、Ruby、Rust、Scala、Swift、Typescript</p><p>摘录来自: (美)David Thomas(大卫·托马斯),Andrew Hunt(安德鲁·亨特). “程序员修炼之道：通向务实的最高境界：第2版。” Apple Books. </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 读书笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 修炼之道 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>内网穿透</title>
+      <link href="/;categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+      <url>/;categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://www.ngrok.cc/user.html">https://www.ngrok.cc/user.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ssl </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ssl </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>IDEA常用命令</title>
+      <link href="/;categories/IDEA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/;categories/IDEA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="批量更改变量名"><a href="#批量更改变量名" class="headerlink" title="批量更改变量名"></a>批量更改变量名</h3><p><code>ctrl + f6</code>  mac: <code>fn + command + f6</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> ImageIo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>阿里云备份（快照）</title>
+      <link href="/;categories/%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%87%E4%BB%BD%EF%BC%88%E5%BF%AB%E7%85%A7%EF%BC%89/"/>
+      <url>/;categories/%E9%98%BF%E9%87%8C%E4%BA%91%E5%A4%87%E4%BB%BD%EF%BC%88%E5%BF%AB%E7%85%A7%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210810105706.png" alt="自动快照策略"></p><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20210810105813.png" alt="配置云盘"></p><p>快照链机制：</p><ul><li>快照存储机制：<ul><li>阿里云将快照分为多个存储块，比如A、B、C、D。</li></ul></li></ul><p>如果用户的云盘是500GiB，但是只有了50GIB，那么第一次生成的快照(S1)就是50GIB。</p><p>而第二次快照(S2)是基于第一次进行备份的，如果B更新了那么此时S2记录的就是B更新后的数据，记为B1，同理C也是，记为C1</p><p>当第三次快照(S3)备份时，B1更新，那么记录并记录为B2，其他存储块引用上一快照(S2)的备份。</p><p>那么删除时会发生什么呢？比如此时删除S2快照，那么只有B1被删除，C1因为S3引用被保留，那么此时S3的数据依旧是A、B2、C1、D。不影响恢复。</p><blockquote><h2 id="删除快照的原理"><a href="#删除快照的原理" class="headerlink" title="删除快照的原理"></a>删除快照的原理</h2><p>当您不再需要某份快照或者快照个数超出额度时，您需要删除一部分快照释放空间。由于快照采用增量原理，假设您需要删除快照链中的某一份快照S1，则流程示意图和逻辑概览如下所示。 <a href="https://gw.alipayobjects.com/zos/onekb/GEmePRxTvdRaZPCgtUhF.png"><img src="https://gw.alipayobjects.com/zos/onekb/GEmePRxTvdRaZPCgtUhF.png" alt="删除快照原理"></a></p><ol><li>阿里云离线分析已删除快照S1的所有数据块（Block），删除未被快照链中其他快照引用的数据块。</li><li>添加快照S1数据块到快照S2。剩下的快照一共记录了10个Block的信息：<ul><li>快照S0的6个。</li><li>快照S1的2个数据块。</li><li>快照S2的2个。</li></ul></li></ol></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> aliyun </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> aliyun </tag>
+            
+            <tag> 快照 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux下安装宋体</title>
       <link href="/;categories/linux%20%E4%B8%AD%E5%8D%88%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/"/>
       <url>/;categories/linux%20%E4%B8%AD%E5%8D%88%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
@@ -35,7 +519,7 @@
       <link href="/;categories/%5BSpringBoot%5D%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/"/>
       <url>/;categories/%5BSpringBoot%5D%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/</url>
       
-        <content type="html"><![CDATA[<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>老规矩，直接解决方法</p><span id="more"></span><p>在需要的参数上加下列注解</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>老规矩，直接解决方法</p><span id="more"></span><p>在需要的参数上加下列注解</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br></pre></td></tr></table></figure><h2 id="将对象转成alibaba-fastjson-JSONObejct-时也会带T"><a href="#将对象转成alibaba-fastjson-JSONObejct-时也会带T" class="headerlink" title="将对象转成alibaba .fastjson.JSONObejct 时也会带T"></a>将对象转成alibaba .fastjson.JSONObejct 时也会带T</h2><p>造成这个的原因和jackson 是一样的，都需要对LocalDateTime进行转化配置。fastjson的配置如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JSONField(format = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -510,7 +994,7 @@
       <link href="/;categories/%5BMac%5D%20mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
       <url>/;categories/%5BMac%5D%20mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/</url>
       
-        <content type="html"><![CDATA[<h4 id="根据连接下载"><a href="#根据连接下载" class="headerlink" title="根据连接下载"></a>根据连接下载</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过curl -0 进行下载 通过--output 确认输出文件</span></span><br><span class="line">curl -0 链接 --output file</span><br><span class="line"><span class="meta">#</span><span class="bash"> 示例</span></span><br><span class="line">curl -0 https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.4.tgz --output mongob.tgz</span><br></pre></td></tr></table></figure><h4 id="更新配置文件"><a href="#更新配置文件" class="headerlink" title="更新配置文件"></a>更新配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 更新配置文件</span></span><br><span class="line">source ./.bash_profice</span><br></pre></td></tr></table></figure><h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 直接创建文件夹</span></span><br><span class="line">mkdir &lt;fileName&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 父文件夹不存在时，同时创建父文件夹</span></span><br><span class="line">mkdir -p /parent/fileName</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果不加-p 并且 父文件夹不存在时，会报错。</span></span><br></pre></td></tr></table></figure><h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> tar 系列 备份文件指 压缩后的文件</span></span><br><span class="line">tar -zxvf name.tgz</span><br><span class="line"><span class="meta">#</span><span class="bash"> -z: 通过 gzip指令处理备份文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -x: 从备份中还原文件（解压）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v: 显示执行过程</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> -f: 指定备份文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -c：备份文件</span></span><br></pre></td></tr></table></figure><h3 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -i:port</span></span><br><span class="line">lsof -i:8080</span><br></pre></td></tr></table></figure><h3 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 主要是linux</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统日期</span></span><br><span class="line">date</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看硬件日期</span></span><br><span class="line">hwclock --show</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将系统日期同步到硬件时间</span></span><br><span class="line">hwclock --systohc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步网络时间</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 ntpdate工具</span></span><br><span class="line">yum -y install ntp ntpdate</span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步时间</span></span><br><span class="line">ntpdate cn.pool.ntp.org</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h4 id="根据连接下载"><a href="#根据连接下载" class="headerlink" title="根据连接下载"></a>根据连接下载</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过curl -0 进行下载 通过--output 确认输出文件</span></span><br><span class="line">curl -0 链接 --output file</span><br><span class="line"><span class="meta">#</span><span class="bash"> 示例</span></span><br><span class="line">curl -0 https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.4.tgz --output mongob.tgz</span><br></pre></td></tr></table></figure><h4 id="更新配置文件"><a href="#更新配置文件" class="headerlink" title="更新配置文件"></a>更新配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 更新配置文件</span></span><br><span class="line">source ./.bash_profice</span><br></pre></td></tr></table></figure><h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 直接创建文件夹</span></span><br><span class="line">mkdir &lt;fileName&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 父文件夹不存在时，同时创建父文件夹</span></span><br><span class="line">mkdir -p /parent/fileName</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果不加-p 并且 父文件夹不存在时，会报错。</span></span><br></pre></td></tr></table></figure><h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> tar 系列 备份文件指 压缩后的文件</span></span><br><span class="line">tar -zxvf name.tgz</span><br><span class="line"><span class="meta">#</span><span class="bash"> -z: 通过 gzip指令处理备份文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -x: 从备份中还原文件（解压）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v: 显示执行过程</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> -f: 指定备份文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -c：备份文件</span></span><br></pre></td></tr></table></figure><h3 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -i:port</span></span><br><span class="line">lsof -i:8080</span><br></pre></td></tr></table></figure><h3 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 主要是linux</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统日期</span></span><br><span class="line">date</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看硬件日期</span></span><br><span class="line">hwclock --show</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将系统日期同步到硬件时间</span></span><br><span class="line">hwclock --systohc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步网络时间</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 ntpdate工具</span></span><br><span class="line">yum -y install ntp ntpdate</span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步时间</span></span><br><span class="line">ntpdate cn.pool.ntp.org</span><br></pre></td></tr></table></figure><p><a href="https://www.jianshu.com/p/75e90aa8f07e">https://www.jianshu.com/p/75e90aa8f07e</a></p>]]></content>
       
       
       <categories>
@@ -1094,7 +1578,7 @@
       <link href="/;categories/nginx/"/>
       <url>/;categories/nginx/</url>
       
-        <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote><h3 id="nginx-是什么"><a href="#nginx-是什么" class="headerlink" title="nginx 是什么"></a>nginx 是什么</h3><ul><li>nginx是一个高性能的Http和反向代理的服务器，具有占内存小、并发能力强的特点</li><li>nginx是专为性能优化而开发的，非常注重效率，能经受高负载的考验。有报告生命能支持高达50000个并发连接数。</li></ul></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><ul><li><p>正向代理</p><blockquote><p>​        如果把互联网比做一个巨大的资源库，而局域网内的客户端想要访问Internet，就需要通过代理服务器进行访问，这个过程就是正向代理。</p></blockquote><p>​        简单来说，就是我们的客户端（浏览器）配置代理服务器，通过代理服务器访问Internet就是正向代理。</p></li><li><p>反向代理</p></li></ul><blockquote><p>​        反向代理，客户端对代理是无感知的，客户端不知道服务器是否进行了代理。        客户端进行反向代理服务器，反向代理服务器选择目标服务器，获取到数据后，将数据返回给客户端，此时目标服务器和代理服务器暴露出来的就是代理服务器这一个服务器，隐藏了目标服务器的真实Ip地址。</p></blockquote><h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><blockquote><p>​        单个服务器解决不了，就增加服务器数量，然后通过代理服务器反向代理多个目标服务器。</p><p>​        然后代理服务器将请求多个请求分发到目标服务器，这个过程也就是负载均衡。</p></blockquote><h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><blockquote><p>​    为了加快网站的解析速度，把动态页面和静态页面由补同的服务器来解析，加快解析速度，降低单个服务器的压力</p></blockquote><h2 id="高可用的集群"><a href="#高可用的集群" class="headerlink" title="高可用的集群"></a>高可用的集群</h2><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2>]]></content>
+        <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote><h3 id="nginx-是什么"><a href="#nginx-是什么" class="headerlink" title="nginx 是什么"></a>nginx 是什么</h3><ul><li>nginx是一个高性能的Http和反向代理的服务器，具有占内存小、并发能力强的特点</li><li>nginx是专为性能优化而开发的，非常注重效率，能经受高负载的考验。有报告生命能支持高达50000个并发连接数。</li></ul></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><ul><li><p>正向代理</p><blockquote><p>​        如果把互联网比做一个巨大的资源库，而局域网内的客户端想要访问Internet，就需要通过代理服务器进行访问，这个过程就是正向代理。</p></blockquote><p>​        简单来说，就是我们的客户端（浏览器）配置代理服务器，通过代理服务器访问Internet就是正向代理。</p></li><li><p>反向代理</p></li></ul><blockquote><p>​        反向代理，客户端对代理是无感知的，客户端不知道服务器是否进行了代理。        客户端进行反向代理服务器，反向代理服务器选择目标服务器，获取到数据后，将数据返回给客户端，此时目标服务器和代理服务器暴露出来的就是代理服务器这一个服务器，隐藏了目标服务器的真实Ip地址。</p></blockquote><h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><blockquote><p>​        单个服务器解决不了，就增加服务器数量，然后通过代理服务器反向代理多个目标服务器。</p><p>​        然后代理服务器将请求多个请求分发到目标服务器，这个过程也就是负载均衡。</p></blockquote><h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><blockquote><p>​    为了加快网站的解析速度，把动态页面和静态页面由补同的服务器来解析，加快解析速度，降低单个服务器的压力</p></blockquote><h2 id="高可用的集群"><a href="#高可用的集群" class="headerlink" title="高可用的集群"></a>高可用的集群</h2><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><hr><p>展示文件目录 </p><p>autoindex on;</p><p>autoindex_exact_size off;</p><p>autoindex_localtime on;</p>]]></content>
       
       
       <categories>
