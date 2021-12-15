@@ -116,7 +116,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">45</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">46</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -126,7 +126,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">79</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">80</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -177,6 +177,115 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/VPN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/study/VPN/" class="post-title-link" itemprop="url">使用Shadowsocks 搭建VPN</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-15 15:11:18 / Modified: 17:33:41" itemprop="dateCreated datePublished" datetime="2021-12-15T15:11:18+08:00">2021-12-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><p>首先购买一台香港服务器, 不用太大,1核4G就可以了.</p>
+<p><a target="_blank" rel="noopener" href="https://www.ucloud.cn/site/active/kuaijie.html?utm_source=bdsem&utm_medium=search&utm_campaign=D03&utm_term=%E9%A6%99%E6%B8%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8&ytag=%E9%A6%99%E6%B8%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8_D03_bdsem_search#xianggang">服务器购买地址</a></p>
+<p>合理的薅羊毛</p>
+<h2 id="一些大坑"><a href="#一些大坑" class="headerlink" title="一些大坑"></a>一些大坑</h2><p><strong>服务器系统选择</strong></p>
+<p>服务器系统如果选<strong>centos</strong> 一定要选 <strong>centos7.2</strong>,  官方推荐使用<strong>ubtubu</strong>,但是博主是先百度的,所以,,,,, 就一脚踩进了centos的坑, 等看到官网推荐时已经晚了. 大哭.jpg</p>
+<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211215165753.png" alt="image-20211215165753314"></p>
+<p><strong>为什么选centos7.2?</strong></p>
+<p>因为<strong>centos8.</strong>* 没有python!!!!  具体是系统原因还是服务商搞的鬼就不太清楚了.</p>
+<p><strong>下载pip</strong></p>
+<p>不先下这个会很糟心的, 官方下载需要用pip,然而,Shadownsocks官方使用的下载方式,下载不下来pip, 神不神奇?就是这么神奇!!!</p>
+<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211215161945.png" alt="image-20211215161945484"></p>
+<p>这么去下载, 会提示库里没有 python-setuptools 和 pip</p>
+<p>所以要这么下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载python 2.7版本的pip</span></span><br><span class="line">wget https://bootstrap.pypa.io/pip/2.7/get-pip.py</span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行</span></span><br><span class="line">python get-pip.py</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载 setuptools  好像不用? 忘记了呢</span></span><br><span class="line">pip install setuptools </span><br></pre></td></tr></table></figure>
+
+<h2 id="安装及升级"><a href="#安装及升级" class="headerlink" title="安装及升级"></a>安装及升级</h2><p>直接使用pip 安装 , 安装的是2.8.2版本,所以可以先安装后升级, 也可以直接安装3.0.0版本的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载的是2.8.2 不支持 AEAD</span></span><br><span class="line">pip install shadowsocks</span><br><span class="line"><span class="meta">#</span><span class="bash"> 升级到3.0.0</span></span><br><span class="line"> pip install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>直接启动</p>
+<p><code>ssserver -p 443 -k password -m sha-256-gcm</code> </p>
+<ul>
+<li>sha-256-gcm 2.8.2建议使用rc4-md5</li>
+<li>shadowsocks 最新版已经不再支持<strong>流加密</strong>, 所以推荐升级</li>
+</ul>
+<p>后台启动</p>
+<p><code>sudo ssserver -p 443 -k password -m sha-256-gcm --user nobody -d start</code></p>
+<p>关闭</p>
+<p><code>sudo ssserver -d stop</code></p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p><a target="_blank" rel="noopener" href="https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v1.9.4/ShadowsocksX-NG.1.9.4.zip">mac 下载</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/4.4.0.0/Shadowsocks-4.4.0.185.zip">windows 下载</a></p>
+<h2 id="连接VPN"><a href="#连接VPN" class="headerlink" title="连接VPN"></a>连接VPN</h2><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211215172758.png" alt="image-20211215172758883"></p>
+<p>配置服务启动时设置的端口号、加密方式、和密码以及服务器的IP地址,即可使用</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211215172902.png" alt="image-20211215172902240"></p>
+<p>大功告成!!!</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
       
   
   
@@ -388,7 +497,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-09 12:07:17" itemprop="dateModified" datetime="2021-12-09T12:07:17+08:00">2021-12-09</time>
+                <time title="Modified: 2021-12-13 10:50:09" itemprop="dateModified" datetime="2021-12-13T10:50:09+08:00">2021-12-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -522,89 +631,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/[Linux]expect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/study/%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/%5BLinux%5Dexpect/" class="post-title-link" itemprop="url">expect 命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-12-08 12:04:52 / Modified: 17:48:33" itemprop="dateCreated datePublished" datetime="2021-12-08T12:04:52+08:00">2021-12-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">命令</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="发文件到服务器"><a href="#发文件到服务器" class="headerlink" title="发文件到服务器"></a>发文件到服务器</h3><p>​    先搞个实例, 省的忘记写</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/;categories/study/%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/%5BLinux%5Dexpect/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -676,7 +702,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -689,7 +715,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

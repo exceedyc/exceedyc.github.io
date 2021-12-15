@@ -20,21 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta name="description" content="解决方法老规矩，直接解决方法">
+  <meta name="description" content="问题​        引入的项目无视配置，自动变成jdk1.5.  无论是修改model的Language Level 还是修改设置中的Java Compiler都无效，会生效一小会，然后又自动变成了jdk1.5. 解决方案直接在父pom文件中加入下述插件，指定版本即可解决 12345678&lt;plugin&gt;    &lt;groupId&gt;org.apache.maven.plug">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot 返回LocalDateTime转为String">
-<meta property="og:url" content="http://example.com/;categories/[SpringBoot]%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/index.html">
+<meta property="og:title" content="Maven 项目 引入后jdk版本问题">
+<meta property="og:url" content="http://example.com/;categories/study/spring-boot/[SpringBoot]%20SpringBoot%20%E9%A1%B9%E7%9B%AE%E5%BC%95%E5%85%A5%E5%90%8E%E8%87%AA%E5%8A%A8%E5%8F%98jdk1.5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/index.html">
 <meta property="og:site_name" content="exceedy">
-<meta property="og:description" content="解决方法老规矩，直接解决方法">
+<meta property="og:description" content="问题​        引入的项目无视配置，自动变成jdk1.5.  无论是修改model的Language Level 还是修改设置中的Java Compiler都无效，会生效一小会，然后又自动变成了jdk1.5. 解决方案直接在父pom文件中加入下述插件，指定版本即可解决 12345678&lt;plugin&gt;    &lt;groupId&gt;org.apache.maven.plug">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-07-27T09:14:42.691Z">
-<meta property="article:modified_time" content="2021-10-19T10:27:51.591Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsfiArV5eXUwMI78d.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210406170813935.png">
+<meta property="article:published_time" content="2021-07-21T08:23:19.344Z">
+<meta property="article:modified_time" content="2021-07-21T09:22:11.871Z">
 <meta property="article:author" content="exceedY">
 <meta property="article:tag" content="SpringBoot">
-<meta property="article:tag" content="bug">
+<meta property="article:tag" content="maven">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsfiArV5eXUwMI78d.png">
 
-<link rel="canonical" href="http://example.com/;categories/[SpringBoot]%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/">
+<link rel="canonical" href="http://example.com/;categories/study/spring-boot/[SpringBoot]%20SpringBoot%20%E9%A1%B9%E7%9B%AE%E5%BC%95%E5%85%A5%E5%90%8E%E8%87%AA%E5%8A%A8%E5%8F%98jdk1.5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 
 
 <script id="page-configurations">
@@ -47,7 +50,7 @@
   };
 </script>
 
-  <title>SpringBoot 返回LocalDateTime转为String | exceedy</title>
+  <title>Maven 项目 引入后jdk版本问题 | exceedy</title>
   
 
 
@@ -122,7 +125,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">45</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">46</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -132,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">79</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">80</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -188,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[SpringBoot]%20SpringBoot%20%E8%BF%94%E5%9B%9ELocalDateTime%E8%BD%AC%E4%B8%BAString/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/spring-boot/[SpringBoot]%20SpringBoot%20%E9%A1%B9%E7%9B%AE%E5%BC%95%E5%85%A5%E5%90%8E%E8%87%AA%E5%8A%A8%E5%8F%98jdk1.5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -204,7 +207,7 @@
 
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          SpringBoot 返回LocalDateTime转为String
+          Maven 项目 引入后jdk版本问题
         </h1>
 
         <div class="post-meta">
@@ -213,16 +216,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-07-27 17:14:42" itemprop="dateCreated datePublished" datetime="2021-07-27T17:14:42+08:00">2021-07-27</time>
+              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:22:11" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-19 18:27:51" itemprop="dateModified" datetime="2021-10-19T18:27:51+08:00">2021-10-19</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -233,7 +230,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/result/" itemprop="url" rel="index"><span itemprop="name">result</span></a>
+                  <a href="/categories/SpringBoot/bug/" itemprop="url" rel="index"><span itemprop="name">bug</span></a>
                 </span>
             </span>
 
@@ -248,17 +245,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>老规矩，直接解决方法</p>
-<span id="more"></span>
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>​        引入的项目无视配置，自动变成jdk1.5. </p>
+<p>无论是修改model的Language Level 还是修改设置中的Java Compiler都无效，会生效一小会，然后又自动变成了jdk1.5.</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>直接在父pom文件中加入下述插件，指定版本即可解决</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>在需要的参数上加下列注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize(using = LocalDateTimeSerializer.class)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="将对象转成alibaba-fastjson-JSONObejct-时也会带T"><a href="#将对象转成alibaba-fastjson-JSONObejct-时也会带T" class="headerlink" title="将对象转成alibaba .fastjson.JSONObejct 时也会带T"></a>将对象转成alibaba .fastjson.JSONObejct 时也会带T</h2><p>造成这个的原因和jackson 是一样的，都需要对LocalDateTime进行转化配置。fastjson的配置如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JSONField(format = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="问题中提到的解决方法"><a href="#问题中提到的解决方法" class="headerlink" title="问题中提到的解决方法"></a>问题中提到的解决方法</h2><p>​        问题中提到的方法遇到一般状况是有效的，那么也说一下解决步骤吧。</p>
+<ol>
+<li><p>修改 Language Level</p>
+<p>File -&gt;Project Structure -&gt; Modules -&gt; Language Level 选择8-***.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsfiArV5eXUwMI78d.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210406170813935.png" alt="image-20210406170813935"></p>
+</li>
+<li><p>修改设置中的Java Compiler</p>
+<p>IntellJ IDEA-&gt; Preferences -&gt; Build,Execution,Deployment -&gt; Compiler -&gt; Java Compiler -&gt;Module 修改Target byte code version 为8</p>
+</li>
+</ol>
 
     </div>
 
@@ -269,7 +271,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
-              <a href="/tags/bug/" rel="tag"># bug</a>
+              <a href="/tags/maven/" rel="tag"># maven</a>
           </div>
 
         
@@ -278,12 +280,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/;categories/study/mysql/mybatis/%5BMybatis%5D%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%97%B6%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E6%97%B6%E9%97%B4%E4%B8%8D%E5%AF%B9%E9%97%AE%E9%A2%98/" rel="prev" title="数据库查询时，得到的时间不对问题">
-      <i class="fa fa-chevron-left"></i> 数据库查询时，得到的时间不对问题
+    <a href="/;categories/%5BSails%5D%20sails%20%E7%B3%BB%E5%88%97%20/" rel="prev" title="sails 系列">
+      <i class="fa fa-chevron-left"></i> sails 系列
     </a></div>
       <div class="post-nav-item">
-    <a href="/;categories/linux%20%E4%B8%AD%E5%8D%88%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" rel="next" title="linux下安装宋体">
-      linux下安装宋体 <i class="fa fa-chevron-right"></i>
+    <a href="/;categories/%5BZookeeper%5D%20%E5%9F%BA%E7%A1%80%E7%AF%87/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -355,7 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%88%90alibaba-fastjson-JSONObejct-%E6%97%B6%E4%B9%9F%E4%BC%9A%E5%B8%A6T"><span class="nav-number">1.1.</span> <span class="nav-text">将对象转成alibaba .fastjson.JSONObejct 时也会带T</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%AD%E6%8F%90%E5%88%B0%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">问题中提到的解决方法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -371,7 +373,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -384,7 +386,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
