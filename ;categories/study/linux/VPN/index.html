@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211215172758.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20211215172902.png">
 <meta property="article:published_time" content="2021-12-15T07:11:18.718Z">
-<meta property="article:modified_time" content="2021-12-15T09:53:49.511Z">
+<meta property="article:modified_time" content="2021-12-20T01:54:55.926Z">
 <meta property="article:author" content="exceedY">
 <meta property="article:tag" content="vpn">
 <meta name="twitter:card" content="summary">
@@ -217,10 +217,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-12-15 15:11:18 / Modified: 17:53:49" itemprop="dateCreated datePublished" datetime="2021-12-15T15:11:18+08:00">2021-12-15</time>
+              <time title="Created: 2021-12-15 15:11:18" itemprop="dateCreated datePublished" datetime="2021-12-15T15:11:18+08:00">2021-12-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-20 09:54:55" itemprop="dateModified" datetime="2021-12-20T09:54:55+08:00">2021-12-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -263,13 +269,13 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载的是2.8.2 不支持 AEAD</span></span><br><span class="line">pip install shadowsocks</span><br><span class="line"><span class="meta">#</span><span class="bash"> 升级到3.0.0</span></span><br><span class="line"> pip install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U</span><br></pre></td></tr></table></figure>
 
 <h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>直接启动</p>
-<p><code>ssserver -p 443 -k password -m sha-256-gcm</code> </p>
+<p><code>ssserver -p 443 -k password -m aes-256-gcm</code> </p>
 <ul>
-<li>sha-256-gcm 2.8.2建议使用rc4-md5</li>
+<li>aes-256-gcm 2.8.2建议使用rc4-md5</li>
 <li>shadowsocks 最新版已经不再支持<strong>流加密</strong>, 所以推荐升级</li>
 </ul>
 <p>后台启动</p>
-<p><code>sudo ssserver -p 443 -k password -m sha-256-gcm --user nobody -d start</code></p>
+<p><code>sudo ssserver -p 443 -k password -m aes-256-gcm --user nobody -d start</code></p>
 <p>关闭</p>
 <p><code>sudo ssserver -d stop</code></p>
 <h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p><a target="_blank" rel="noopener" href="https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v1.9.4/ShadowsocksX-NG.1.9.4.zip">mac 下载</a></p>
