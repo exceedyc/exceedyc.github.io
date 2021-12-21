@@ -126,7 +126,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">82</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">72</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -181,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/mysql/mybatis/[Mybatis]%20%E6%A0%B9%E6%8D%AE%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/ImageIo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -198,234 +198,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/study/mysql/mybatis/%5BMybatis%5D%20%E6%A0%B9%E6%8D%AE%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">根据实体类创建数据库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:16:03" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>@<a href="%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E5%BA%93">TOC</a></p>
-<p>​        首先说一下，研究这个的契机是什么，今天刚从github上clone下来一个项目，想跑一下，结果发现没有sql，而这个开源项目又已经很久没更新了，也不太好找维护者，所以，没有办法，只能想办法自己创建数据库，而当我看到成堆的实体类时，，emmm，算了，找个简单的办法吧。</p>
-<p>​        因此，就找到了这个jar包 <code> mybatis-enhance-actable</code></p>
-<p>​        那么就开始实战吧。</p>
-<h3 id="pom文件"><a href="#pom文件" class="headerlink" title="pom文件"></a>pom文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">&lt;!-- mybatis --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 生成数据库 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.gitee.sunchenbin.mybatis.actable<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-enhance-actable<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.18<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="Spring配置文件"><a href="#Spring配置文件" class="headerlink" title="Spring配置文件"></a>Spring配置文件</h3><p>​    首先是配置sql信息的配置类<code>MySqlConfig.java</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yeafel.evaluation.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.druid.pool.DruidDataSource;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.spring.SqlSessionFactoryBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.config.PropertiesFactoryBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.support.PathMatchingResourcePatternResolver;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.DataSourceTransactionManager;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">/** 包位置是固定不变的*/</span></span><br><span class="line"><span class="meta">@ComponentScan(basePackages = &#123;&quot;com.gitee.sunchenbin.mybatis.actable.manager.*&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTableConfig</span> </span>&#123;</span><br><span class="line">	<span class="comment">// mysql所有的配置来自第二章，配置文件</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.datasource.driver-class-name&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">	<span class="comment">//数据库连接</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.datasource.url&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">	<span class="comment">//数据库账号</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.datasource.username&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">	<span class="comment">//数据库密码</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;spring.datasource.password&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/** </span></span><br><span class="line"><span class="comment">  * 配置数据源</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DruidDataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        dataSource.setDriverClassName(driver);</span><br><span class="line">        dataSource.setUrl(url);</span><br><span class="line">        dataSource.setUsername(username);</span><br><span class="line">        dataSource.setPassword(password);</span><br><span class="line">        dataSource.setMaxActive(<span class="number">30</span>);</span><br><span class="line">        dataSource.setInitialSize(<span class="number">10</span>);</span><br><span class="line">        dataSource.setValidationQuery(<span class="string">&quot;SELECT 1&quot;</span>);</span><br><span class="line">        dataSource.setTestOnBorrow(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 数据源</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSourceTransactionManager <span class="title">dataSourceTransactionManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        DataSourceTransactionManager dataSourceTransactionManager = <span class="keyword">new</span> DataSourceTransactionManager();</span><br><span class="line">        dataSourceTransactionManager.setDataSource(dataSource());</span><br><span class="line">        <span class="keyword">return</span> dataSourceTransactionManager;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 	</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactoryBean <span class="title">sqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        sqlSessionFactoryBean.setDataSource(dataSource());</span><br><span class="line">        PathMatchingResourcePatternResolver resolver = <span class="keyword">new</span> PathMatchingResourcePatternResolver();</span><br><span class="line">        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(<span class="string">&quot;classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml&quot;</span>));</span><br><span class="line">        sqlSessionFactoryBean.setTypeAliasesPackage(<span class="string">&quot;com.yeafel.evaluation.dataobject.entity.*&quot;</span>);</span><br><span class="line">        <span class="comment">//上述classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml固定的包路径</span></span><br><span class="line">        <span class="comment">//com.xxx.xxx.entity.*替换成你的实体类地址</span></span><br><span class="line">        <span class="keyword">return</span> sqlSessionFactoryBean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.mybatis.spring.mapper.MapperScannerConfigurer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.AutoConfigureAfter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@AutoConfigureAfter(MyTableConfig.class)</span><span class="comment">//上面第一点配置文件类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBatisMapperScannerConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MapperScannerConfigurer <span class="title">mapperScannerConfigurer</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        MapperScannerConfigurer mapperScannerConfigurer = <span class="keyword">new</span> MapperScannerConfigurer();</span><br><span class="line">            mapperScannerConfigurer.setBasePackage(<span class="string">&quot;com.yeafel.evaluation.dataobjet.mapper.*;com.gitee.sunchenbin.mybatis.actable.dao.*&quot;</span>);</span><br><span class="line">        mapperScannerConfigurer.setSqlSessionFactoryBeanName(<span class="string">&quot;sqlSessionFactory&quot;</span>);</span><br><span class="line">        <span class="comment">//com.xxx.xxx.mapper.*替换成你的mapper地址</span></span><br><span class="line">        <span class="comment">//com.gitee.sunchenbin.mybatis.actable.dao.*固定的包</span></span><br><span class="line">        <span class="keyword">return</span> mapperScannerConfigurer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>上述配置类中，主要注意的就是两个类中的entity和mapper地址，尤其是mapper地址，只传*mapper.java的位置就可以。</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>配置类中用到的配置，直接放在默认的<code>application.yml</code>中即可</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mysql 配置</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3307/eval_teac?characterEncoding=utf-8&amp;useSSL=false</span></span><br><span class="line"><span class="comment"># mybatis 生成数据库配置</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">	<span class="attr">table:</span></span><br><span class="line">		<span class="attr">auto:</span> <span class="string">update</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">pack:</span> <span class="string">com.**.**.entity</span> <span class="string">//</span> <span class="string">你的实体类路径</span></span><br><span class="line">  <span class="attr">database:</span></span><br><span class="line">  	<span class="attr">type:</span> <span class="string">mysql</span></span><br></pre></td></tr></table></figure>
-
-<p>mysql的配置是普通的mysql标准配置，不做解释，那么详细说一下mybatis的配置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```yml</span><br><span class="line">update: 每次加载hibernate时根据实体类生成数据库，并且参数属性更新时，表中的属性会同步更新，但是不会覆盖表（不会删除原数据）</span><br><span class="line">create: 每次加载hibernate时根据实体类生成数据库，并且会删除原表重建新表</span><br><span class="line">none: 不做任何操作</span><br><span class="line">add: 只对新增做处理，不会更新原有数据</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```mybatis.database.type=mysql``` 表明要创建的是什么类型的数据库，还有很多可以选择，这里简单说一下，毕竟是以mysql为主的文章。 </span><br><span class="line"></span><br><span class="line">```yml</span><br><span class="line">oracle</span><br><span class="line">sqlserver</span><br><span class="line">postgresql</span><br><span class="line">mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><p>实体类主要是注解的配置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.Column;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.Table;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.GeneratedValue;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.GenerationType;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Table(name = &quot;test&quot;)</span></span><br><span class="line"><span class="meta">@Data</span> <span class="comment">// lombok</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">		<span class="meta">@Column(name=&quot;action_id&quot;,type=MySqlTypeConstant.BIGINT, length = 11, isKey = true, isAutoIncrement = true,isNull = false)</span></span><br><span class="line">    <span class="keyword">private</span> Long actionRoleId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 角色id */</span></span><br><span class="line">    <span class="keyword">private</span> Long roleId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 功能id */</span></span><br><span class="line">    <span class="keyword">private</span> Long actionId;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是第一种使用方式，是比较直观的。那么说一下配置的含义。</p>
-<ul>
-<li><p>@Table 表明这是需要扫描的类，并生成name中的表，如name=”test”，那么就会生成test的数据库表。</p>
-</li>
-<li><p>@Column 显而易见这是列，其中的参数有很多，就不一一列举，只说一下文中用到。</p>
-<ul>
-<li>name 列名</li>
-<li>type 参数类型</li>
-<li>length 参数长度，默认255</li>
-<li>isKey 是否是主键，默认false</li>
-<li>isAutoIncrement 是否自增，默认false</li>
-<li>isNull 是否为空，默认true</li>
-</ul>
-</li>
-</ul>
-<p>还有第二种方式，注解拆分</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.Column;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.ColumnType;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.Table;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.command.BaseModel;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Id;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 第二种定义方式，使用<span class="doctag">@Table</span>和<span class="doctag">@Column</span>定义字段，具体内容用具体注解定义</span></span><br><span class="line"><span class="comment"> * 例如<span class="doctag">@Id</span>，<span class="doctag">@IsNotNull</span>，<span class="doctag">@isAutoIncrement</span>等等</span></span><br><span class="line"><span class="comment"> * 如果没有设置name，会直接把变量名按照驼峰规则转换，如果没有设置类型也会自动转换Java的类型到SQL类型</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Table(name = &quot;test1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> <span class="keyword">extends</span> <span class="title">BaseModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@IsAutoIncrement</span></span><br><span class="line">    <span class="meta">@Column</span></span><br><span class="line">    <span class="keyword">private</span> Integer    id;</span><br><span class="line">  </span><br><span class="line">  	<span class="meta">@Column</span></span><br><span class="line">  	<span class="keyword">private</span> String name;</span><br><span class="line">  </span><br><span class="line">  	<span class="meta">@Column</span></span><br><span class="line">  	<span class="meta">@ColumnType(value = MySqlTypeConstant.VARCHAR, length=11)</span></span><br><span class="line">  	<span class="keyword">private</span> String address;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>@Column 表明是列</li>
-<li>@ColumnType 表明参数类型，不使用后自动加载，<ul>
-<li>value 类型</li>
-<li>length 长度，默认255</li>
-</ul>
-</li>
-</ul>
-<p>第三种方式，是最简单的方式，全部交给自动加载，自动加载会更佳驼峰规则转换</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;</span><br><span class="line"><span class="keyword">import</span> com.gitee.sunchenbin.mybatis.actable.annotation.Table;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 第三种定义方式，懒人定义，按照驼峰规则转换</span></span><br><span class="line"><span class="comment"> * 不需要对每个字段设置<span class="doctag">@Column</span></span></span><br><span class="line"><span class="comment"> * 这里没有继承BaseModel，因为BaseModel离有OrderBy等参数，也会对其进行构建字段</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 徐森威</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/12/24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Table(isSimple = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserLogin</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@IsKey</span></span><br><span class="line">   <span class="meta">@IsAutoIncrement</span></span><br><span class="line">   <span class="keyword">private</span> Integer    id;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> String type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p>日志打印如下，即为成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimgsimage-20210406225103372.png" alt="image-20210406225103372"></p>
-<p>同时观察数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210406225248538.png" alt="image-20210406225248538"></p>
-<p>至此，实体类转化为数据库成功！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Mac]%20mac%20%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/%5BMac%5D%20mac%20%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:10:33" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">配置</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="全局变量配置"><a href="#全局变量配置" class="headerlink" title="全局变量配置"></a>全局变量配置</h3><ul>
-<li>首先打开终端</li>
-<li>输入ls -a 命令找到 .bash_profile 文件，如果没有则创建：<code>mkdir .bash_profile</code></li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210330153431430.png" alt="image-20210330153431430"></p>
-<ul>
-<li>输入 <code>vim ./.bash_profile </code> 或者输入     <code>vi ./.bash_profile</code></li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210330153935600.png" alt="image-20210330153935600"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210330160934673.png" alt="image-20210330160934673"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Mac]%20mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/%5BMac%5D%20mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/" class="post-title-link" itemprop="url">mac 常用命令</a>
+            <a href="/;categories/ImageIo/" class="post-title-link" itemprop="url">java操作图片-ImageIo</a>
         </h2>
 
         <div class="post-meta">
@@ -435,14 +208,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-24 16:47:57" itemprop="dateModified" datetime="2021-08-24T16:47:57+08:00">2021-08-24</time>
+                <time title="Modified: 2021-07-21 17:55:28" itemprop="dateModified" datetime="2021-07-21T17:55:28+08:00">2021-07-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -450,11 +223,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/cli/" itemprop="url" rel="index"><span itemprop="name">cli</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -469,22 +238,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="根据连接下载"><a href="#根据连接下载" class="headerlink" title="根据连接下载"></a>根据连接下载</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过curl -0 进行下载 通过--output 确认输出文件</span></span><br><span class="line">curl -0 链接 --output file</span><br><span class="line"><span class="meta">#</span><span class="bash"> 示例</span></span><br><span class="line">curl -0 https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.4.tgz --output mongob.tgz</span><br></pre></td></tr></table></figure>
-
-<h4 id="更新配置文件"><a href="#更新配置文件" class="headerlink" title="更新配置文件"></a>更新配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 更新配置文件</span></span><br><span class="line">source ./.bash_profice</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 直接创建文件夹</span></span><br><span class="line">mkdir &lt;fileName&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 父文件夹不存在时，同时创建父文件夹</span></span><br><span class="line">mkdir -p /parent/fileName</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果不加-p 并且 父文件夹不存在时，会报错。</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> tar 系列 备份文件指 压缩后的文件</span></span><br><span class="line">tar -zxvf name.tgz</span><br><span class="line"><span class="meta">#</span><span class="bash"> -z: 通过 gzip指令处理备份文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -x: 从备份中还原文件（解压）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v: 显示执行过程</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> -f: 指定备份文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -c：备份文件</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="查看端口占用"><a href="#查看端口占用" class="headerlink" title="查看端口占用"></a>查看端口占用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -i:port</span></span><br><span class="line">lsof -i:8080</span><br></pre></td></tr></table></figure>
-
-<h3 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 主要是linux</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统日期</span></span><br><span class="line">date</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看硬件日期</span></span><br><span class="line">hwclock --show</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将系统日期同步到硬件时间</span></span><br><span class="line">hwclock --systohc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步网络时间</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 ntpdate工具</span></span><br><span class="line">yum -y install ntp ntpdate</span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步时间</span></span><br><span class="line">ntpdate cn.pool.ntp.org</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/75e90aa8f07e">https://www.jianshu.com/p/75e90aa8f07e</a></p>
-
+          <h2 id="java操作图片"><a href="#java操作图片" class="headerlink" title="java操作图片"></a>java操作图片</h2><p>​    本文章主要说明java 进行图片合并、添加文字两个功能，其他功能大同小异，但是因为博主没用过，所以不做过多赘述。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/ImageIo/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -508,7 +270,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Linux]%20sftp/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/spring-boot/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -525,7 +287,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/%5BLinux%5D%20sftp/" class="post-title-link" itemprop="url">sftp</a>
+            <a href="/;categories/study/spring-boot/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">SpringBoot 踩坑记 之 集成webSocket （二）</a>
         </h2>
 
         <div class="post-meta">
@@ -534,9 +296,273 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 16:39:32" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/webSocket/" itemprop="url" rel="index"><span itemprop="name">webSocket</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>基于stomp版的，啊，有个demo，但是还没实际用过，不想写怎么办，在线等，一点也不急那种。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/study/spring-boot/SpringBoot%20%E8%B8%A9%E5%9D%91%E8%AE%B0%20%E4%B9%8B%20%20%E9%9B%86%E6%88%90webSocket%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/dubbo-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/dubbo-md/" class="post-title-link" itemprop="url">dubbo 学习日记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-21 17:13:18" itemprop="dateModified" datetime="2021-07-21T17:13:18+08:00">2021-07-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>dubbo 直接使用scoket通信，传输效率高，并可以统计系统之间的调用干洗、调用次数。缺点是无法跨语音，只能是java。<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/dubbo-md/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/" class="post-title-link" itemprop="url">mysql读写分离 （一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-08 18:01:11" itemprop="dateModified" datetime="2021-12-08T18:01:11+08:00">2021-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql/" itemprop="url" rel="index"><span itemprop="name">sql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <pre><code>为了能让数据库更有效快速的进行存储查询工作，因此需要使用到读写分离。笔者是为了能使用springboot + mysql + mybaits 进行读写分离，因此专门进行学（挖）习（坑）
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-%E4%B8%80/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/docker%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/docker%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title-link" itemprop="url">docker 踩坑记 （一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-20 21:21:58" itemprop="dateCreated datePublished" datetime="2021-07-20T21:21:58+08:00">2021-07-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -548,7 +574,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/sftp/" itemprop="url" rel="index"><span itemprop="name">sftp</span></a>
+                  <a href="/categories/linux/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
                 </span>
             </span>
 
@@ -563,118 +589,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sftp -P port user@ip</span><br><span class="line">password</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看服务器路径</span></span><br><span class="line">pwd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看本季路径</span></span><br><span class="line">lpwd</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载到本地</span></span><br><span class="line">get -r file</span><br><span class="line">get file</span><br><span class="line"><span class="meta">#</span><span class="bash"> 上传文件</span></span><br><span class="line">put -r file</span><br><span class="line">put file</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[JavaCV]%E5%AE%89%E8%A3%85OpenCV/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/%5BJavaCV%5D%E5%AE%89%E8%A3%85OpenCV/" class="post-title-link" itemprop="url">OpenCv</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 16:38:49" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/opencv/" itemprop="url" rel="index"><span itemprop="name">opencv</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> <a target="_blank" rel="noopener" href="https://docs.opencv.org/master/d0/db2/tutorial_macos_install.html"> 官方网址</a></p>
-<p>linux 安装及 win安装都需要特定的安装，在上方的安装文档中有，这里只记录mac</p>
-<h2 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h2><p><a target="_blank" rel="noopener" href="https://github-releases.githubusercontent.com/537699/7a398280-985a-11eb-8ed9-61b0ef22bd88?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A/20210415/us-east-1/s3/aws4_request&X-Amz-Date=20210415T073241Z&X-Amz-Expires=300&X-Amz-Signature=920bef45acbd330e8ae1afc13d711cdd8a409fad9c2933357d128927196f37ef&X-Amz-SignedHeaders=host&actor_id=30826199&key_id=0&repo_id=537699&response-content-disposition=attachment;%20filename=cmake-3.20.1-macos-universal.dmg&response-content-type=application/octet-stream">下载cmake</a></p>
-<ul>
-<li>首先进入下载界面下载cmake，然后安装</li>
-<li>根据 tools-&gt; how to install for Command line Use。 将cmake设置为命令行可用<ul>
-<li>根据第一种方式，将 /Application/cmake.app/bin 配置到 /root/.bash_profile 中即可</li>
-</ul>
-</li>
-<li><code>cmake --version</code> 测试是否成功</li>
-</ul>
-<h2 id="下载OpenCV"><a href="#下载OpenCV" class="headerlink" title="下载OpenCV"></a>下载OpenCV</h2><p><a target="_blank" rel="noopener" href="https://opencv.org/releases/">zip下载</a></p>
-<p>最好通过git下载</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir opencv</span><br><span class="line">cd opencv</span><br><span class="line">git clone https://github.com/opencv/opencv.git</span><br><span class="line">git clone https://github.com/opencv/opencv_contrib.git</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用CMake-build-OpenCV"><a href="#使用CMake-build-OpenCV" class="headerlink" title="使用CMake build OpenCV"></a>使用CMake build OpenCV</h2><p>为了防止源码污染，因此建立 opencv同级目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build_opencv</span><br><span class="line">cd build_opencv</span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMOLES=ON ../opencv</span><br><span class="line">make -j7</span><br></pre></td></tr></table></figure>
-
-<h2 id="将openCV引入到项目"><a href="#将openCV引入到项目" class="headerlink" title="将openCV引入到项目"></a>将openCV引入到项目</h2><p>-DCMAKE_USE_OPENSSL</p>
-<h2 id="官方教程"><a href="#官方教程" class="headerlink" title="官方教程"></a>官方教程</h2><p><a target="_blank" rel="noopener" href="https://opencv.org/links/">https://opencv.org/links/</a></p>
-<p><a target="_blank" rel="noopener" href="https://opencv-java-tutorials.readthedocs.io/en/latest/01-installing-opencv-for-java.html">https://opencv-java-tutorials.readthedocs.io/en/latest/01-installing-opencv-for-java.html</a></p>
-<p>但是，是opencv3.x，没安装完，还不太清楚是不是</p>
-
+          <p>  直奔主题吧，介绍文会新建一个，这里直接就开始安装使用吧<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/docker%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -697,7 +620,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -765,7 +688,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

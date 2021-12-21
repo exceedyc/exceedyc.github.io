@@ -126,7 +126,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">82</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">72</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -181,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98]%20%E5%90%88%E5%8D%95%E6%94%AF%E4%BB%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/mysql/mybatis/[Mybatis]%20%E6%A0%B9%E6%8D%AE%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -198,7 +198,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/%5B%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%5D%20%E5%90%88%E5%8D%95%E6%94%AF%E4%BB%98/" class="post-title-link" itemprop="url">微信支付-合单支付</a>
+            <a href="/;categories/study/mysql/mybatis/%5BMybatis%5D%20%E6%A0%B9%E6%8D%AE%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">根据实体类创建数据库</a>
         </h2>
 
         <div class="post-meta">
@@ -207,21 +207,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:55:03" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-21 11:53:38" itemprop="dateModified" datetime="2021-12-21T11:53:38+08:00">2021-12-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" itemprop="url" rel="index"><span itemprop="name">微信支付</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/%E5%90%88%E5%8D%95%E6%94%AF%E4%BB%98/" itemprop="url" rel="index"><span itemprop="name">合单支付</span></a>
+                  <a href="/categories/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a>
                 </span>
             </span>
 
@@ -236,12 +238,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/open/pay/chapter2_9_2.shtml">合单支付</a></p>
-<p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/apiv3/open/pay/chapter4_1_1.shtml">商户支付</a></p>
-<p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/open/pay/chapter7_1_1.shtml">服务商支付</a></p>
+          <p>@<a href="%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E5%BA%93">TOC</a></p>
+<p>​        首先说一下，研究这个的契机是什么，今天刚从github上clone下来一个项目，想跑一下，结果发现没有sql，而这个开源项目又已经很久没更新了，也不太好找维护者，所以，没有办法，只能想办法自己创建数据库，而当我看到成堆的实体类时，，emmm，算了，找个简单的办法吧。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/;categories/%5B%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%5D%20%E5%90%88%E5%8D%95%E6%94%AF%E4%BB%98/#more" rel="contents">
+              <a class="btn" href="/;categories/study/mysql/mybatis/%5BMybatis%5D%20%E6%A0%B9%E6%8D%AE%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -270,7 +271,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[%E5%88%86%E5%B8%83%E5%BC%8F]%20Zookeeper%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Mac]%20mac%20%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -287,7 +288,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/%5B%E5%88%86%E5%B8%83%E5%BC%8F%5D%20Zookeeper%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Zookeeper 入门</a>
+            <a href="/;categories/%5BMac%5D%20mac%20%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -296,25 +297,27 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:07:25" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-21 11:44:03" itemprop="dateModified" datetime="2021-12-21T11:44:03+08:00">2021-12-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                  <a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/zookeeper/" itemprop="url" rel="index"><span itemprop="name">zookeeper</span></a>
+                  <a href="/categories/mac/%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">配置</span></a>
                 </span>
             </span>
 
@@ -329,10 +332,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Zookeeper入门"><a href="#Zookeeper入门" class="headerlink" title="Zookeeper入门"></a>Zookeeper入门</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>​        Zookeeper 是一个开源的分布式的，为分布式应用提供协调服务的Apache项目。</p>
+          <h3 id="全局变量配置"><a href="#全局变量配置" class="headerlink" title="全局变量配置"></a>全局变量配置</h3><ul>
+<li>首先打开终端</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/;categories/%5B%E5%88%86%E5%B8%83%E5%BC%8F%5D%20Zookeeper%E5%85%A5%E9%97%A8/#more" rel="contents">
+              <a class="btn" href="/;categories/%5BMac%5D%20mac%20%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -361,7 +366,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[proxy]nginx/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Mac]%20mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -378,7 +383,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/%5Bproxy%5Dnginx/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/;categories/%5BMac%5D%20mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/" class="post-title-link" itemprop="url">mac 常用命令</a>
         </h2>
 
         <div class="post-meta">
@@ -390,80 +395,24 @@
 
               <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
             </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="nginx">@TOC</a></p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[nodejs]nodejs%20%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/%5Bnodejs%5Dnodejs%20%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">nodejs 安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-21 11:44:15" itemprop="dateModified" datetime="2021-12-21T11:44:15+08:00">2021-12-21</time>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-07-21 16:23:19 / Modified: 17:18:40" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
-            </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nodejs/" itemprop="url" rel="index"><span itemprop="name">nodejs</span></a>
+                  <a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mac/cli/" itemprop="url" rel="index"><span itemprop="name">cli</span></a>
                 </span>
             </span>
 
@@ -478,25 +427,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><a target="_blank" rel="noopener" href="http://nodejs.cn/">官网</a>：<a target="_blank" rel="noopener" href="http://nodejs.cn/">http://nodejs.cn/</a></p>
-<p><a target="_blank" rel="noopener" href="https://cdn.npm.taobao.org/dist/node/v14.16.1/node-v14.16.1.tar.gz">下载地址</a>：<a target="_blank" rel="noopener" href="https://cdn.npm.taobao.org/dist/node/v14.16.1/node-v14.16.1.tar.gz">https://cdn.npm.taobao.org/dist/node/v14.16.1/node-v14.16.1.tar.gz</a></p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><em>Linux的下载百变不离其中，首先还是下载解压包</em></p>
-<p>​        ps: 之所以经常用下载源码的方式安装，是因为使用yum安装的指定版本比较麻烦，当然不需要指定版本使用yum是比较方便，但是，yum嘛，懂的都懂，经常性没有你想要的，所以首推还是下载源码压缩包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">cd /usr/local</span><br><span class="line">mkdir nodejs</span><br><span class="line">cd nodejs</span><br><span class="line">curl &lt;下载地址&gt; &gt; nodejs-v14.16.1.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h2 id="解压安装"><a href="#解压安装" class="headerlink" title="解压安装"></a>解压安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd nodejs-v14.16.1</span><br><span class="line">make </span><br></pre></td></tr></table></figure>
-
-<p><strong>如果报错，大概率是没有gcc造成的</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装gcc gcc-c++</span></span><br><span class="line">yum install gcc gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后，再次运行make</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
+          <h4 id="根据连接下载"><a href="#根据连接下载" class="headerlink" title="根据连接下载"></a>根据连接下载</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过curl -0 进行下载 通过--output 确认输出文件</span></span><br><span class="line">curl -0 链接 --output file</span><br><span class="line"><span class="meta">#</span><span class="bash"> 示例</span></span><br><span class="line">curl -0 https://fastdl.mongodb.org/osx/mongodb-macos-x86_64-4.4.4.tgz --output mongob.tgz</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/%5BMac%5D%20mac%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -520,7 +459,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Zookeeper]%20%E5%9F%BA%E7%A1%80%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[Linux]%20sftp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -537,7 +476,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/%5BZookeeper%5D%20%E5%9F%BA%E7%A1%80%E7%AF%87/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/;categories/%5BLinux%5D%20sftp/" class="post-title-link" itemprop="url">sftp</a>
         </h2>
 
         <div class="post-meta">
@@ -548,6 +487,26 @@
               <span class="post-meta-item-text">Posted on</span>
 
               <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-21 11:44:29" itemprop="dateModified" datetime="2021-12-21T11:44:29+08:00">2021-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/sftp/" itemprop="url" rel="index"><span itemprop="name">sftp</span></a>
+                </span>
             </span>
 
           
@@ -561,7 +520,109 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/%5BLinux%5D%20sftp/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/[JavaCV]%E5%AE%89%E8%A3%85OpenCV/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
+            <a href="/;categories/%5BJavaCV%5D%E5%AE%89%E8%A3%85OpenCV/" class="post-title-link" itemprop="url">OpenCv</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-21 11:44:37" itemprop="dateModified" datetime="2021-12-21T11:44:37+08:00">2021-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/opencv/" itemprop="url" rel="index"><span itemprop="name">opencv</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> <a target="_blank" rel="noopener" href="https://docs.opencv.org/master/d0/db2/tutorial_macos_install.html"> 官方网址</a></p>
+<p>linux 安装及 win安装都需要特定的安装，在上方的安装文档中有，这里只记录mac</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/%5BJavaCV%5D%E5%AE%89%E8%A3%85OpenCV/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -584,7 +645,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -652,7 +713,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
