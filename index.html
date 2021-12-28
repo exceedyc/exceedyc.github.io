@@ -116,7 +116,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -278,7 +278,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/study/wx/%5Bwx%5D%20%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E7%94%B5%E5%AD%90%E5%8F%91%E7%A5%A8/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/;categories/study/wx/%5Bwx%5D%20%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E7%94%B5%E5%AD%90%E5%8F%91%E7%A5%A8/" class="post-title-link" itemprop="url">微信支付-合单支付</a>
         </h2>
 
         <div class="post-meta">
@@ -287,9 +287,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-12-27 11:44:33 / Modified: 15:10:43" itemprop="dateCreated datePublished" datetime="2021-12-27T11:44:33+08:00">2021-12-27</time>
+              <time title="Created: 2021-12-27 11:44:33" itemprop="dateCreated datePublished" datetime="2021-12-27T11:44:33+08:00">2021-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-28 14:47:35" itemprop="dateModified" datetime="2021-12-28T14:47:35+08:00">2021-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" itemprop="url" rel="index"><span itemprop="name">微信支付</span></a>
+                </span>
             </span>
 
           
@@ -303,26 +318,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>获取access_token : <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html">https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html</a></p>
-<p><em>全局凭证, 小程序绑定公众号后可以直接拿小程序的AppID及AppSecret获取</em></p>
-<p><code>GET https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=APPID&amp;secret=APPSECRET</code></p>
-<p>获取自身开票码及建立自己的开票平台: <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List.html">https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List.html</a></p>
-<p><em>提前获得, 不会变</em> </p>
-<p>第三方会收费: <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/doc/0000eaef0fca486a68485b6e256000">https://developers.weixin.qq.com/community/develop/doc/0000eaef0fca486a68485b6e256000</a></p>
-<p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/doc/000e8c585c402065d3794afbe5bc09?_at=1640577066140">https://developers.weixin.qq.com/community/develop/doc/000e8c585c402065d3794afbe5bc09?_at=1640577066140</a></p>
-<p>正式开始开票: <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List.html">https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List.html</a></p>
-<p>先绑定与开票平台的关系:<a target="_blank" rel="noopener" href="https://api.weixin.qq.com/card/invoice/setbizattr?action=set_pay_mch&amp;access_token=%7Baccess_token%7D">https://api.weixin.qq.com/card/invoice/setbizattr?action=set_pay_mch&amp;access_token={access_token}</a></p>
-<ol>
-<li>前端调用: <a target="_blank" rel="noopener" href="https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&amp;type=wx_card%E6%89%93%E5%BC%80%E6%8E%88%E6%9D%83%E7%95%8C%E9%9D%A2">https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&amp;type=wx_card打开授权界面</a></li>
-<li>同上: <a target="_blank" rel="noopener" href="https://api.weixin.qq.com/card/invoice/getauthurl?access_token=%7Baccess_token%7D">https://api.weixin.qq.com/card/invoice/getauthurl?access_token={access_token}</a> 将信息传递给微信</li>
-<li>去公众号下载电子发票, 将电子发票上传到开票平台, 然后发送到用户卡包</li>
+          <h2 id="微信开电子发票的一些流程"><a href="#微信开电子发票的一些流程" class="headerlink" title="微信开电子发票的一些流程"></a>微信开电子发票的一些流程</h2><ol>
+<li>获取access_token : <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html">https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html</a></li>
 </ol>
-<blockquote>
-<p>小程序开具电子发票的步骤如下：<br>1 提前获取开票平台标识s_pappid，因为同一个开票平台的s_pappid都相同，所以获取s_pappid的操作只需要进行一次。不同接入模式获取s_pappid的方法略有不同：</p>
-<p><strong>如果商户接入模式为“自建平台模式”：s_pappid通过调用调用<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>接口获得</strong></p>
-<p>2 商户获取获取access_token。调用方法见获取<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token">获取Access token</a>；<br>3 设置商户联系方式。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>。注意，本步骤不能忽略，否则将造成下一步获取授权页报错；<br>4 商户获取授权页ticket。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>5 商户获取授权页url，上一步获取的授权页ticket将作为参数传入。另外，本环节里面作为参数传入的order_id要注意保留，传递给开票平台作为向用户提供电子发票的依据。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>6 在小程序开票按钮的点击事件上部署跳转到小程序授权页的逻辑。上一步获得的auth_url和开票小程序appid要作为参数传入。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>7 商户在后台等待接收用户的授权完成事件，获取授权事件方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>8 创建发票卡券模板。发票卡券模板应和背后的开票主体构成一一对应关系，便于后续若开票主体发生变化时，可以便捷修改。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>；<br>9 在自建发票平台开具电子发票；<br>10 上传发票PDF文件。此步骤获得的s_media_id起到关联PDF和发票卡券的作用，将作为参数在下一步的插卡接口中传入。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>；<br>11 将电子发票添加到用户微信卡包。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>。</p>
-</blockquote>
-
+<p>​    <em>全局凭证, 小程序绑定公众号后可以直接拿小程序的AppID及AppSecret获取</em></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/study/wx/%5Bwx%5D%20%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E7%94%B5%E5%AD%90%E5%8F%91%E7%A5%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -656,7 +663,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
