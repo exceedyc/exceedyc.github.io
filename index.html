@@ -121,12 +121,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">52</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">53</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">83</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">86</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -177,6 +177,255 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/[python]%20%E4%BD%BF%E7%94%A8pytion%E6%9F%A5%E8%AF%A2mysql%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/study/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/%5Bpython%5D%20%E4%BD%BF%E7%94%A8pytion%E6%9F%A5%E8%AF%A2mysql%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">架构之路</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-31 21:33:10 / Modified: 21:47:21" itemprop="dateCreated datePublished" datetime="2022-01-31T21:33:10+08:00">2022-01-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h2><p>当同一数据出现5次时,  记录最新的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装模块</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建链接</span></span><br><span class="line">db = pymysql.connect(user=<span class="string">&quot;root&quot;</span>, password=<span class="string">&quot;123456&quot;</span>, host=<span class="string">&quot;localhost&quot;</span>, database=<span class="string">&quot;test&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取浮标</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># sql 语句</span></span><br><span class="line">sql = <span class="string">&quot;select * from user limit %d&quot;</span> %(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行sql</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取全部数据(元组)</span></span><br><span class="line">result = cursor.fetchall()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建集合, 元组数据不能删除,只能全部删除</span></span><br><span class="line">re = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环对比</span></span><br><span class="line"><span class="keyword">for</span> data1 <span class="keyword">in</span> result:</span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> data2 <span class="keyword">in</span> result:</span><br><span class="line">    <span class="keyword">if</span> data1[<span class="number">1</span>] = data2[<span class="number">1</span>]:</span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">      <span class="keyword">if</span> i==<span class="number">5</span>:</span><br><span class="line">        <span class="built_in">print</span>(data1)</span><br><span class="line">        re.add(data2)</span><br><span class="line"><span class="built_in">print</span>(re)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/java/[Java]%20Java%E5%8E%86%E5%8F%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/study/java/%5BJava%5D%20Java%E5%8E%86%E5%8F%B2/" class="post-title-link" itemprop="url">Java发展史</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-24 09:58:32 / Modified: 10:03:22" itemprop="dateCreated datePublished" datetime="2022-01-24T09:58:32+08:00">2022-01-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>91年 由James Gosling启动的. Oak  橡树</p>
+<p>95年 更名为Java, 从SunWorld大会正式发布JDK1.0</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/linux/linux%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/study/linux/linux%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">linux设置定时脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-21 09:53:01 / Modified: 10:49:47" itemprop="dateCreated datePublished" datetime="2022-01-21T09:53:01+08:00">2022-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>安装cron</p>
+<p>service crond  start</p>
+<p>crond -e : 新增当前用户定时任务</p>
+<p>crond -r: 删除当前用户定时任务</p>
+<p>任务格式</p>
+<p><code>* * * * * user command</code></p>
+<p>分 时 天 月 周 用户名  执行的命令行</p>
+<blockquote>
+<p># Example of job definition:</p>
+<p># .—————- minute (0 - 59)</p>
+<p># | .————- hour (0 - 23)</p>
+<p># | | .———- day of month (1 - 31)</p>
+<p># | | | .——- month (1 - 12) OR jan,feb,mar,apr …</p>
+<p># | | | | .—- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p>
+<p># | | | | |</p>
+<p># * * * * * user-name command to be executed</p>
+</blockquote>
+<p>*: 所有</p>
+<p>*/5: 每5(分|时|…|周)</p>
+<p>-: 几到几</p>
+<p>,: 分割数字</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
       
   
   
@@ -327,255 +576,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/java/java%20%E5%9F%BA%E7%A1%80/[Java]JVM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/study/java/java%20%E5%9F%BA%E7%A1%80/%5BJava%5DJVM/" class="post-title-link" itemprop="url">深入理解JVM</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-15 15:45:30" itemprop="dateCreated datePublished" datetime="2022-01-15T15:45:30+08:00">2022-01-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-17 11:09:48" itemprop="dateModified" datetime="2022-01-17T11:09:48+08:00">2022-01-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220115155301.png" alt="截屏2022-01-15 下午3.52.47"></p>
-<p><a target="_blank" rel="noopener" href="https://hg.openjdk.java.net/jdk/jdk12/file/06222165c35f">jdk下载地址</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/nosql/redis/[redis]RedisJSON%20%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/study/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/nosql/redis/%5Bredis%5DRedisJSON%20%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-01-12 12:17:58 / Modified: 12:59:00" itemprop="dateCreated datePublished" datetime="2022-01-12T12:17:58+08:00">2022-01-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<hr>
-<h2 id="使用Docker快速启动"><a href="#使用Docker快速启动" class="headerlink" title="使用Docker快速启动"></a>使用Docker快速启动</h2><p><strong>获取镜像并后台启动</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker pull redislabs/rejson:latest</span><br><span class="line">docker run -itd --name redisjson -p 6380:6379 redislabs/rejson:latest </span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入镜像</span></span><br><span class="line">docker exec -it redisjson /bin/bash</span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入redis客户端</span></span><br><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220112123459.png" alt="image-20220112123459392"></p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="String-类型的数据操作"><a href="#String-类型的数据操作" class="headerlink" title="String 类型的数据操作"></a>String 类型的数据操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 新增 </span><br><span class="line">127.0.0.1:6379&gt; json.set str . &#x27;&quot;bar&quot;&#x27;</span><br><span class="line">OK</span><br><span class="line"># 查询</span><br><span class="line">127.0.0.1:6379&gt; json.get str</span><br><span class="line">&quot;\&quot;bar\&quot;&quot;</span><br><span class="line"># 数据类型</span><br><span class="line">127.0.0.1:6379&gt; json.type str</span><br><span class="line">&quot;string&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="String类型的扩展操作"><a href="#String类型的扩展操作" class="headerlink" title="String类型的扩展操作"></a>String类型的扩展操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 字符串长度</span><br><span class="line">127.0.0.1:6379&gt; JSON.STRLEN str</span><br><span class="line">(integer) 3</span><br><span class="line"># 拼接字符串</span><br><span class="line">127.0.0.1:6379&gt; JSON.STRAPPEND str . &#x27;&quot;baz&quot;&#x27;</span><br><span class="line">(integer) 6</span><br><span class="line"># 查询</span><br><span class="line">127.0.0.1:6379&gt; JSON.get str</span><br><span class="line">&quot;\&quot;barbaz\&quot;&quot;</span><br></pre></td></tr></table></figure>
-
-<p>这里其实有规律的, 或者说万变不离其宗. STRLEN = String.length  明显是缩写, 同理拼接也是 STRAPPEND=StringBuffer.append.  多说一句append的翻译是追加, 所以这个方法的作用一目了然吧, 所以呢, 英语真的很重要的.</p>
-<h3 id="Number类型的数据操作"><a href="#Number类型的数据操作" class="headerlink" title="Number类型的数据操作"></a>Number类型的数据操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; json.set num . 0</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; json.get num</span><br><span class="line">&quot;0&quot;</span><br><span class="line"># 增加</span><br><span class="line">127.0.0.1:6379&gt; JSON.NUMINCRBY num . 1</span><br><span class="line">&quot;1&quot;</span><br><span class="line">127.0.0.1:6379&gt; JSON.NUMINCRBY num . 1.5</span><br><span class="line">&quot;2.5&quot;</span><br><span class="line">127.0.0.1:6379&gt; JSON.NUMINCRBY num . -0.75</span><br><span class="line">&quot;1.75&quot;</span><br><span class="line">127.0.0.1:6379&gt; JSON.NUMINCRBY num . 24</span><br><span class="line">&quot;25.75&quot;</span><br><span class="line"> # 乘, 然而下个版本就删除了</span><br><span class="line">127.0.0.1:6379&gt; JSON.NUMMULTBY num . 24</span><br><span class="line">&quot;618&quot;</span><br><span class="line">127.0.0.1:6379&gt; JSON.NUMMULTBY num . 2</span><br><span class="line">&quot;1236&quot;</span><br><span class="line">127.0.0.1:6379&gt; JSON.NUMMULTBY num . 3</span><br><span class="line">&quot;3708&quot;</span><br></pre></td></tr></table></figure>
-
-<p><em>没找到除, 难怪要把乘删了, 挺离谱的</em></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/mysql/[mysql]%E5%BE%AA%E7%8E%AF%E6%B7%BB%E5%8A%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/study/mysql/%5Bmysql%5D%E5%BE%AA%E7%8E%AF%E6%B7%BB%E5%8A%A0/" class="post-title-link" itemprop="url">循环添加</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-11 09:22:47" itemprop="dateCreated datePublished" datetime="2022-01-11T09:22:47+08:00">2022-01-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-14 09:45:41" itemprop="dateModified" datetime="2022-01-14T09:45:41+08:00">2022-01-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="使用Sql将相同的数据添加1000次"><a href="#使用Sql将相同的数据添加1000次" class="headerlink" title="使用Sql将相同的数据添加1000次"></a>使用Sql将相同的数据添加1000次</h2><p>众所周知, </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -643,14 +647,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
