@@ -209,7 +209,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-01-31 21:33:10 / Modified: 21:47:21" itemprop="dateCreated datePublished" datetime="2022-01-31T21:33:10+08:00">2022-01-31</time>
+              <time title="Created: 2022-01-31 21:33:10 / Modified: 21:50:02" itemprop="dateCreated datePublished" datetime="2022-01-31T21:33:10+08:00">2022-01-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +233,14 @@
 
       
           <h2 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h2><p>当同一数据出现5次时,  记录最新的数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装模块</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建链接</span></span><br><span class="line">db = pymysql.connect(user=<span class="string">&quot;root&quot;</span>, password=<span class="string">&quot;123456&quot;</span>, host=<span class="string">&quot;localhost&quot;</span>, database=<span class="string">&quot;test&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取浮标</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># sql 语句</span></span><br><span class="line">sql = <span class="string">&quot;select * from user limit %d&quot;</span> %(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行sql</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取全部数据(元组)</span></span><br><span class="line">result = cursor.fetchall()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建集合, 元组数据不能删除,只能全部删除</span></span><br><span class="line">re = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环对比</span></span><br><span class="line"><span class="keyword">for</span> data1 <span class="keyword">in</span> result:</span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> data2 <span class="keyword">in</span> result:</span><br><span class="line">    <span class="keyword">if</span> data1[<span class="number">1</span>] = data2[<span class="number">1</span>]:</span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">      <span class="keyword">if</span> i==<span class="number">5</span>:</span><br><span class="line">        <span class="built_in">print</span>(data1)</span><br><span class="line">        re.add(data2)</span><br><span class="line"><span class="built_in">print</span>(re)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/;categories/study/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/%5Bpython%5D%20%E4%BD%BF%E7%94%A8pytion%E6%9F%A5%E8%AF%A2mysql%E6%95%B0%E6%8D%AE/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
