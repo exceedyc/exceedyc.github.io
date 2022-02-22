@@ -116,17 +116,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">53</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">54</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">53</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">54</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">86</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">89</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -177,6 +177,156 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/obsidian/obsidian%20%E6%8F%92%E4%BB%B6%E5%85%B1%E4%BA%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/obsidian/obsidian%20%E6%8F%92%E4%BB%B6%E5%85%B1%E4%BA%AB/" class="post-title-link" itemprop="url">obsidian 插件共享</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-02-22 10:18:45 / Modified: 10:55:17" itemprop="dateCreated datePublished" datetime="2022-02-22T10:18:45+08:00">2022-02-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Obsidian-插件共享"><a href="#Obsidian-插件共享" class="headerlink" title="Obsidian 插件共享"></a>Obsidian 插件共享</h1><p>obsidian独特的库机制, 让每个库的第三方插件都可以独立配置, 然而这样有好有坏, 好处就是每个库都有独立的个性, 然而每次新建库都会面临重新下载插件的坏处, 如果插件多, 还可能造成存储占用过大的问题, 那么如何扬长避短呢?</p>
+<h2 id="软连接"><a href="#软连接" class="headerlink" title="软连接"></a>软连接</h2><p>   软连接你值得拥有, 首先, 我们新建一个库, 取名A<br>    <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220222103137.png"><br>    随便找个文件夹放即可, 也可以用已有的库.<br>    然后我们进入到该库下的<code>.obsidian</code>文件夹下, 如果没有<code>plugins</code>文件夹则新建,然后记录A库的插件路径<br>    <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220222103628.png"><br>    然后建立B库, B库不需要创建<code>plugins</code>文件夹, 其他操作如上, 不在赘述.<br>    然后在B库<strong>建立软连接</strong>连接A库的plugins文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ln -s A/.obsidian/plugins B/.obsidian/plugins</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果在B库的.obsidian文件夹下使用如下命令</span></span><br><span class="line">ln -s A/.obsidian/plugins plugins</span><br><span class="line"><span class="meta">#</span><span class="bash"> win 使用:</span></span><br><span class="line">mklink /j C:\Users\A\.obsidian\plugins D:\B\.obsidian\plugins</span><br></pre></td></tr></table></figure>
+<p>完成后,在B库可以看到如下文件列表:<br><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220222104310.png"><br>至此大功告成</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>首先在A库, 安装插件:<br><code>Sliding Panes</code><br><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220222105003.png"><br>可以看到A库已经安装完毕, 那么我们打开,看看效果<br>打开并重启后, 新建文件, 可以看到A库已经生效<br><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220222105134.png"><br>再来看看我们的B库:<br><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgs20220222105248.png"><br>也有了这个插件, 并且, 我们成功利用了obsidian的库独立个性的机制, 不同的库哪怕使用的是同一个文件夹下的插件, 依旧可以独立设置, 此时, 我们的A库是打开插件的, 而B库是没有的.<br>ps: 如果新安装插件确不显示, 记得重启该库哦, 打开不生效同理</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/[mysql]%20%E6%9F%A5%E9%87%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/;categories/study/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%5Bmysql%5D%20%E6%9F%A5%E9%87%8D/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-02-15 10:57:53 / Modified: 11:00:05" itemprop="dateCreated datePublished" datetime="2022-02-15T10:57:53+08:00">2022-02-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<hr>
+<h2 id="在不知道哪条数据重复的情况下-查询重复的数据"><a href="#在不知道哪条数据重复的情况下-查询重复的数据" class="headerlink" title="在不知道哪条数据重复的情况下,查询重复的数据"></a>在不知道哪条数据重复的情况下,查询重复的数据</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from `table_name` where `id` in (select `id` from `table_name`  GROUP BY `hash` HAVING COUNT(`hash`) &gt; 1) ;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+<div>
+    
+ </div>  
+
+  
+  
+  
+
       
   
   
@@ -341,7 +491,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/linux/linux%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/spring/spring-boot/[SpringBoot]@RequestBody%E4%BD%BF%E7%94%A8%E6%97%B6%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -358,7 +508,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/;categories/study/linux/linux%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">linux设置定时脚本</a>
+            <a href="/;categories/study/spring/spring-boot/%5BSpringBoot%5D@RequestBody%E4%BD%BF%E7%94%A8%E6%97%B6%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">RequestBody使用时问题</a>
         </h2>
 
         <div class="post-meta">
@@ -367,17 +517,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-21 09:53:01 / Modified: 10:49:47" itemprop="dateCreated datePublished" datetime="2022-01-21T09:53:01+08:00">2022-01-21</time>
+              <time title="Created: 2022-01-21 15:09:45" itemprop="dateCreated datePublished" datetime="2022-01-21T15:09:45+08:00">2022-01-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-22 10:56:54" itemprop="dateModified" datetime="2022-02-22T10:56:54+08:00">2022-02-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
                 </span>
             </span>
 
@@ -392,177 +548,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>安装cron</p>
-<p>service crond  start</p>
-<p>crond -e : 新增当前用户定时任务</p>
-<p>crond -r: 删除当前用户定时任务</p>
-<p>任务格式</p>
-<p><code>* * * * * user command</code></p>
-<p>分 时 天 月 周 用户名  执行的命令行</p>
-<blockquote>
-<p># Example of job definition:</p>
-<p># .—————- minute (0 - 59)</p>
-<p># | .————- hour (0 - 23)</p>
-<p># | | .———- day of month (1 - 31)</p>
-<p># | | | .——- month (1 - 12) OR jan,feb,mar,apr …</p>
-<p># | | | | .—- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p>
-<p># | | | | |</p>
-<p># * * * * * user-name command to be executed</p>
-</blockquote>
-<p>*: 所有</p>
-<p>*/5: 每5(分|时|…|周)</p>
-<p>-: 几到几</p>
-<p>,: 分割数字</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/bug/[BUG]%E5%B0%8Fbug%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/bug/%5BBUG%5D%E5%B0%8Fbug%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">小bug记录, 有时间输出成文章</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-01-19 10:45:21 / Modified: 10:49:58" itemprop="dateCreated datePublished" datetime="2022-01-19T10:45:21+08:00">2022-01-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bugs/" itemprop="url" rel="index"><span itemprop="name">bugs</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>空集合使用<code>CollectionUtils.isEmpty</code> 判断</li>
-<li>POST 接受参数List需要封装到对象里</li>
-<li><code>null == 数组</code> 如果数组是<code>[] </code>是false哦  ps: 还是要理解一下<code>==</code></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-<div>
-    
- </div>  
-
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/study/mysql/[mysql]%E6%9F%A5%E8%AF%A2%E9%9D%9E%E4%BA%A4%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="exceedY">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="exceedy">
-    </span>
-
-
-
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/;categories/study/mysql/%5Bmysql%5D%E6%9F%A5%E8%AF%A2%E9%9D%9E%E4%BA%A4%E9%9B%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-01-17 15:44:16 / Modified: 15:44:54" itemprop="dateCreated datePublished" datetime="2022-01-17T15:44:16+08:00">2022-01-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<hr>
-<h2 id="查询非交集"><a href="#查询非交集" class="headerlink" title="查询非交集"></a>查询非交集</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from digital_collection where  id = 8 and not exists (select id from category_digital_relation where digital_collection.id = category_digital_relation.digital_id) ;</span><br></pre></td></tr></table></figure>
-
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>SpringBoot, 当参数需要同时接受文件与普通数据时, 不能使用<code>@RequestBody</code>.</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>前端传数据时, 使用的<code>context- type</code>为<code>multipart/form-data</code>,因此普通数据类型无法使用JSON格式, RequestBody因此不可用</p>
 
       
     </div>
@@ -654,20 +641,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
