@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="微信开电子发票的一些流程 获取access_token : https:&#x2F;&#x2F;developers.weixin.qq.com&#x2F;doc&#x2F;offiaccount&#x2F;Basic_Information&#x2F;Get_access_token.html  ​    全局凭证, 小程序绑定公众号后可以直接拿小程序的AppID及AppSecret获取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信支付-合单支付">
+<meta property="og:url" content="http://example.com/;categories/%E7%AC%94%E8%AE%B0/study/wx/[wx]%20%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E7%94%B5%E5%AD%90%E5%8F%91%E7%A5%A8/index.html">
+<meta property="og:site_name" content="exceedy">
+<meta property="og:description" content="微信开电子发票的一些流程 获取access_token : https:&#x2F;&#x2F;developers.weixin.qq.com&#x2F;doc&#x2F;offiaccount&#x2F;Basic_Information&#x2F;Get_access_token.html  ​    全局凭证, 小程序绑定公众号后可以直接拿小程序的AppID及AppSecret获取">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-27T03:44:33.000Z">
+<meta property="article:modified_time" content="2021-12-28T07:57:56.756Z">
+<meta property="article:author" content="exceedY">
+<meta property="article:tag" content="开发票">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/;categories/%E7%AC%94%E8%AE%B0/study/wx/[wx]%20%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E7%94%B5%E5%AD%90%E5%8F%91%E7%A5%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>微信支付-合单支付 | exceedy</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">exceedy</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">55</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">55</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">92</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/%E7%AC%94%E8%AE%B0/study/wx/[wx]%20%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E7%94%B5%E5%AD%90%E5%8F%91%E7%A5%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微信支付-合单支付
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-27 11:44:33" itemprop="dateCreated datePublished" datetime="2021-12-27T11:44:33+08:00">2021-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-28 15:57:56" itemprop="dateModified" datetime="2021-12-28T15:57:56+08:00">2021-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" itemprop="url" rel="index"><span itemprop="name">微信支付</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="微信开电子发票的一些流程"><a href="#微信开电子发票的一些流程" class="headerlink" title="微信开电子发票的一些流程"></a>微信开电子发票的一些流程</h2><ol>
+<li>获取access_token : <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html">https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html</a></li>
+</ol>
+<p>​    <em>全局凭证, 小程序绑定公众号后可以直接拿小程序的AppID及AppSecret获取</em></p>
+<span id="more"></span>
+
+<p>​    <code>GET https://api.weixin.qq.com/cgi-bin/token?    grant_type=client_credential&amp;appid=APPID&amp;secret=APPSECRET</code></p>
+<ol start="2">
+<li><ul>
+<li>获取自身开票码及建立自己的开票平台: <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List.html*%E6%8F%90%E5%89%8D%E8%8E%B7%E5%BE%97">https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List.html*提前获得</a>, 不会变*</li>
+<li> 第三方会收费: </li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/doc/0000eaef0fca486a68485b6e256000">https://developers.weixin.qq.com/community/develop/doc/0000eaef0fca486a68485b6e256000</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/doc/000e8c585c402065d3794afbe5bc09?_at=1640577066140">https://developers.weixin.qq.com/community/develop/doc/000e8c585c402065d3794afbe5bc09?_at=1640577066140</a></li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li>正式开始开票: <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List.html">https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List.html</a></li>
+</ol>
+<ol start="3">
+<li><ol>
+<li>先绑定与开票平台的关系:<a target="_blank" rel="noopener" href="https://api.weixin.qq.com/card/invoice/setbizattr?action=set_pay_mch&amp;access_token=%7Baccess_token%7D">https://api.weixin.qq.com/card/invoice/setbizattr?action=set_pay_mch&amp;access_token={access_token}</a></li>
+<li>前端调用: <a target="_blank" rel="noopener" href="https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&amp;type=wx_card%E6%89%93%E5%BC%80%E6%8E%88%E6%9D%83%E7%95%8C%E9%9D%A2">https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&amp;type=wx_card打开授权界面</a></li>
+<li>同上: <a target="_blank" rel="noopener" href="https://api.weixin.qq.com/card/invoice/getauthurl?access_token=%7Baccess_token%7D">https://api.weixin.qq.com/card/invoice/getauthurl?access_token={access_token}</a> 将信息传递给微信</li>
+<li>去公众号下载电子发票, 将电子发票上传到开票平台, 然后发送到用户卡包</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>小程序开具电子发票的步骤如下：<br>1 提前获取开票平台标识s_pappid，因为同一个开票平台的s_pappid都相同，所以获取s_pappid的操作只需要进行一次。不同接入模式获取s_pappid的方法略有不同：</p>
+<p><strong>如果商户接入模式为“自建平台模式”：s_pappid通过调用调用<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>接口获得</strong></p>
+<p>2 商户获取获取access_token。调用方法见获取<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token">获取Access token</a>；<br>3 设置商户联系方式。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>。注意，本步骤不能忽略，否则将造成下一步获取授权页报错；<br>4 商户获取授权页ticket。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>5 商户获取授权页url，上一步获取的授权页ticket将作为参数传入。另外，本环节里面作为参数传入的order_id要注意保留，传递给开票平台作为向用户提供电子发票的依据。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>6 在小程序开票按钮的点击事件上部署跳转到小程序授权页的逻辑。上一步获得的auth_url和开票小程序appid要作为参数传入。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>7 商户在后台等待接收用户的授权完成事件，获取授权事件方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Vendor_API_List">商户接口列表</a>；<br>8 创建发票卡券模板。发票卡券模板应和背后的开票主体构成一一对应关系，便于后续若开票主体发生变化时，可以便捷修改。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>；<br>9 在自建发票平台开具电子发票；<br>10 上传发票PDF文件。此步骤获得的s_media_id起到关联PDF和发票卡券的作用，将作为参数在下一步的插卡接口中传入。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>；<br>11 将电子发票添加到用户微信卡包。调用方法见<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/offiaccount/WeChat_Invoice/E_Invoice/Invoicing_Platform_API_List">开票平台接口列表</a>。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E7%A5%A8/" rel="tag"># 开发票</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/;categories/%E7%AC%94%E8%AE%B0/study/spring/spring-boot/%5BSpringBoot%5D%20%E4%BD%BF%E7%94%A8RestTemplate/" rel="prev" title="使用RestTemplate上传文件">
+      <i class="fa fa-chevron-left"></i> 使用RestTemplate上传文件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/;categories/%E7%AC%94%E8%AE%B0/study/spring/%5BSpring5%5D%20Spring%E4%BB%8E0%E5%AD%A6%E4%B9%A0/" rel="next" title="Spring5介绍及下载">
+      Spring5介绍及下载 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+<div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ 我也是有底线的哦 ------</div>
+    
+</div>
+
+    
+ </div>  
+
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E4%BF%A1%E5%BC%80%E7%94%B5%E5%AD%90%E5%8F%91%E7%A5%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">微信开电子发票的一些流程</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="exceedY"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">exceedY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/exceedYc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;exceedYc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:17560726090@163.com" title="E-Mail → mailto:17560726090@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">exceedY</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/click.js"></script>

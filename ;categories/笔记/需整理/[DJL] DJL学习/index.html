@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="@DJL 学习DJL之前先了解一下什么是深度学习  深度学习什么是深度学习深度学习是机器学习中监督学习的分支，是根据神经网络对模型进行训练的任务过程。 机器学习包含：  监督学习 非监督学习   在上层是 人工智能。  一开始是传统专家系统，根据判断（数据、规则）得出答案。 进一步发展：数据+答案通过机器学习训练模型得到规则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DJL">
+<meta property="og:url" content="http://example.com/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/[DJL]%20DJL%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="exceedy">
+<meta property="og:description" content="@DJL 学习DJL之前先了解一下什么是深度学习  深度学习什么是深度学习深度学习是机器学习中监督学习的分支，是根据神经网络对模型进行训练的任务过程。 机器学习包含：  监督学习 非监督学习   在上层是 人工智能。  一开始是传统专家系统，根据判断（数据、规则）得出答案。 进一步发展：数据+答案通过机器学习训练模型得到规则">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210408105026467.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210408105649963.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210408113352890.png">
+<meta property="article:published_time" content="2021-07-21T08:23:19.320Z">
+<meta property="article:modified_time" content="2021-12-21T03:45:14.700Z">
+<meta property="article:author" content="exceedY">
+<meta property="article:tag" content="DJL">
+<meta property="article:tag" content="人工智能">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210408105026467.png">
+
+<link rel="canonical" href="http://example.com/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/[DJL]%20DJL%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>DJL | exceedy</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">exceedy</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">55</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">55</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">92</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/[DJL]%20DJL%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="exceedY">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="exceedy">
+    </span>
+
+
+
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DJL
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-21 16:23:19" itemprop="dateCreated datePublished" datetime="2021-07-21T16:23:19+08:00">2021-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-21 11:45:14" itemprop="dateModified" datetime="2021-12-21T11:45:14+08:00">2021-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/DJL/" itemprop="url" rel="index"><span itemprop="name">DJL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>@<a href="DJL">DJL</a></p>
+<p>学习DJL之前先了解一下什么是深度学习</p>
+<hr>
+<h1 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h1><h2 id="什么是深度学习"><a href="#什么是深度学习" class="headerlink" title="什么是深度学习"></a>什么是深度学习</h2><p>深度学习是机器学习中监督学习的分支，是根据神经网络对模型进行训练的任务过程。</p>
+<p>机器学习包含：</p>
+<ul>
+<li>监督学习</li>
+<li>非监督学习</li>
+</ul>
+<p> 在上层是 人工智能。</p>
+<ul>
+<li>一开始是传统专家系统，根据判断（数据、规则）得出答案。</li>
+<li>进一步发展：数据+答案通过机器学习训练模型得到规则</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="什么是神经网络"><a href="#什么是神经网络" class="headerlink" title="什么是神经网络"></a>什么是神经网络</h2><p>神经网络是由大量简单元件相互链接而成的网络，具有以下特征：</p>
+<ul>
+<li><p>非线性</p>
+</li>
+<li><p>分层特征学习</p>
+<ul>
+<li>输入层：输入数据、答案</li>
+<li>隐藏层：进行训练</li>
+<li>输出层：输出规则</li>
+</ul>
+</li>
+<li><p>可扩展结构</p>
+<ul>
+<li>隐藏层可以根据不同的业务进行扩展</li>
+</ul>
+</li>
+<li><p>高算力要求</p>
+<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210408105026467.png" alt="神经网络"></p>
+</li>
+</ul>
+<h3 id="训练神经网络"><a href="#训练神经网络" class="headerlink" title="训练神经网络"></a>训练神经网络</h3><p>包含了两个很重要的步骤：</p>
+<ul>
+<li><p>前向传播</p>
+</li>
+<li><p>反向传播</p>
+</li>
+<li><p>epochs：输入数据—&gt; 神经网络-&gt;输出数据-&gt;损失-&gt;根据损失反向求导-&gt;得到一个梯队，然后更新权重，再重新输入数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210408105649963.png" alt="image-20210408105649963"></p>
+</li>
+</ul>
+<h1 id="DJL"><a href="#DJL" class="headerlink" title="DJL"></a>DJL</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>DJL 是什么？DJL 为Java量身定制的机器学习平台。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>为Java量身定制的方法<ul>
+<li>多线程支持和内存管理</li>
+</ul>
+</li>
+<li>全引擎支持<ul>
+<li>一次构建，轻松运行</li>
+</ul>
+</li>
+<li>预训练模型库<ul>
+<li>70多个预训练模型</li>
+</ul>
+</li>
+<li>为开源社区贡献<ul>
+<li>已支持PaddlePaddle</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><ul>
+<li>Amazon family</li>
+<li>TalkingData<ul>
+<li>基于Apache Spark的大数据智能分析</li>
+</ul>
+</li>
+<li>Netflix<ul>
+<li>基于Scala的大规模流数据推理</li>
+</ul>
+</li>
+<li>阿里<ul>
+<li>基于Java的深度学习推理服务</li>
+<li>PaddlePaddle </li>
+</ul>
+</li>
+</ul>
+<h2 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h2><p>DJL + Paddle = Java完全支持</p>
+<h2 id="DJL架构"><a href="#DJL架构" class="headerlink" title="DJL架构"></a>DJL架构</h2><ul>
+<li>NDArray:    目的：把很复杂的数据结构表达出来。</li>
+<li>NDManager： NDArray的管理者，目的：对内存的管理，当NDArray结束时，立马回收。</li>
+<li>Model：模型<ul>
+<li>Trainer ： 训练师：对模型训练</li>
+<li>Predictor： 推理师：进行推理</li>
+</ul>
+</li>
+<li>Block：模块，所有的神经网络在DJL中都是BLock表达出来的，一个或多个就会构成一个基本的Model架构。</li>
+</ul>
+<h3 id="NDArray"><a href="#NDArray" class="headerlink" title="NDArray"></a>NDArray</h3><ul>
+<li><p>多维数组</p>
+</li>
+<li><p>获取数组信息</p>
+<ul>
+<li>getDataType(): boolean int32,int64,float32,float64,string</li>
+<li>getShape(): Shape 物件 (long[]）</li>
+<li>getDevice(): CPU, GPU(0)</li>
+<li>size(): 数组元素的总数</li>
+</ul>
+</li>
+<li><p>实际上 NDArray 是在 natice C++ 内存里</p>
+<ul>
+<li>通过toByteBuffer 复制一份进Java heap<ul>
+<li>toFloatArray()</li>
+<li>toFloat()</li>
+</ul>
+</li>
+</ul>
+<h4 id="为什么内存存在C-里"><a href="#为什么内存存在C-里" class="headerlink" title="为什么内存存在C++里"></a>为什么内存存在C++里</h4></li>
+</ul>
+<p>​    只在java中，数据太大不好处理，并且使用的cpu较少,同时多维不好处理，并且下述中的加速库都是由C、C++实现的，所以需要存一份数据在C++中。</p>
+<ul>
+<li>矩阵加速库：LAPACK，BLAS</li>
+<li>多线程：OpenMP</li>
+<li>CPU加速库： oneDNN（MKLDNN）</li>
+<li>GPU加速库：CUDA, cuDNN</li>
+</ul>
+<p> 因此，需要尽量避免原生的Java做计算，善用DJL提供的算子 array.add(1f).所有的计算都做完后再调用toFloatArray 转回java。</p>
+<h4 id="DJL提供的算子"><a href="#DJL提供的算子" class="headerlink" title="DJL提供的算子"></a>DJL提供的算子</h4><ul>
+<li><p>四则运算：add,sub,mul,div,…</p>
+<p>｜1｜2｜</p>
+<p>｜3｜4｜ </p>
+<p>当使用add时，add(2)，矩阵中的所有数都会+2.</p>
+<p>｜1+2｜2+2｜</p>
+<p>｜3+2｜4+2｜</p>
+<p>同理，sub,mul,div都是如此，而这里的矩阵乘法和标准的矩阵乘法时不一样的，因此，延伸出了专门针对标准矩阵乘法的接口。matMul。</p>
+</li>
+<li><p>矩阵乘法：matMul</p>
+<p>当使用matMul时：array.matMul(array)</p>
+</li>
+</ul>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">｜<span class="number">1</span><span class="operator">*</span><span class="number">1</span><span class="operator">+</span><span class="number">2</span><span class="operator">*</span><span class="number">3</span><span class="operator">|</span><span class="number">1</span><span class="operator">*</span><span class="number">3</span><span class="operator">+</span><span class="number">2</span><span class="operator">*</span><span class="number">4</span><span class="operator">|</span></span><br><span class="line">｜<span class="number">3</span><span class="operator">*</span><span class="number">1</span><span class="operator">+</span><span class="number">4</span><span class="operator">*</span><span class="number">3</span><span class="operator">|</span><span class="number">3</span><span class="operator">*</span><span class="number">2</span><span class="operator">+</span><span class="number">4</span><span class="operator">*</span><span class="number">4</span><span class="operator">|</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>改变形状：reshape，swapAxes</p>
+<p>reshape 与 swapAxes的区别</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">reshape(....y,x); ：y 代表从上往下排序几行，x代表从左到右排序几列，并且是x轴优先排序.但是在C++中的排序是不会变的。如：</span><br><span class="line">|1|2|3|</span><br><span class="line">|4|5|6|</span><br><span class="line">这个矩阵对应的C++的排列是：</span><br><span class="line">|1|2|3|4|5|6|</span><br><span class="line">然后调用reshape(3,2);</span><br><span class="line">java中的解读变成了：</span><br><span class="line">|1|2|</span><br><span class="line">|3|4|</span><br><span class="line">|5|6|</span><br><span class="line">但是C++中是不会变的。</span><br><span class="line">特别提示：最后两位永远是y,x而前面的是怎么分组，前位每多一个数，便多一个分组，并且所有的数相乘要等于数组大小。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">swapAxes(0,1);</span><br><span class="line">|1|2|3|</span><br><span class="line">|4|5|6|</span><br><span class="line">这里比较特殊，这个矩阵是（2，3）并且方向是(y,x)格式的矩阵，这里的yx和上述方法中的yx一个含义，所以上面的矩阵是1-3从左到右排序，然后从上往下排序。</span><br><span class="line">但是在swapAxes是进行整个轴的对调。那么这个矩阵就变成了(3,2),虽然排序方向依旧是（y,x) ，但是优先排序变成了y轴。因此，对调完后是，从上往下排3，然后从左到右排2，结果便是：</span><br><span class="line">｜1｜4｜</span><br><span class="line">｜2｜5｜</span><br><span class="line">｜3｜6｜</span><br><span class="line">同时C++中的排列也会随之改变为：</span><br><span class="line">|1|4|2|5|3|6|</span><br></pre></td></tr></table></figure></li>
+<li><p>比较运算：eq,gt,…</p>
+<p>array.eq(array);</p>
+<p>|1==1|2==2|</p>
+<p>|3==3|4==4|</p>
+</li>
+<li><p>Reduction运算：su m,max,min,…</p>
+<p>array.max()</p>
+<p>|4|</p>
+</li>
+<li><p>其他数学运算：abs，exp,…</p>
+</li>
+</ul>
+<p> 每个操作输出的NDArray都是一份新的拷贝。也就是说不影响以前的数据喽。</p>
+<h3 id="内存释放"><a href="#内存释放" class="headerlink" title="内存释放"></a>内存释放</h3><p>临时生成的NDArray越早释放越好，并且不会自动释放。</p>
+<p>因为NDArray内存存在C++里，上面提到过，所以java的GC没办法回收native内存。</p>
+<p>​    每一个产生的NDArray都需要调用C API回收，这样非常容易出现内存溢出。</p>
+<p>​    针对回收DJL使用NDManager管理。将临时的NDArray装入NDManager中，调用close()时一起释放。</p>
+<h3 id="NDManager"><a href="#NDManager" class="headerlink" title="NDManager"></a>NDManager</h3><ul>
+<li><p>管理数据的创建以及生命周期</p>
+</li>
+<li><p>创建所有的NDArray都需要通过NDManager.</p>
+<ul>
+<li>manager.create(new float[]{0f,1f,2f,3f}, new Shape(2,2));</li>
+<li>manager.zeros(new Shape(2,2)); // 全是0的2*2 矩阵</li>
+<li>manager.randomUniform(0f,1f,new Shape(2,2)); // 2*2 0-1的矩阵</li>
+</ul>
+</li>
+<li><p>回收临时NDArray的方案</p>
+<p>创建一个manager内部的NDMaber，然后将临时的NDArray放入，一起close。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NDManager subManager = manager.newSubManager();</span><br><span class="line">array.attach(subManager);</span><br><span class="line">subManager.close();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="DJL-深度学习推理实现"><a href="#DJL-深度学习推理实现" class="headerlink" title="DJL 深度学习推理实现"></a>DJL 深度学习推理实现</h2><h4 id="分步"><a href="#分步" class="headerlink" title="分步"></a>分步</h4><p><strong>数据前处理 -&gt; 推理 -&gt; 数据后处理</strong></p>
+<ul>
+<li>数据前处理：如图片<ul>
+<li>把图片转化成RGB数组</li>
+<li>把文字转换成索引</li>
+<li>将数据归一化</li>
+</ul>
+</li>
+<li>推理：<ul>
+<li>输入NDList(List of NDArray)，封装NDArray到LIst中。</li>
+<li>输出NDList(List of NDArray)</li>
+<li>(概率，文字索引…)</li>
+</ul>
+</li>
+<li>数据后处理<ul>
+<li>把概率转换对应的标签</li>
+<li>把文字索引转换回真正的文字</li>
+</ul>
+</li>
+</ul>
+<h4 id="Translator"><a href="#Translator" class="headerlink" title="Translator"></a>Translator</h4><p>将数据前处理和数据后处理封装到了Translator里</p>
+<ul>
+<li>public NDList processInput(TranslatorContext cox, I);     </li>
+<li>public O processOutput(TranslatorContext ctx, NDList lits)</li>
+<li>TranslatorContext 会获取NDManager，并且将数据处理时产生的NDArray返回NDManager,处理完成后直接close。</li>
+<li>优点<ul>
+<li>整理琐碎的处理代码</li>
+<li>容易服用经典的数据处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><h4 id="Apache-MXNet"><a href="#Apache-MXNet" class="headerlink" title="Apache MXNet"></a>Apache MXNet</h4><ul>
+<li>Symbolic 模型</li>
+<li>Gluon 模型，需要先 hybridize 后保存,就会转成Symbolic模型</li>
+</ul>
+<h4 id="PyTorch"><a href="#PyTorch" class="headerlink" title="PyTorch"></a>PyTorch</h4><ul>
+<li>TorchScript 模型</li>
+<li>PyTorch模型，可通过 jit.trace 或是 jit.script 转成TorchScript</li>
+</ul>
+<h4 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h4><ul>
+<li>SavedModel</li>
+<li>h5模型，可通过tf.keras.models.load_model 搭配 tf.saved_model.save转成SavedModel</li>
+</ul>
+<h3 id="Criteria"><a href="#Criteria" class="headerlink" title="Criteria"></a>Criteria</h3><ul>
+<li>创建多个搜索条件找到需要加载的模型<ul>
+<li>可以读取本地的模型</li>
+<li>S3上的预训练模型</li>
+<li>支持从URL读取，包含http，S3，hdfs</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**读取S3上的预训练模型*/</span></span><br><span class="line">Criteria&lt;Image, DetectedObjects&gt; criteria = Criteria.builder()</span><br><span class="line">.optApplication(Application.CV.OBJECT_DETECTION) <span class="comment">//读取模型</span></span><br><span class="line">.setTypes(Image.class, DetectedObjects.class) <span class="comment">// 类型</span></span><br><span class="line">.optFilter(<span class="string">&quot;backbone&quot;</span>,<span class="string">&quot;resnet50&quot;</span>) <span class="comment">// 多个filter</span></span><br><span class="line">.optProgress(<span class="keyword">new</span> ProgressBar()) <span class="comment">// </span></span><br><span class="line">.build();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**读取本地模型</span></span><br><span class="line"><span class="comment">	* 本地模型：/var/models/my_resnet50/my_resent50.pt</span></span><br><span class="line"><span class="comment">	* pt 模型名要和上级文件夹同名</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">Criteria&lt;Image, Classifications&gt; criteria = Criteria.builder()</span><br><span class="line">  .setTypes(Image.class, Classifications.class)</span><br><span class="line">  .optTranslator(ImageClassifictionTranslator.builder()</span><br><span class="line">                .setSynsetArtifactName(<span class="string">&quot;synset.txt&quot;</span>)</span><br><span class="line">                .build()) <span class="comment">// 建立 Translator</span></span><br><span class="line">  .optModelUrls(<span class="string">&quot;file:///var/models/my_resnet50&quot;</span>) <span class="comment">// 路径</span></span><br><span class="line">  .optArtifactId(<span class="string">&quot;ai.djl.localmodelzoo:my_resnet50&quot;</span>) <span class="comment">// 本地的id</span></span><br><span class="line">  .build();</span><br><span class="line">ZooModel&lt;Image, Classifications&gt; model = ModelZoo.loadModel(criteria); <span class="comment">// 获取model</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果模型和上级文件不想同名，那么删除 optArtifactId，并将ModelUrl修改</span></span><br><span class="line"><span class="comment">// files:///var/models/文件名不一样?artifact_id=文件名&amp;model_name=模型名</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="读取模型Criteria-API"><a href="#读取模型Criteria-API" class="headerlink" title="读取模型Criteria API"></a>读取模型Criteria API</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建Predictor</span></span><br><span class="line"><span class="keyword">try</span>(ZooModel&lt;?,?&gt; model = loadModel(arguments, metrics))&#123;</span><br><span class="line">  Object predictResult = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span>(Predictor predictor = model.<span class="function">new <span class="title">Predictor</span><span class="params">()</span>)</span>&#123; <span class="comment">// 线程安全的</span></span><br><span class="line">    predictResult = predictor.predic(inputData); <span class="comment">// 开始推理</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 多线程环境下：一个线程创建一个Predcitor，避免每次predict时都创建新的Predictor。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="优化推理速度"><a href="#优化推理速度" class="headerlink" title="优化推理速度"></a>优化推理速度</h3><h4 id="MXNet"><a href="#MXNet" class="headerlink" title="MXNet"></a>MXNet</h4><ul>
+<li>MXNet 推理引擎不是线程安全的</li>
+<li>多线程调用需使用NaiveEngine （线程安全的）<ul>
+<li>export MXNET_ENGINE_TYPE = NaiveEngine。</li>
+</ul>
+</li>
+<li>每个线程里面都要有自己一份拷贝的weight </li>
+<li>可以使用实验性质的线程安全接口 -Dai.djl.mxnet.user_thread_safe_predictor=true</li>
+<li>多线程性能最优配置：<ul>
+<li>export OMP_NUM_THREADS=1</li>
+<li>只需要调整Java线程数量</li>
+</ul>
+</li>
+</ul>
+<h4 id="PyTorch-1"><a href="#PyTorch-1" class="headerlink" title="PyTorch"></a>PyTorch</h4><ul>
+<li>Pytorch 释放Tensor的接口不是线程安全的，需要避免GC更NDManager同时回收Tensor<ul>
+<li>必须传入：-Dai.djl.disable_close_resource_on_finalize=true</li>
+</ul>
+</li>
+<li>PyTorch 默认不使用MKLDNN(oneDNN)<ul>
+<li>使用：-Dai.djl.pytorch.usr_mkldnn=true</li>
+</ul>
+</li>
+<li>多线程性能最优配置<ul>
+<li>-Dai.djl.pytorch.num_interop_threads=1</li>
+<li>-Dai.djl.pytorch.num_threads=1</li>
+<li>同样只需要调整java线程数量即可</li>
+</ul>
+</li>
+</ul>
+<h4 id="TensorFlow-1"><a href="#TensorFlow-1" class="headerlink" title="TensorFlow"></a>TensorFlow</h4><ul>
+<li>多行程性能最优配置<ul>
+<li>export OMP_NUM_THREADS=1</li>
+<li>export TF_NUM_INTEROP_THREADS=1</li>
+<li>export TF_NUM_INTRAOP_THREADS=1</li>
+<li>只需要调整Java线程数量</li>
+</ul>
+</li>
+</ul>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p><img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsimage-20210408113352890.png" alt="image-20210408113352890"></p>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><h3 id="基于Java的Jupyter-Notebook"><a href="#基于Java的Jupyter-Notebook" class="headerlink" title="基于Java的Jupyter Notebook"></a>基于Java的Jupyter Notebook</h3><ul>
+<li>基于Java11+ 的notebook</li>
+<li>安装配置简单</li>
+<li>Tablesaw： Java中的matplotlib</li>
+<li>DJL完美适配：CPU/GPU直接使用</li>
+</ul>
+<h3 id="JAVA-深度学习微服务部署"><a href="#JAVA-深度学习微服务部署" class="headerlink" title="JAVA 深度学习微服务部署"></a>JAVA 深度学习微服务部署</h3><h3 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h3><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h2 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h2><h3 id="DJL模块简介"><a href="#DJL模块简介" class="headerlink" title="DJL模块简介"></a>DJL模块简介</h3><h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>​    神经网络模型搭建：Model/ 使用Block Api 代表神经网络的基石</p>
+<ul>
+<li>Sequential Blocak</li>
+<li>ParallelBlock</li>
+<li>Lambda BLock</li>
+</ul>
+<h4 id="BLock-实现"><a href="#BLock-实现" class="headerlink" title="BLock 实现"></a>BLock 实现</h4><p>Linear Block 全连接层</p>
+<ul>
+<li><p>Linear, FullyConnected(FC),Dense</p>
+</li>
+<li><p>描述公式：<br>$$<br>Y=XW^T + b<br>$$</p>
+</li>
+<li><p>参数：Weight, Bias</p>
+</li>
+<li><p>前向传播：forward</p>
+</li>
+<li><p>实例演示：全连接层和多层感知机</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Linear</span> <span class="keyword">extends</span> <span class="title">AbstractBlock</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span> VERSION = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">long</span> units;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">long</span> inputFeatures;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> Shape inputShape;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> Parameter weight;</span><br><span class="line">   <span class="keyword">private</span> Parameter bias;</span><br><span class="line"></span><br><span class="line">   Linear(Builder builder) &#123;</span><br><span class="line">       <span class="keyword">super</span>(VERSION);</span><br><span class="line">       units = builder.units;</span><br><span class="line">       <span class="comment">// &quot;inputFeatures&quot; is only known after &quot;beforeInitialize&quot; is called, hence we need</span></span><br><span class="line">       <span class="comment">// a callback, even if we do not used the callback parameter</span></span><br><span class="line">       weight =</span><br><span class="line">               addParameter(</span><br><span class="line">                       <span class="keyword">new</span> Parameter(<span class="string">&quot;weight&quot;</span>, <span class="keyword">this</span>, ParameterType.WEIGHT),</span><br><span class="line">                       inputShapes -&gt; <span class="keyword">new</span> Shape(units, inputFeatures));</span><br><span class="line">       <span class="keyword">if</span> (builder.bias) &#123;</span><br><span class="line">           bias = addParameter(<span class="keyword">new</span> Parameter(<span class="string">&quot;bias&quot;</span>, <span class="keyword">this</span>, ParameterType.BIAS), <span class="keyword">new</span> Shape(units));</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** &#123;<span class="doctag">@inheritDoc</span>&#125; */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> NDList <span class="title">forwardInternal</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">           ParameterStore parameterStore,</span></span></span><br><span class="line"><span class="params"><span class="function">           NDList inputs,</span></span></span><br><span class="line"><span class="params"><span class="function">           <span class="keyword">boolean</span> training,</span></span></span><br><span class="line"><span class="params"><span class="function">           PairList&lt;String, Object&gt; params)</span> </span>&#123;</span><br><span class="line">       NDArray input = inputs.singletonOrThrow();</span><br><span class="line">       Device device = input.getDevice();</span><br><span class="line">       NDArray weightArr = parameterStore.getValue(weight, device, training);</span><br><span class="line">       NDArray biasArr = parameterStore.getValue(bias, device, training);</span><br><span class="line">       <span class="keyword">return</span> linear(input, weightArr, biasArr);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据集读取和预处理：Dataset-Api"><a href="#数据集读取和预处理：Dataset-Api" class="headerlink" title="数据集读取和预处理：Dataset Api"></a>数据集读取和预处理：Dataset Api</h3><ul>
+<li>预处理Transform， 需要做一些特殊处理</li>
+<li>预处理Popeline</li>
+<li>CV预处理流程</li>
+<li>NLP预处理流程<ul>
+<li>编码-&gt;清洗-&gt;分词-&gt;特征处理</li>
+</ul>
+</li>
+<li>多线程载入数据</li>
+</ul>
+<h4 id="正式训练"><a href="#正式训练" class="headerlink" title="正式训练"></a>正式训练</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">1[数据] --&gt; 2[网络] --&gt;3[前向传播]--&gt;4[损失函数]--&gt; 5[方向传播]--&gt;6[更新权重]--&gt;1</span><br></pre></td></tr></table></figure>
+
+<p>Trainer Api:</p>
+<ul>
+<li>​    设置损失函数和优化器<ul>
+<li>学习目标和更新权重 的方法</li>
+</ul>
+</li>
+<li>超参数设置<ul>
+<li>训练多久，样本大小，学习率更新</li>
+</ul>
+</li>
+<li>权重初始化</li>
+<li>用Evaluator 评测学习情况</li>
+<li>多GPU学习</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> lr = <span class="number">0.9f</span>; <span class="comment">// 学习率</span></span><br><span class="line">Model model = Model.newInstance(<span class="string">&quot;cnn&quot;</span>); <span class="comment">// 新建一个model</span></span><br><span class="line">model.setBlock(block);</span><br><span class="line"></span><br><span class="line">Loss loss = Los.softmaxCrossEntropyLoss(); <span class="comment">// 损失函数</span></span><br><span class="line"></span><br><span class="line">Tracker lrt = Tracker.fixed(lr); <span class="comment">// </span></span><br><span class="line"></span><br><span class="line">Optimizer sgd = Optimizer.sgd().setLearningRateTracker(lrt).build();</span><br><span class="line"></span><br><span class="line">DefaultTrainingConfig config = <span class="keyword">new</span> DefaultTrainingConfig(loss).optOptimizer(sgd) <span class="comment">// 设置损失函数和优化器</span></span><br><span class="line">  .addEvaluator(<span class="keyword">new</span> Accuracy()) <span class="comment">// 评测学习情况，默认打印超参数。accuracy: 学习情况</span></span><br><span class="line">  .addTrainingListeners(TrainingListener.Defaults.logging());</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>源代码相似度比较，200多个分类。</p>
+<p>比特币源代码，里面的源码被归类为1</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DJL/" rel="tag"># DJL</a>
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/%5B%E5%88%86%E5%B8%83%E5%BC%8F%5D%20Zookeeper%E5%85%A5%E9%97%A8/" rel="prev" title="Zookeeper 入门">
+      <i class="fa fa-chevron-left"></i> Zookeeper 入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/Github%20%E5%9B%BE%E5%BA%8A%20+%20Typora%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0/" rel="next" title="GitHub + PicGo + Typora 自动上传图片">
+      GitHub + PicGo + Typora 自动上传图片 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+<div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------ 我也是有底线的哦 ------</div>
+    
+</div>
+
+    
+ </div>  
+
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">深度学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.1.</span> <span class="nav-text">什么是深度学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.2.</span> <span class="nav-text">什么是神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.2.1.</span> <span class="nav-text">训练神经网络</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DJL"><span class="nav-number">2.</span> <span class="nav-text">DJL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7"><span class="nav-number">2.3.</span> <span class="nav-text">用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81"><span class="nav-number">2.4.</span> <span class="nav-text">支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DJL%E6%9E%B6%E6%9E%84"><span class="nav-number">2.5.</span> <span class="nav-text">DJL架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NDArray"><span class="nav-number">2.5.1.</span> <span class="nav-text">NDArray</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%85%E5%AD%98%E5%AD%98%E5%9C%A8C-%E9%87%8C"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">为什么内存存在C++里</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DJL%E6%8F%90%E4%BE%9B%E7%9A%84%E7%AE%97%E5%AD%90"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">DJL提供的算子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E9%87%8A%E6%94%BE"><span class="nav-number">2.5.2.</span> <span class="nav-text">内存释放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NDManager"><span class="nav-number">2.5.3.</span> <span class="nav-text">NDManager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DJL-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8E%A8%E7%90%86%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.6.</span> <span class="nav-text">DJL 深度学习推理实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%AD%A5"><span class="nav-number">2.6.0.1.</span> <span class="nav-text">分步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Translator"><span class="nav-number">2.6.0.2.</span> <span class="nav-text">Translator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.6.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Apache-MXNet"><span class="nav-number">2.6.1.1.</span> <span class="nav-text">Apache MXNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PyTorch"><span class="nav-number">2.6.1.2.</span> <span class="nav-text">PyTorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TensorFlow"><span class="nav-number">2.6.1.3.</span> <span class="nav-text">TensorFlow</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Criteria"><span class="nav-number">2.6.2.</span> <span class="nav-text">Criteria</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%A8%A1%E5%9E%8BCriteria-API"><span class="nav-number">2.6.3.</span> <span class="nav-text">读取模型Criteria API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6"><span class="nav-number">2.6.4.</span> <span class="nav-text">优化推理速度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MXNet"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">MXNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PyTorch-1"><span class="nav-number">2.6.4.2.</span> <span class="nav-text">PyTorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TensorFlow-1"><span class="nav-number">2.6.4.3.</span> <span class="nav-text">TensorFlow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-number">2.7.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E9%97%A8"><span class="nav-number">2.8.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EJava%E7%9A%84Jupyter-Notebook"><span class="nav-number">2.8.1.</span> <span class="nav-text">基于Java的Jupyter Notebook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2"><span class="nav-number">2.8.2.</span> <span class="nav-text">JAVA 深度学习微服务部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pom"><span class="nav-number">2.8.3.</span> <span class="nav-text">pom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.8.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.9.</span> <span class="nav-text">训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DJL%E6%A8%A1%E5%9D%97%E7%AE%80%E4%BB%8B"><span class="nav-number">2.9.1.</span> <span class="nav-text">DJL模块简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">2.9.1.1.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BLock-%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.9.1.2.</span> <span class="nav-text">BLock 实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E8%AF%BB%E5%8F%96%E5%92%8C%E9%A2%84%E5%A4%84%E7%90%86%EF%BC%9ADataset-Api"><span class="nav-number">2.9.2.</span> <span class="nav-text">数据集读取和预处理：Dataset Api</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%BC%8F%E8%AE%AD%E7%BB%83"><span class="nav-number">2.9.2.1.</span> <span class="nav-text">正式训练</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="exceedY"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">exceedY</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/exceedYc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;exceedYc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:17560726090@163.com" title="E-Mail → mailto:17560726090@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">exceedY</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/click.js"></script>
