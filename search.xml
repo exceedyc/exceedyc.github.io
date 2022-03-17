@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>二分查找</title>
+      <link href="/;categories/%E7%AC%94%E8%AE%B0/Java/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"/>
+      <url>/;categories/%E7%AC%94%E8%AE%B0/Java/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><p>二分查找的重点在于: 缩小搜索范围.</p><p>在力扣刷了三个二分的题, 因为每次都是“抄”答案, 感觉并没有理解深刻, 看了一位大佬的题解, 茅塞顿开: 重点不在于模版, 而是解题思路, 二分查找的目的是缩小搜索范围, 那么看题确定思路至关重要!</p><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><blockquote><p>你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。<br>   假设你有 n 个版本 [1, 2, …, n]，你想找出导致之后所有版本出错的第一个错误的版本。<br>   你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>用left表示左坐标, right代表右坐标, mid代表每次查询的坐标<br>假设第一次查找得到的结果便是true, 那么就需要缩小rhgit的范围, 并且此次的结果可能是最终结果, 所以right 缩小为mid. 如果是false, 那么此次必定不是第一个错误版本, 因此left增加为 mid + 1.<br>那么, 怎么确定查到的一定是最终结果呢?  因为为false时, rhgit是固定不变的, 而left会一直靠近rhgit, 那么当他们相等时, 便是第一次错误版本.</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">firstBadVersion</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> left = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> right = n;</span><br><span class="line"><span class="comment">// 相等时就是最终结果, 所以要小于</span></span><br><span class="line"><span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line"><span class="comment">// 计算查询的坐标</span></span><br><span class="line"><span class="keyword">int</span> mid = (right - left) / <span class="number">2</span> + left;</span><br><span class="line"><span class="keyword">boolean</span> bad = isBadVersion(mid);</span><br><span class="line"><span class="keyword">if</span> (bad) &#123;</span><br><span class="line"><span class="comment">// 是true right缩小为mid</span></span><br><span class="line">right = mid;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">left = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> left;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因此只要明白思路, 理清逻辑, 便成写出正确的算法, 而不是一味的套用模版, 力扣提供的模版只是提供了思路, 还是要对答案, 而不是抄答案.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HashMap 数据结构-学习笔记</title>
       <link href="/;categories/%E7%AC%94%E8%AE%B0/Java/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/HashMap/"/>
       <url>/;categories/%E7%AC%94%E8%AE%B0/Java/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/HashMap/</url>
