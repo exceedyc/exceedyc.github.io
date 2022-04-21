@@ -307,7 +307,7 @@
       <link href="/;categories/%E7%AC%94%E8%AE%B0/study/linux/linux%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/"/>
       <url>/;categories/%E7%AC%94%E8%AE%B0/study/linux/linux%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E8%84%9A%E6%9C%AC/</url>
       
-        <content type="html"><![CDATA[<p>安装cron</p><p>service crond  start</p><p>crond -e : 新增当前用户定时任务</p><p>crond -r: 删除当前用户定时任务</p><p>任务格式</p><p><code>* * * * * user command</code></p><p>分 时 天 月 周 用户名  执行的命令行</p><blockquote><p># Example of job definition:</p><p># .—————- minute (0 - 59)</p><p># | .————- hour (0 - 23)</p><p># | | .———- day of month (1 - 31)</p><p># | | | .——- month (1 - 12) OR jan,feb,mar,apr …</p><p># | | | | .—- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p><p># | | | | |</p><p># * * * * * user-name command to be executed</p></blockquote><p>*: 所有</p><p>*/5: 每5(分|时|…|周)</p><p>-: 几到几</p><p>,: 分割数字</p><p>crontab -l  查看列表</p><p>/var/log/cron 日志文件</p>]]></content>
+        <content type="html"><![CDATA[<p>安装cron</p><p>service crond  start</p><p>crontab -e : 新增当前用户定时任务</p><p>crontab -r: 删除当前用户定时任务 <font color = "red">谨慎使用, 会全部删除!! </font></p><p>任务格式</p><p><code>* * * * * user command</code></p><p>分 时 天 月 周 用户名  执行的命令行</p><blockquote><p># Example of job definition:</p><p># .—————- minute (0 - 59)</p><p># | .————- hour (0 - 23)</p><p># | | .———- day of month (1 - 31)</p><p># | | | .——- month (1 - 12) OR jan,feb,mar,apr …</p><p># | | | | .—- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p><p># | | | | |</p><p># * * * * * user-name command to be executed</p></blockquote><p>*: 所有</p><p>*/5: 每5(分|时|…|周)</p><p>-: 几到几</p><p>,: 分割数字</p><p>crontab -l  查看列表</p><p>/var/log/cron 日志文件</p>]]></content>
       
       
       <categories>
