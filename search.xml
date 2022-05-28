@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>mysql在列一为空时返回列2</title>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/sql/mysql/mysql%E5%9C%A8%E5%88%97%E4%B8%80%E4%B8%BA%E7%A9%BA%E6%97%B6%E8%BF%94%E5%9B%9E%E5%88%972/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/sql/mysql/mysql%E5%9C%A8%E5%88%97%E4%B8%80%E4%B8%BA%E7%A9%BA%E6%97%B6%E8%BF%94%E5%9B%9E%E5%88%972/</url>
+      
+        <content type="html"><![CDATA[<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>如果一个列的结果为空，那么就查询另一列（表）的数据<br>举例： 有两张表，表1（table1) 和 表2（table2），数据如下：<br>table1:<br>| id  | name |<br>| — | —- |<br>| 1   | 张三 |<br>| 2   |      |<br>table2:<br>| id  | name | table_id |<br>| — | —- | ——– |<br>| 1   | 王五 | 1        |<br>| 2   | 李四 | 2        |<br>要求查询结果如下：<br>| id  | name |<br>| — | —- |<br>| 1   | 张三 |<br>| 2    |   李四   |</p><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>使用IFNULL();<br>如果第一个参数为空，那么返回第二个参数</p><h2 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h2><p>思路： 将两个表关联起来， 通过函数判断，如果表一的name为空，那么返回表2的name</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select t1.id as id, ifnull(t1.name, t2.name) as name from table1 as t1 left join table2 as t2 on t1.id = t2.table1.id;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用thumbor搭建CDN图片加载服务器</title>
       <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/linux/%E4%BD%BF%E7%94%A8thumbor%E6%90%AD%E5%BB%BACDN%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
       <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/linux/%E4%BD%BF%E7%94%A8thumbor%E6%90%AD%E5%BB%BACDN%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
@@ -47,7 +60,7 @@
       <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
       <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/</url>
       
-        <content type="html"><![CDATA[<a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/dubbo/" title="dubbo">dubbo</a><a href="#">Post not found: 知识库/Java/进阶/分布式/Zookeeper安装及启动 Zookeeper安装及启动</a>]]></content>
+        <content type="html"><![CDATA[<a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/dubbo/" title="dubbo">dubbo</a><a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/Zookeeper%E5%AE%89%E8%A3%85%E5%8F%8A%E5%90%AF%E5%8A%A8/" title="Zookeeper安装及启动">Zookeeper安装及启动</a>]]></content>
       
       
       
@@ -57,8 +70,8 @@
     
     <entry>
       <title>VUE 安装、打包与运行</title>
-      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Vue/VUE%20%E6%89%93%E5%8C%85%E4%B8%8E%E8%BF%90%E8%A1%8C/"/>
-      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Vue/VUE%20%E6%89%93%E5%8C%85%E4%B8%8E%E8%BF%90%E8%A1%8C/</url>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Vue/VUE%E6%89%93%E5%8C%85%E4%B8%8E%E8%BF%90%E8%A1%8C/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Vue/VUE%E6%89%93%E5%8C%85%E4%B8%8E%E8%BF%90%E8%A1%8C/</url>
       
         <content type="html"><![CDATA[<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装vue-cli, 以此进行打包</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue</span><br></pre></td></tr></table></figure><h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>]]></content>
       
@@ -167,8 +180,8 @@
     
     <entry>
       <title>学习《Java面试圣经》笔记</title>
-      <link href="/;categories/%E7%AC%94%E8%AE%B0/Java/Java%E9%9D%A2%E8%AF%95%E5%9C%A3%E7%BB%8F--%E5%B0%8F%E5%82%85%E5%93%A5/"/>
-      <url>/;categories/%E7%AC%94%E8%AE%B0/Java/Java%E9%9D%A2%E8%AF%95%E5%9C%A3%E7%BB%8F--%E5%B0%8F%E5%82%85%E5%93%A5/</url>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/Java%E9%9D%A2%E8%AF%95%E5%9C%A3%E7%BB%8F--%E5%B0%8F%E5%82%85%E5%93%A5/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/Java%E9%9D%A2%E8%AF%95%E5%9C%A3%E7%BB%8F--%E5%B0%8F%E5%82%85%E5%93%A5/</url>
       
         <content type="html"><![CDATA[<a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">数据结构</a>]]></content>
       
@@ -208,7 +221,7 @@
       <link href="/;categories/%E7%B4%A2%E5%BC%95/%E6%88%91%E7%9A%84%E7%B4%A2%E5%BC%95/"/>
       <url>/;categories/%E7%B4%A2%E5%BC%95/%E6%88%91%E7%9A%84%E7%B4%A2%E5%BC%95/</url>
       
-        <content type="html"><![CDATA[<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><a href="/;categories/%E7%AC%94%E8%AE%B0/Java/Java%E9%9D%A2%E8%AF%95%E5%9C%A3%E7%BB%8F--%E5%B0%8F%E5%82%85%E5%93%A5/" title="Java面试圣经--小傅哥">Java面试圣经--小傅哥</a><h2 id=""><a href="#" class="headerlink" title=""></a><a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式</a></h2><h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">数据结构</a><h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h1 id="第三方"><a href="#第三方" class="headerlink" title="第三方"></a>第三方</h1><h1 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h1><h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><p>[[Vue]]</p><a href="#">Post not found: 知识库/Vue/VUE 打包与运行 VUE 打包与运行</a>]]></content>
+        <content type="html"><![CDATA[<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/Java%E9%9D%A2%E8%AF%95%E5%9C%A3%E7%BB%8F--%E5%B0%8F%E5%82%85%E5%93%A5/" title="Java面试圣经--小傅哥">Java面试圣经--小傅哥</a><h2 id=""><a href="#" class="headerlink" title=""></a><a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式</a></h2><h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">数据结构</a><h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h1 id="第三方"><a href="#第三方" class="headerlink" title="第三方"></a>第三方</h1><h1 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h1><h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Vue/VUE%E6%89%93%E5%8C%85%E4%B8%8E%E8%BF%90%E8%A1%8C/" title="VUE打包与运行">VUE打包与运行</a><p>[[Vue]]</p>]]></content>
       
       
       
@@ -267,9 +280,22 @@
     
     
     <entry>
+      <title>使用python查询mysql数据库--当同一数据出现n次时, 记录最新的数据</title>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/python/%E4%BD%BF%E7%94%A8python%E6%9F%A5%E8%AF%A2mysql%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/python/%E4%BD%BF%E7%94%A8python%E6%9F%A5%E8%AF%A2mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<h2 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h2><p>当同一数据出现5次时,  记录最新的数据</p><span id="more"></span><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装模块</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建链接</span></span><br><span class="line">db = pymysql.connect(user=<span class="string">&quot;root&quot;</span>, password=<span class="string">&quot;123456&quot;</span>, host=<span class="string">&quot;localhost&quot;</span>, database=<span class="string">&quot;test&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取浮标</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># sql 语句</span></span><br><span class="line">sql = <span class="string">&quot;select * from user limit %d&quot;</span> %(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行sql</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取全部数据(元组)</span></span><br><span class="line">result = cursor.fetchall()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建集合, 元组数据不能删除,只能全部删除</span></span><br><span class="line">re = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环对比</span></span><br><span class="line"><span class="keyword">for</span> data1 <span class="keyword">in</span> result:</span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> data2 <span class="keyword">in</span> result:</span><br><span class="line">    <span class="keyword">if</span> data1[<span class="number">1</span>] = data2[<span class="number">1</span>]:</span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">      <span class="keyword">if</span> i==<span class="number">5</span>:</span><br><span class="line">        <span class="built_in">print</span>(data1)</span><br><span class="line">        re.add(data2)</span><br><span class="line"><span class="built_in">print</span>(re)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java发展史</title>
-      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E5%9F%BA%E7%A1%80/%5BJava%5D%20Java%E5%8E%86%E5%8F%B2/"/>
-      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E5%9F%BA%E7%A1%80/%5BJava%5D%20Java%E5%8E%86%E5%8F%B2/</url>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E5%9F%BA%E7%A1%80/Java%E5%8E%86%E5%8F%B2/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E5%9F%BA%E7%A1%80/Java%E5%8E%86%E5%8F%B2/</url>
       
         <content type="html"><![CDATA[<h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>91年 由James Gosling启动的. Oak  橡树</p><p>95年 更名为Java, 从SunWorld大会正式发布JDK1.0</p>]]></content>
       
@@ -1121,8 +1147,8 @@
     
     <entry>
       <title>markdown 语法</title>
-      <link href="/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/markdown%20%E8%AF%AD%E6%B3%95/"/>
-      <url>/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/markdown%20%E8%AF%AD%E6%B3%95/</url>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/obsidian/markdown%20%E8%AF%AD%E6%B3%95/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/obsidian/markdown%20%E8%AF%AD%E6%B3%95/</url>
       
         <content type="html"><![CDATA[<p>​        笔者用的是typora进行 编辑的，typora和csdn都内嵌了html，所以，写文章就像写html一样就好了，而且还是可以实时反馈的。</p><span id="more"></span><p>​        那么接下来先介绍：</p><h3 id="字体修改"><a href="#字体修改" class="headerlink" title="字体修改"></a>字体修改</h3><ul><li><p>color 颜色</p></li><li><p>size 字体大小</p></li></ul><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">red</span>&gt;</span>2<span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">font</span> <span class="attr">size</span>=<span class="string">1</span>&gt;</span><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br></pre></td></tr></table></figure><h1 id="一样大哦"><a href="#一样大哦" class="headerlink" title="一样大哦"></a>一样大哦</h1><h1>真的嘛?</h1><h3 id="业内跳转"><a href="#业内跳转" class="headerlink" title="业内跳转"></a>业内跳转</h3><ol><li><p>去1<a href="#test1"><sup>1</sup></a>号位置</p></li><li><p>去字体修改<a href="#%E5%AD%97%E4%BD%93%E4%BF%AE%E6%94%B9"><sup>1</sup></a>号位置</p></li><li><p><a href="#test1">超链接版再去1号</a></p></li><li><p><a href="#sss">去标题</a></p></li></ol><h1 name="sss">标题在这</h1><div name="test1">1号在这里</div><p>三个版本的页内但是很神奇的只有一个可以通用，其他两个只能在typora编辑器里使用</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. 3. 编辑器好用</span><br><span class="line">2. 通用，但是不实用</span><br><span class="line"></span><br><span class="line">1. 使用 跳转标签name的方式</span><br><span class="line">[1](#name)</span><br><span class="line">&lt;div name=&quot;name&quot;&gt;1&lt;/div&gt;</span><br><span class="line">当使用这种方式时，就可以做到点1 跳转到div 1 的位置</span><br><span class="line">3. 使用的方式大同小异，区别在于3使用的是纯h5，也就是超链接</span><br><span class="line">&lt;a href=&quot;#test1&quot;&gt;超链接版再去1号&lt;/a&gt;</span><br><span class="line">这样也可以完成跳转。但遗憾的事，这两种办法只能在cdsn或编译器用。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       
@@ -1281,8 +1307,8 @@
     
     <entry>
       <title>next 主题 功能测试</title>
-      <link href="/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/"/>
-      <url>/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/</url>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/hexo/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/hexo/%E6%B5%8B%E8%AF%95next%20%E6%A0%87%E7%AD%BE/</url>
       
         <content type="html"><![CDATA[<p><a href="https://theme-next.js.org/docs/tag-plugins/tabs.html">next 主题文档</a> </p><span id="more"></span><div class="tabs" id="unique-name"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#unique-name-1">1</button></li><li class="tab"><button type="button" data-href="#unique-name-2">2</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="unique-name-1"><p>Any content (support inline tags too).</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="unique-name-2"><p>哈哈哈</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>]]></content>
       
@@ -1837,6 +1863,19 @@
     
     
     <entry>
+      <title>Zookeeper安装及启动</title>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/Zookeeper%E5%AE%89%E8%A3%85%E5%8F%8A%E5%90%AF%E5%8A%A8/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/Zookeeper%E5%AE%89%E8%A3%85%E5%8F%8A%E5%90%AF%E5%8A%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Zookeeper入门"><a href="#Zookeeper入门" class="headerlink" title="Zookeeper入门"></a>Zookeeper入门</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>​        Zookeeper 是一个开源的分布式的，为分布式应用提供协调服务的Apache项目。</p><span id="more"></span><h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p>​        Zookeeper 从设计模式角度来看：是一个基于观察这模式设计的分布式服务管理框架，它<strong>负责存储和管理大家都关心的数据</strong>，然后<strong>接受观察者的注册</strong>， 一旦这些数据的状态发生变化，Zookeeper就将<strong>负责通知已经在Zookeepr上注册的那些观察者</strong> 做出相应的反应。</p><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul><li>一个领导者（Leader), 多个跟随者（Follower）组成的集群</li><li>集群中只要有半数以上节点存活，Zookeeper集群就能正常服务。</li><li>全局数据一致：每个Server备份一份相同的数据副本，Client无论链接到哪个Server，数据都是一致的。</li><li>更新请求顺序进行，来自同一个Client的更新请求按其发送顺序依次执行</li><li>数据更新原子性，一次数据更新要么成功，要么失败。</li><li>实时性，在一定时间范围内，Client能读到最新数据。</li></ul><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>树形结构。</p><p>​    数据模型结构与Unix文件系统很类似i，整体上可以看作是一颗树，每个节点称作一个ZNode，每个ZNode默认能存储1MB的数据，每个ZNode都可以通过其路径唯一标识。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">a[ZNode] --&gt; b[ZNode1]</span><br><span class="line">a --&gt; c[ZNode2]</span><br><span class="line">b--&gt;d[ZNode1/file]</span><br><span class="line">b--&gt;e[ZNode1/file1]</span><br><span class="line">c--&gt;f[ZNode2/file]</span><br></pre></td></tr></table></figure><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>​        提供的服务包括：</p><ul><li><p>统一命名服务</p><ul><li><p>在分布式环境下，经常需要对应用/服务进行统一命名，便于识别。如下图，客户端访问域名，域名可以直接转发多个ip地址。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">subgraph Zokkeper Serviece</span><br><span class="line">/ --&gt; /service --&gt; id1[www.baidu.com]</span><br><span class="line">--&gt; 192.168.22.13</span><br><span class="line">id1--&gt; 192.168.22.14</span><br><span class="line">id1--&gt;192.168.22.15</span><br><span class="line">end</span><br><span class="line">client1 -- 访问--&gt; id1</span><br><span class="line">client2 -- 访问--&gt; id1</span><br><span class="line"> </span><br></pre></td></tr></table></figure></li></ul></li><li><p>统一配置管理</p><ul><li>分布式环境下，配置文件同步非常常见。<ul><li>一般要求一个集群中，所有节点的配置信息是一致的。比如Kafka集群</li><li>对配置文件修改后，希望能够快速同步到各个节点上。</li></ul></li><li>配置管理可交由Zookeeper实现<ul><li>可将配置信息写入ZooKeeper上的一个ZNode</li><li>各个客户断服务器监听这个ZNode</li><li>一旦ZNode中的数据被修改，ZooKeeper将通知各个客户端服务器。</li></ul></li></ul></li><li><p>统一集群管理</p><ul><li>分布式环境下，实时掌握每个节点的状态是必要的<ul><li>可根据节点试试状态作出一些调整</li></ul></li><li>ZooKeeper可以实现实时监控节点状态变化<ul><li>可将节点信息写入ZooKeeper是那个的一个ZNode</li><li>禁停这个ZNode可获取它的实时状态变化。</li></ul></li></ul></li><li><p>服务器节点动态上下线</p><ul><li>客户端能实时洞察到服务器上下线的变化</li></ul></li><li><p>软负载均衡</p><ul><li>在ZooKeeper中记录每台服务器的访问数，让访问数最少的服务器去处理最新的客户端请求。</li></ul></li><li><p>…</p></li></ul><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://zookeeper.apache.org/">Zookeeper官网</a></p><p><a href="https://zookeeper.apache.org/releases.html#download">下载地址</a></p><p><a href="https://downloads.apache.org/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz">3.7</a></p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载后解压，简单明了</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入opt</span> </span><br><span class="line">cd /opt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建文件</span></span><br><span class="line">mkdir -p model/zookeeper</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">cd model/zookeeper/</span><br><span class="line">curl https://downloads.apache.org/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz -&gt; zookeeper3.7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压</span></span><br><span class="line">tart -zxvf zookeeper3.7.tar.gz</span><br></pre></td></tr></table></figure><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>zookeeper 文件目录如下：</p><p><strong>第一步</strong>：将 conf/zoo_sample.cfg 修改为 zoo.cfg</p><p><code> mv conf/zoo_sample.cfg conf/zoo.cfg</code></p><p><strong>第二步</strong> 新建数据存储文件</p><p><code> mkdir zkData</code></p><p><strong>第三步</strong> 修改配置文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi conf/zoo.cfg</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将其中的dataDir=tem/zookeeper 修改</span></span><br><span class="line">dataDir=/opt/zookeeper/apache-zooleeper-3.7.0-bin/zkData</span><br><span class="line"></span><br><span class="line">:wq</span><br></pre></td></tr></table></figure><p><strong>第四步</strong> 启动 （单机模式）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zkServer.sh start</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zkServer.sh status</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动客户端</span></span><br><span class="line">bin/zkCli.sh</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 退出客户端</span></span><br><span class="line">quit</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看文件</span></span><br><span class="line">ls /</span><br></pre></td></tr></table></figure><p><strong>第五步</strong>关闭服务</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zkServer.sh stop</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java操作图片-ImageIo</title>
       <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/IO/ImageIo/"/>
       <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/IO/ImageIo/</url>
@@ -1906,7 +1945,7 @@
       <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/dubbo/"/>
       <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/dubbo/</url>
       
-        <content type="html"><![CDATA[<p>dubbo 直接使用scoket通信，传输效率高，并可以统计系统之间的调用干洗、调用次数。缺点是无法跨语音，只能是java。<br>  <span id="more"></span><br>  dubbo 是阿里巴巴开源的分布式框架。<br>  <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsdubbo-relation.jpg" alt="依赖关系"></p><pre><code>简单来说，我们的服务端启动后，第一步去注册中心进行注册，第二部客户端去注册中心查找，第三步注册中心返回符合要求的地址，第四步客户端进行调用就进行请求调用。</code></pre><p>  注册中心：官方推荐使用<a href="#">Post not found: 知识库/Java/进阶/分布式/Zookeeper安装及启动 Zookeeper安装及启动</a></p>]]></content>
+        <content type="html"><![CDATA[<p>dubbo 直接使用scoket通信，传输效率高，并可以统计系统之间的调用干洗、调用次数。缺点是无法跨语音，只能是java。<br>  <span id="more"></span><br>  dubbo 是阿里巴巴开源的分布式框架。<br>  <img src="https://cdn.jsdelivr.net/gh/exceedyc/images/imgsdubbo-relation.jpg" alt="依赖关系"></p><pre><code>简单来说，我们的服务端启动后，第一步去注册中心进行注册，第二部客户端去注册中心查找，第三步注册中心返回符合要求的地址，第四步客户端进行调用就进行请求调用。</code></pre><p>  注册中心：官方推荐使用<a href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/Java/%E8%BF%9B%E9%98%B6/%E5%88%86%E5%B8%83%E5%BC%8F/Zookeeper%E5%AE%89%E8%A3%85%E5%8F%8A%E5%90%AF%E5%8A%A8/" title="Zookeeper安装及启动">Zookeeper安装及启动</a></p>]]></content>
       
       
       <categories>
@@ -2207,8 +2246,8 @@
     
     <entry>
       <title>Hello World</title>
-      <link href="/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/hello-world/"/>
-      <url>/;categories/%E7%AC%94%E8%AE%B0/%E9%9C%80%E6%95%B4%E7%90%86/hello-world/</url>
+      <link href="/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/hexo/hello-world/"/>
+      <url>/;categories/%E7%9F%A5%E8%AF%86%E5%BA%93/hexo/hello-world/</url>
       
         <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我的天呢，终于弄好了，纪念一下</span><br></pre></td></tr></table></figure><span id="more"></span>]]></content>
       
